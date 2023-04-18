@@ -50,7 +50,40 @@ This is a design doc
  1. Home Page
    - Get home page
      - Upcoming event info (select the most recent x events)
-       - Picture
-       - Event descriptoin
-       - Event link
+       - Event name
        - Event time
+       - Event description
+       - Event organizer
+       - Event pic (optional)
+ 2. Dorm page
+   - Get dorm info
+     - Dorm picture
+     - Dorm description
+       - Address
+       - Room types
+       - Location
+       - Food options
+     - Reviews
+       - Overall rating
+       - Each review has
+         - Name of reviewer
+         - Detailed comments
+         - Rating
+         - Time posted
+     - Events (select the most recent x events)
+       - Event name
+       - Event time
+       - Event description
+       - Event organizer
+       - Event pic (optional)
+   - Post new reviews
+   - Post new events
+ 3. Event Page
+   - Get Events
+     - Event Name
+     - Event time
+     - Event description
+     - Event organizer
+     - Event pic (optional)
+ 4. Profile Page
+   - Liked events   
