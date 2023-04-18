@@ -44,3 +44,8 @@ This is a design doc
     - User has to be logged in to view
     - Event host has to be verified?
     - Official events only (for now)
+## Back End
+ this is the back end
+ ### API Calls
+ - Home page
+  - get home page
