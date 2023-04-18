@@ -47,5 +47,10 @@ This is a design doc
 ## Back End
  this is the back end
  ### API Calls
- - Home page
-  - get home page
+ 1. Home Page
+   - Get home page
+     - Upcoming event info (select the most recent x events)
+       - Picture
+       - Event descriptoin
+       - Event link
+       - Event time
