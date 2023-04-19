@@ -1,10 +1,9 @@
 
 .main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
+  padding: 10rem;
   min-height: 100vh;
   background-color: rgba(239, 244, 247, 0.897);
 }
@@ -28,6 +27,19 @@
 .sidebar {
   height: 100%;
   width: 10%;
+}
+.main img {
+  height: 50%;
+}
+.slideshow {
+  display:flex;
+  justify-content: flex-start;
+}
+.slideshow img{
+  width: 532px;
+  height: 302px;
+  border-radius: 5%;
+  border: 1px solid black;
 }
 
 .navbar img {

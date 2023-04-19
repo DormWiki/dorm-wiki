@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,9 +16,6 @@ export default function Home() {
         <link rel="icon" href="/icon-dorm-wiki.png" />
       </Head>
       <div className={styles.navbar}>
-        <div id="logo">
-          <img src="/dorm-wiki-logo.png"></img>
-        </div>
         <ul>
           <li>
             <a href="#">Home</a>
@@ -37,18 +35,17 @@ export default function Home() {
         </ul>
         <button type="button">Login</button>
       </div>
-      <div className={styles.sidebar}>
-        <ul>
-          <li>
-            <a href="#">Link</a>
-          </li>
-          <li>
-            <a href="#">Link</a>
-          </li>
-        </ul>
-      </div>
       <main className={styles.main}>
-        
+        <div id="logo">
+          <img src="/dorm-wiki-logo.png"></img>
+        </div>
+        <div className={styles.slideshow}>
+          <div className={styles.imglink}>
+            <Link href="/wiki/maple-hall">
+              <img src="/maple-hall\Maple-exterior.jpg"></img>
+            </Link>
+          </div>
+        </div>
       </main>
     </>
   );
