@@ -101,7 +101,7 @@ This is a design doc
    - user email (primary key)
    - name
    - list of liked events (reference Event table id column)
- 2. Event
+ 2. Event table
    - event id (primary key)
    - name
    - time
@@ -109,13 +109,13 @@ This is a design doc
    - organizer
    - picture
    - posted by (reference user email column in User table)
-  3. Dorm
+  3. Dorm table
    - name (primary key)
    - address
    - description
    - list of reviews (each review reference the id column in Review table)
    - list of events (each event reference the id column in Event table)
-  4. Review 
+  4. Review table
    - review id (primary key)
    - posted by (reference user email column in User table)
    - rating
