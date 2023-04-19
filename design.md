@@ -55,6 +55,7 @@ This is a design doc
        - Event description
        - Event organizer
        - Event pic (optional)
+       - Original Poster
  2. Dorm page
    - Get dorm info
      - Dorm picture
@@ -76,6 +77,7 @@ This is a design doc
        - Event description
        - Event organizer
        - Event pic (optional)
+       - Original Poster
    - Post new reviews
    - Post new events
  3. Event Page
@@ -85,5 +87,37 @@ This is a design doc
      - Event description
      - Event organizer
      - Event pic (optional)
+     - Original Poster
  4. Profile Page
-   - Liked events   
+   - Liked events
+     - Event Name
+     - Event time
+     - Event description
+     - Event organizer
+     - Event pic (optional)
+     - Original Poster  
+ ### Database
+ 1. User table
+   - user email (primary key)
+   - name
+   - list of liked events (reference Event table id column)
+ 2. Event
+   - event id (primary key)
+   - name
+   - time
+   - description
+   - organizer
+   - picture
+   - posted by (reference user email column in User table)
+  3. Dorm
+   - name (primary key)
+   - address
+   - description
+   - list of reviews (each review reference the id column in Review table)
+   - list of events (each event reference the id column in Event table)
+  4. Review 
+   - review id (primary key)
+   - posted by (reference user email column in User table)
+   - rating
+   - time
+   - comment
