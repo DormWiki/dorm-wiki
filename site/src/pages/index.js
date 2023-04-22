@@ -15,38 +15,40 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/icon-dorm-wiki.png" />
       </Head>
-      <div className={styles.navbar}>
-        <ul>
-          <li>
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="#">Events</a>
-          </li>
-          <li>
-            <a href="#">Wiki</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Search</a>
-          </li>
-        </ul>
-        <button type="button">Login</button>
-      </div>
-      <main className={styles.main}>
-        <div id="logo">
-          <img src="/dorm-wiki-logo.png"></img>
+      <body>
+        <div className={styles.navbar}>
+          <ul>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Events</a>
+            </li>
+            <li>
+              <a href="#">Wiki</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Search</a>
+            </li>
+          </ul>
+          <button type="button">Login</button>
         </div>
-        <div className={styles.slideshow}>
-          <div className={styles.imglink}>
-            <Link href="/wiki/maple-hall">
-              <img src="/maple-hall\Maple-exterior.jpg"></img>
-            </Link>
+        <main className={styles.main}>
+          <div id="logo">
+            <img src="/dorm-wiki-logo.png"></img>
           </div>
-        </div>
-      </main>
+          <div className={styles.slideshow}>
+            <div className={styles.imglink}>
+              <Link href="/wiki/maple-hall">
+                <img src="/maple-hall\Maple-exterior.jpg"></img>
+              </Link>
+            </div>
+          </div>
+        </main>
+      </body>
     </>
   );
 }
