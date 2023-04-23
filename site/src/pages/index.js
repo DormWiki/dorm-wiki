@@ -15,31 +15,32 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/icon-dorm-wiki.png" />
       </Head>
-      <body>
-        <div className={styles.navbar}>
-          <ul>
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Events</a>
-            </li>
-            <li>
-              <a href="#">Wiki</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a href="#">Search</a>
-            </li>
-          </ul>
-          <button type="button">Login</button>
-        </div>
-        <main className={styles.main}>
-          <div id="logo">
-            <img src="/dorm-wiki-logo.png"></img>
+      <div className={styles.navbar}>
+        <ul>
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">Events</a>
+          </li>
+          <li>
+            <a href="#">Wiki</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Search</a>
+          </li>
+        </ul>
+        <button type="button">Login</button>
+      </div>
+      <main className={styles.main}>
+        <div className={styles.content}>
+          <div >
+            <img style={{ height:'252px',  width: '252px' }} src="/dorm-wiki-logo.png"></img>
           </div>
+         
           <div className={styles.slideshow}>
             <div className={styles.imglink}>
               <Link href="/wiki/maple-hall">
@@ -47,8 +48,17 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </main>
-      </body>
+          <h2 className={styles.hrtitle}>
+            Upcoming Events
+          </h2>
+          <div className={styles.upcoming_events}>
+            <div className={styles.event_deck}>a</div>
+            <div className={styles.event_deck}>a</div>
+            <div className={styles.event_deck}>a</div>
+            <div className={styles.event_deck}>a</div>
+          </div>
+        </div>
+      </main>
     </>
   );
 }

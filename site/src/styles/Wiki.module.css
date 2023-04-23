@@ -1,0 +1,22 @@
+.slideshow {
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+.slideshow img {
+  height: 400px;
+}
+
+.slide {
+  display: none;
+}
+
+.description {
+  margin-top: 100px;
+  justify-self: flex-end;
+  width: 400px;
+}
+
+.description p {
+  font-size: 20px;
+}

@@ -3,13 +3,36 @@ import { useRouter } from "next/router";
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import wiki from '@/styles/Wiki.module.css'
 import Link from "next/link";
+import Swiper from 'swiper';
+import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] })
 
+
+
+
 export default function Wiki( {info} ) {
-  const router = useRouter()
-  const dorm = router.query.wiki
+  const router = useRouter();
+  const dorm = router.query.wiki;
+   
+  let s_index = 0;
+  useEffect(()=> {
+    setTimeout( () => {
+      let slides = document.getElementsByClassName("slide");
+      console.log(slides);
+      for (let i = 0; i < 5; i++) {
+        slides[i].style.display = "none";
+      }
+      s_index++;
+      if (s_index == 5) {
+        s_index = 0;
+      }
+      slides[s_index - 1].style.display = "block";
+    }, 2000);
+  });
+
   return (
     <>
       <Head>
@@ -19,7 +42,7 @@ export default function Wiki( {info} ) {
       </Head>
       <main className={styles.main}>
         <div className={styles.navbar}>
-          <div id="logo">
+          <div className={styles.logo}>
             <img src="/dorm-wiki-logo.png"></img>
           </div>
           <ul>
@@ -51,9 +74,18 @@ export default function Wiki( {info} ) {
             </li>
           </ul>
         </div>
-        <div className={styles.content}>
-          {info["maple-hall"]["description"]}
-        </div>
+        <section className={styles.content}>
+          <div className={wiki.slideshow}>
+            <img className={wiki.slide} src="/maple-hall/Maple-exterior.jpg"></img>
+            <img className={wiki.slide} src="/maple-hall/Maple-courtyard.jpg"></img>
+            <img className={wiki.slide} src="/maple-hall/Maple-area-01.jpg"></img>
+            <img className={wiki.slide} src="/maple-hall/Maple-kitchen.jpg"></img>
+            <img className={wiki.slide} src="/maple-hall/Maple-room.jpg"></img>
+          </div>
+          <div className={wiki.description}>
+            <p>{info["maple-hall"]["description"]}</p>
+          </div>
+        </section>
       </main>
     </>
   );
