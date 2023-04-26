@@ -18,7 +18,7 @@ export default function Wiki( {info} ) {
   const dorm = router.query.wiki;
    
   let s_index = 0;
-  
+
   return (
     <>
       <Head>
@@ -89,11 +89,11 @@ const divStyle = {
 
 const slideImages = [
   {
-    url: "public/maple-hall/maple-hall1.jpg",
+    url: "http://localhost:3000/maple-hall/maple-hall1.jpg",
     caption: "Slide 1",
   },
   {
-    url: "public/maple-hall/maple-hall2.jpg",
+    url: "http://localhost:3000/maple-hall/maple-hall2.jpg",
     caption: "Slide 2",
   },
 ];
@@ -121,7 +121,6 @@ export async function getStaticProps() {
   const res = await fetch(
     "https://raw.githubusercontent.com/nikopermi/DormWiki/main/info.json"
   ).then((res) => res.json());
-  console.log(res);
   const info = res;
 
   // By returning { props: { posts } }, the Blog component
