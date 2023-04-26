@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import wiki from '@/styles/Wiki.module.css'
 import Link from "next/link";
-import Swiper from 'swiper';
 import { useEffect } from 'react';
+import { Slide } from "react-slideshow-image";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,21 +18,7 @@ export default function Wiki( {info} ) {
   const dorm = router.query.wiki;
    
   let s_index = 0;
-  useEffect(()=> {
-    setTimeout( () => {
-      let slides = document.getElementsByClassName("slide");
-      console.log(slides);
-      for (let i = 0; i < 5; i++) {
-        slides[i].style.display = "none";
-      }
-      s_index++;
-      if (s_index == 5) {
-        s_index = 0;
-      }
-      slides[s_index - 1].style.display = "block";
-    }, 2000);
-  });
-
+  
   return (
     <>
       <Head>
@@ -75,21 +61,59 @@ export default function Wiki( {info} ) {
           </ul>
         </div>
         <section className={styles.content}>
-          <div className={wiki.slideshow}>
-            <img className={wiki.slide} src="/maple-hall/Maple-exterior.jpg"></img>
-            <img className={wiki.slide} src="/maple-hall/Maple-courtyard.jpg"></img>
-            <img className={wiki.slide} src="/maple-hall/Maple-area-01.jpg"></img>
-            <img className={wiki.slide} src="/maple-hall/Maple-kitchen.jpg"></img>
-            <img className={wiki.slide} src="/maple-hall/Maple-room.jpg"></img>
-          </div>
+          {Slideshow()}
           <div className={wiki.description}>
             <p>{info["maple-hall"]["description"]}</p>
+          </div>
+          <div className={wiki.description}>
+            <p>{info["maple-hall"]["reviews"]["12512"]["text"]}</p>
           </div>
         </section>
       </main>
     </>
   );
 }
+const spanStyle = {
+  padding: "20px",
+  background: "#efefef",
+  color: "#000000",
+};
+
+const divStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundSize: "cover",
+  height: "400px",
+};
+
+const slideImages = [
+  {
+    url: "public/maple-hall/maple-hall1.jpg",
+    caption: "Slide 1",
+  },
+  {
+    url: "public/maple-hall/maple-hall2.jpg",
+    caption: "Slide 2",
+  },
+];
+const Slideshow = () => {
+  return (
+    <div className="slide-container">
+      <Slide>
+        {slideImages.map((slideImage, index) => (
+          <div key={index}>
+            <div
+              style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}
+            >
+              <span style={spanStyle}>{slideImage.caption}</span>
+            </div>
+          </div>
+        ))}
+      </Slide>
+    </div>
+  );
+};
 
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
