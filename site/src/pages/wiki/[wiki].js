@@ -1,11 +1,11 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import React, { useState } from 'react';
 
 import { useRouter } from "next/router";
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
 import styles from '@/styles/Home.module.css'
-import wiki from '@/styles/Wiki.module.css'
+import wiki from '@/styles/Wiki.module.css';
 import Link from "next/link";
 import { useEffect } from 'react';
 import CustomCarousel from "../../components/Carousel";
@@ -15,12 +15,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 const inter = Inter({ subsets: ['latin'] })
-
-function rating (int) {
-  for (let i = 0; i < int; i++) {
-
-  }
-}
 
 export default function Wiki( {info} ) {
   const router = useRouter();
