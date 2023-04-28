@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import React, { useState } from 'react';
+
 import { useRouter } from "next/router";
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -6,12 +8,19 @@ import styles from '@/styles/Home.module.css'
 import wiki from '@/styles/Wiki.module.css'
 import Link from "next/link";
 import { useEffect } from 'react';
-import { Slide } from "react-slideshow-image";
+import CustomCarousel from "../../components/Carousel";
+import ReactStars from "react-stars";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+
 
 const inter = Inter({ subsets: ['latin'] })
 
+function rating (int) {
+  for (let i = 0; i < int; i++) {
 
-
+  }
+}
 
 export default function Wiki( {info} ) {
   const router = useRouter();
@@ -24,13 +33,10 @@ export default function Wiki( {info} ) {
       <Head>
         <title>{dorm}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/icon-dorm-wiki.png" />
+        <link rel="icon" href="/icon-dorm-wiki.svg" />
       </Head>
       <main className={styles.main}>
         <div className={styles.navbar}>
-          <div className={styles.logo}>
-            <img src="/dorm-wiki-logo.png"></img>
-          </div>
           <ul>
             <li>
               <Link href="/">Home</Link>
@@ -51,6 +57,9 @@ export default function Wiki( {info} ) {
           <button type="button">Login</button>
         </div>
         <div className={styles.sidebar}>
+          <div className={styles.logo}>
+            <img src="/dorm-wiki-logo.png"></img>
+          </div>
           <ul>
             <li>
               <Link href="#">Link</Link>
@@ -61,66 +70,79 @@ export default function Wiki( {info} ) {
           </ul>
         </div>
         <section className={styles.content}>
-          {Slideshow()}
+          <CustomCarousel />
           <div className={wiki.description}>
+            <h3> Information </h3>
             <p>{info["maple-hall"]["description"]}</p>
           </div>
-          <div className={wiki.description}>
-            <p>{info["maple-hall"]["reviews"]["12512"]["text"]}</p>
-          </div>
+          <span className={wiki.review_box}>
+            <div className={wiki.review}>
+              <div className={wiki.review_text}>
+                <h2>Anonymous</h2>
+                <h3 className={wiki.subtitle}>
+                  {info["maple-hall"]["reviews"]["12512"]["date"]}
+                </h3>
+                <h3> Cool dorm! </h3>
+                <p>{info["maple-hall"]["reviews"]["12512"]["text"]}</p>
+              </div>
+              <div className={wiki.review_rating}>
+                <ReactStars
+                  edit={false}
+                  starCount={5}
+                  value={info["maple-hall"]["reviews"]["12512"]["rating"]}
+                  size={36}
+                  color2={"#ffd700"}
+                />
+              </div>
+            </div>
+            <div className={wiki.review}>
+              <div className={wiki.review_text}>
+                <h2>Anonymous</h2>
+                <h3 className={wiki.subtitle}>
+                  {info["maple-hall"]["reviews"]["12512"]["date"]}
+                </h3>
+                <h3> Cool dorm! </h3>
+                <p>{info["maple-hall"]["reviews"]["12512"]["text"]}</p>
+              </div>
+              <ReactStars
+                edit={false}
+                starCount={5}
+                value={info["maple-hall"]["reviews"]["12512"]["rating"]}
+                size={36}
+                color2={"#ffd700"}
+              />
+            </div>
+            <div className={wiki.review}>
+              <div className={wiki.review_text}>
+                <h2>Anonymous</h2>
+                <h3 className={wiki.subtitle}>
+                  {info["maple-hall"]["reviews"]["12512"]["date"]}
+                </h3>
+                <h3> Cool dorm! </h3>
+                <p>{info["maple-hall"]["reviews"]["12512"]["text"]}</p>
+              </div>
+              <ReactStars
+                edit={false}
+                starCount={5}
+                value={info["maple-hall"]["reviews"]["12512"]["rating"]}
+                size={36}
+                color2={"#ffd700"}
+              />
+            </div>
+          </span>
         </section>
       </main>
     </>
   );
 }
-const spanStyle = {
-  padding: "20px",
-  background: "#efefef",
-  color: "#000000",
-};
 
-const divStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundSize: "cover",
-  height: "400px",
-};
-
-const slideImages = [
-  {
-    url: "http://localhost:3000/maple-hall/maple-hall1.jpg",
-    caption: "Slide 1",
-  },
-  {
-    url: "http://localhost:3000/maple-hall/maple-hall2.jpg",
-    caption: "Slide 2",
-  },
-];
-const Slideshow = () => {
-  return (
-    <div className="slide-container">
-      <Slide>
-        {slideImages.map((slideImage, index) => (
-          <div key={index}>
-            <div
-              style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}
-            >
-              <span style={spanStyle}>{slideImage.caption}</span>
-            </div>
-          </div>
-        ))}
-      </Slide>
-    </div>
-  );
-};
 
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch(
-    "https://raw.githubusercontent.com/nikopermi/DormWiki/main/info.json"
-  ).then((res) => res.json());
+  const res = await fetch("http://localhost:3000/info.json").then((res) =>
+    res.json()
+  );
   const info = res;
 
   // By returning { props: { posts } }, the Blog component
@@ -157,6 +179,6 @@ export async function getStaticPaths() {
       "/wiki/laurel-village",
       // Object variant:
     ],
-    fallback: true,
+    fallback: false,
   };
 }

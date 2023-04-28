@@ -7,15 +7,17 @@
 }
 
 .logo {
+  display:flex;
   order: 1;
-  justify-items: flex-start;
+  position: relative;
+  align-self: flex-start;
   height: 252px;
-  width: 252px;
+  width: 100%;
 }
 
 .logo img{
-  height: 252px;
-  width: 252px;
+  height: 202px;
+  width: 100%;
 }
 
 .hrtitle {
@@ -62,48 +64,35 @@
 
 .navbar, .sidebar {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
+  position: fixed;
   background-color: var(--uw-purple);
 }
 
-.sidebar {
-  justify-content: center;
-}
 
 .navbar ul {
   margin-left: auto;
 }
 
 .navbar {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+  border-bottom: 1px solid black;
+  z-index: 101;
+  flex-direction: row;
   height: 7%;
   width: 100%;
 }
 
 .sidebar {
-  height: 100%;
+  z-index: 100;
+  padding-top: 63px;
+  flex-direction: column;
+  height: 100vh;
   width: 10%;
-}
-
-
-.slideshow {
-  align-self: flex-end;
-  order: 1;
-  margin-top: 50px;
-  margin-right: 100px;
-  margin-left: auto;
-  display:flex;
-  height: 305px;
-  justify-content: flex-end;
-}
-
-.slideshow img{
-  width: 532px;
-  height: 305px;
-  border-radius: 5%;
-  border: 1px solid black;
+  justify-content: flex-start;
+  border-right: 1px solid black;
+  top: 0;
 }
 
 .upcoming_events {
@@ -272,10 +261,6 @@
   transform: translateZ(0);
 }
 
-.logo {
-  position: absolute;
-  height: 252px;
-}
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
@@ -384,9 +369,6 @@
     filter: invert(1);
   }
 
-  .logo {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
-  }
 }
 
 @keyframes rotate {

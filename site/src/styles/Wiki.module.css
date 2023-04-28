@@ -3,19 +3,56 @@
   margin-left: 100px;
 }
 
-.slideshow img {
+#carousel img {
   height: 400px;
 }
 
-.slide {
-}
 
 .description {
-  margin-top: 100px;
+  display: flex;
+  margin-top: 50px;
+  flex-direction: column;
+  align-items: center;
   justify-self: flex-end;
-  width: 400px;
+  width: 45%;
+  outline: 1px solid black;
 }
 
 .description p {
   font-size: 20px;
+}
+
+.review_box {
+  margin-top: 200px;
+  row-gap: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+.review {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  width: 75%;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+
+
+.review_rating  img {
+  height: 30px;
+  width: 30px;
+}
+
+.subtitle {
+  font-size: smaller;
+  color: gray;
+  text-decoration: none;
+}
+
+.right {
+  align-self: right;
 }
