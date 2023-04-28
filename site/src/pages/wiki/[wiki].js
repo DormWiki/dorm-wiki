@@ -8,10 +8,10 @@ import styles from '@/styles/Home.module.css'
 import wiki from '@/styles/Wiki.module.css';
 import Link from "next/link";
 import { useEffect } from 'react';
+
 import CustomCarousel from "../../components/Carousel";
 import ReactStars from "react-stars";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
 
 
 const inter = Inter({ subsets: ['latin'] })

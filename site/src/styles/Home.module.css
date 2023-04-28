@@ -17,7 +17,23 @@
 
 .logo img{
   height: 202px;
+  width: 100%;margin-top: 100px;
   width: 100%;
+  order: 2;
+  align-self: center;
+  display: fixed;
+  align-items: center;
+  text-align: center;
+  margin-right: 100px;
+}
+
+.title {
+  width: 100%;
+  font-size: xx-large;
+  align-self: center;
+  display: fixed;
+  text-align: center;
+  align-items: center;
 }
 
 .hrtitle {
@@ -25,7 +41,7 @@
   width: 100%;
   order: 2;
   align-self: center;
-  display: flex;
+  display: fixed;
   align-items: center;
   text-align: center;
   margin-right: 100px;
