@@ -8,13 +8,11 @@ import styles from '@/styles/Home.module.css'
 import wiki from '@/styles/Wiki.module.css';
 import Link from "next/link";
 import { useEffect } from 'react';
-
-import CustomCarousel from "../../components/Carousel";
 import ReactStars from "react-stars";
+import CustomCarousel from "../../components/Carousel";
+
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Wiki( {info} ) {
   const router = useRouter();
@@ -33,7 +31,9 @@ export default function Wiki( {info} ) {
         <div className={styles.navbar}>
           <ul>
             <li>
-              <Link a href="/">Home</Link>
+              <Link a href="/">
+                Home
+              </Link>
             </li>
             <li>
               <Link href="/events">Events</Link>
@@ -64,7 +64,7 @@ export default function Wiki( {info} ) {
           </ul>
         </div>
         <section className={styles.content}>
-          <CustomCarousel />
+          <CustomCarousel dorm={"maple-hall"} />
           <div className={wiki.description}>
             <h3> Information </h3>
             <p>{info["maple-hall"]["description"]}</p>
@@ -73,20 +73,20 @@ export default function Wiki( {info} ) {
             <div className={wiki.review}>
               <div className={wiki.review_text}>
                 <h2>Anonymous</h2>
+                <div className={wiki.review_rating}>
+                  <ReactStars
+                    edit={false}
+                    starCount={5}
+                    value={info["maple-hall"]["reviews"]["12512"]["rating"]}
+                    size={36}
+                    color2={"#ffd700"}
+                  />
+                </div>
                 <h3 className={wiki.subtitle}>
                   {info["maple-hall"]["reviews"]["12512"]["date"]}
                 </h3>
                 <h3> Cool dorm! </h3>
                 <p>{info["maple-hall"]["reviews"]["12512"]["text"]}</p>
-              </div>
-              <div className={wiki.review_rating}>
-                <ReactStars
-                  edit={false}
-                  starCount={5}
-                  value={info["maple-hall"]["reviews"]["12512"]["rating"]}
-                  size={36}
-                  color2={"#ffd700"}
-                />
               </div>
             </div>
             <div className={wiki.review}>

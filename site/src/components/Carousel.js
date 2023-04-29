@@ -4,35 +4,39 @@ import { Carousel } from "react-responsive-carousel";
 import styles from "@/styles/Carousel.module.css"
 
 
-const CustomCarousel = () => (
+const CustomCarousel = (props) => (
   <div className={styles.wrapper}>
     <Carousel autoPlay>
       <div>
-        <img alt="" src="http://localhost:3000/maple-hall/maple-hall1.jpg"  />
+        <img
+          alt=""
+          src={`http://localhost:3000/maple-hall/${props.dorm}1.jpg`}
+        />
         <p className="legend">Legend 1</p>
       </div>
       <div>
         <img
           alt=""
-          src="http://localhost:3000/maple-hall/maple-hall2.jpg"
-          width="300px"
+          src={`http://localhost:3000/maple-hall/${props.dorm}2.jpg`}
         />
         <p className="legend">Legend 2</p>
       </div>
       <div>
         <img
           alt=""
-          src="http://localhost:3000/maple-hall/maple-hall3.jpg"
-          width="300px"
+          src={`http://localhost:3000/maple-hall/${props.dorm}3.jpg`}
         />
         <p className="legend">Legend 3</p>
       </div>
       <div>
-        <img alt="" src="http://localhost:3000/maple-hall/maple-hall4.jpg" />
+        <img
+          alt=""
+          src={`http://localhost:3000/maple-hall/${props.dorm}4.jpg`}
+        />
         <p className="legend">Legend 4</p>
       </div>
       <div>
-        <img alt="" src="http://localhost:3000/maple-hall/maple-hall5.jpg" />
+        <img alt="" src={`http://localhost:3000/maple-hall/${props.dorm}5.jpg`}/>
         <p className="legend">Legend 5</p>
       </div>
     </Carousel>
