@@ -13,24 +13,31 @@
 }
 
 .logo {
-  display:flex;
+  display: flex;
   order: 1;
   position: relative;
   align-self: flex-start;
-  height: 252px;
+  height: 20px;
   width: 100%;
 }
 
+.logoside{
+  margin-top: 25px;
+  width: 100;
+  align-self: center;
+  position: relative;
+  align-items: center;
+  text-align: center;
+}
+
 .logo img{
-  height: 202px;
-  width: 100%;margin-top: 100px;
+  height: 200px;
   width: 100%;
   order: 2;
   align-self: center;
-  display: fixed;
+  display: flex;
   align-items: center;
   text-align: center;
-  margin-right: 100px;
 }
 
 .hrtitle {
@@ -100,6 +107,7 @@
   flex-direction: row;
   height: 7%;
   width: 100%;
+  color: white;
 }
 
 .sidebar {
@@ -157,6 +165,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
+  color: white;
 }
 
 .navbar button:hover {

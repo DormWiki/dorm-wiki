@@ -22,7 +22,7 @@ export default function Home() {
         <title>Dorm-Wiki</title>
         <meta name="description" content="Your go-to place for UW dorm info" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/icon-dorm-wiki.png" />
+        <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
       <div className={styles.navbar}>
         <ul>
@@ -50,12 +50,11 @@ export default function Home() {
         <div className={styles.content}>
           <div>
             <img
-              style={{ height: "252px", width: "252px" }}
-              src="/dorm-wiki-logo.png"
+              style={{ height: "250px", width: "250px" }}
+              src="/dw-logo-main.png"
             ></img>
           </div>
-
-          <CustomCarousel dorm={"maple-hall"} count={5}/>
+          <CustomCarousel dorm={"maple-hall"}/>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
             <div className={styles.event_deck}>a</div>

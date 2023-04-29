@@ -25,7 +25,7 @@ export default function Wiki( {info} ) {
       <Head>
         <title>{dorm}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/icon-dorm-wiki.svg" />
+        <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
       <main className={styles.main}>
         <div className={styles.navbar}>
@@ -51,8 +51,8 @@ export default function Wiki( {info} ) {
           <button type="button">Login</button>
         </div>
         <div className={styles.sidebar}>
-          <div className={styles.logo}>
-            <img src="/dorm-wiki-logo.png"></img>
+          <div className={styles.logoside}>
+            <img src="/dw-logo-side.png" style={{width:125}}></img>
           </div>
           <ul>
             <li>
