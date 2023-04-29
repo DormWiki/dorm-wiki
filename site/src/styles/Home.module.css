@@ -4,6 +4,12 @@
   justify-content: space-between;
   min-height: 100vh;
   background-color: rgba(239, 244, 247, 0.897);
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .logo {
@@ -25,15 +31,6 @@
   align-items: center;
   text-align: center;
   margin-right: 100px;
-}
-
-.title {
-  width: 100%;
-  font-size: xx-large;
-  align-self: center;
-  display: fixed;
-  text-align: center;
-  align-items: center;
 }
 
 .hrtitle {
@@ -84,6 +81,11 @@
   align-items: center;
   position: fixed;
   background-color: var(--uw-purple);
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 
@@ -148,11 +150,17 @@
   margin: 10px;
   height: 40px;
   border-radius: var(--border-radius);
-  padding: 10px;
+  padding: 8px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
 }
 
 .navbar button:hover {
-  opacity: 90%;
+  opacity: 85%;
 }
 
 .sidebar ul, .navbar ul {

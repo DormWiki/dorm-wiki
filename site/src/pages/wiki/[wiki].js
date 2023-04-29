@@ -33,19 +33,19 @@ export default function Wiki( {info} ) {
         <div className={styles.navbar}>
           <ul>
             <li>
-              <Link href="/">Home</Link>
+              <Link a href="/">Home</Link>
             </li>
             <li>
-              <Link href="#">Events</Link>
+              <Link href="/events">Events</Link>
             </li>
             <li>
-              <Link href="#">Wiki</Link>
+              <Link href="/wiki">Wiki</Link>
             </li>
             <li>
-              <Link href="#">About</Link>
+              <Link href="/about">About</Link>
             </li>
             <li>
-              <Link href="#">Search</Link>
+              <Link href="/search">Search</Link>
             </li>
           </ul>
           <button type="button">Login</button>

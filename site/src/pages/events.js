@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import events from '@/styles/Events.module.css'
 import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -36,8 +37,16 @@ export default function Events() {
         </ul>
             <button type="button">Login</button>
         </div>
-        <main className={styles.main}>
-            <h2 className={styles.title}>Events page.</h2>
+        <main className={events.main}>
+            <h2 className={events.title}>Trending</h2>
+            <h2 className={events.title}>Upcoming</h2>
+            <div className={events.content}>
+                Events info
+                Contact info
+                Photos
+                RSVP
+                Guest list
+            </div>
         </main>
     </>
   );

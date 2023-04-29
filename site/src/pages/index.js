@@ -8,7 +8,7 @@ import Events from './events';
 
 import { useRouter } from "next/router";
 
-const inter = Inter({ subsets: ['latin'] })
+//const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter();
