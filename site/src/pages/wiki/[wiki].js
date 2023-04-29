@@ -73,20 +73,20 @@ export default function Wiki( {info} ) {
             <div className={wiki.review}>
               <div className={wiki.review_text}>
                 <h2>Anonymous</h2>
-                <div className={wiki.review_rating}>
-                  <ReactStars
-                    edit={false}
-                    starCount={5}
-                    value={info["maple-hall"]["reviews"]["12512"]["rating"]}
-                    size={36}
-                    color2={"#ffd700"}
-                  />
-                </div>
                 <h3 className={wiki.subtitle}>
                   {info["maple-hall"]["reviews"]["12512"]["date"]}
                 </h3>
                 <h3> Cool dorm! </h3>
                 <p>{info["maple-hall"]["reviews"]["12512"]["text"]}</p>
+              </div>
+              <div className={wiki.review_rating}>
+                <ReactStars
+                  edit={false}
+                  starCount={5}
+                  value={info["maple-hall"]["reviews"]["12512"]["rating"]}
+                  size={36}
+                  color2={"#ffd700"}
+                />
               </div>
             </div>
             <div className={wiki.review}>
@@ -98,13 +98,15 @@ export default function Wiki( {info} ) {
                 <h3> Cool dorm! </h3>
                 <p>{info["maple-hall"]["reviews"]["12512"]["text"]}</p>
               </div>
-              <ReactStars
-                edit={false}
-                starCount={5}
-                value={info["maple-hall"]["reviews"]["12512"]["rating"]}
-                size={36}
-                color2={"#ffd700"}
-              />
+              <div className={wiki.review_rating}>
+                <ReactStars
+                  edit={false}
+                  starCount={5}
+                  value={info["maple-hall"]["reviews"]["12512"]["rating"]}
+                  size={36}
+                  color2={"#ffd700"}
+                />
+              </div>
             </div>
             <div className={wiki.review}>
               <div className={wiki.review_text}>
@@ -115,13 +117,15 @@ export default function Wiki( {info} ) {
                 <h3> Cool dorm! </h3>
                 <p>{info["maple-hall"]["reviews"]["12512"]["text"]}</p>
               </div>
-              <ReactStars
-                edit={false}
-                starCount={5}
-                value={info["maple-hall"]["reviews"]["12512"]["rating"]}
-                size={36}
-                color2={"#ffd700"}
-              />
+              <div className={wiki.review_rating}>
+                <ReactStars
+                  edit={false}
+                  starCount={5}
+                  value={info["maple-hall"]["reviews"]["12512"]["rating"]}
+                  size={36}
+                  color2={"#ffd700"}
+                />
+              </div>
             </div>
           </span>
         </section>

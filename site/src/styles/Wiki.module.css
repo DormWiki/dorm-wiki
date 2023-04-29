@@ -30,21 +30,24 @@
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+  min-height: 40%;
 }
+
 .review {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: space-between;
   padding: 10px;
   width: 75%;
   border: 2px solid black;
   border-radius: 20px;
+  height: auto;
 }
 
 .review_rating {
   flex: 50%;
-  box-sizing: border-box;
+  flex-basis: 100%;
 }
 
 .review_rating  img {
@@ -62,7 +65,17 @@
   align-self: right;
 }
 
+.review h3 {
+  font-size: 20px;
+}
+
+.review .subtitle {
+  font-size: 15px;
+  font-weight: normal;
+}
+
 .review h2 {
+  font-size: 25px;
   flex: 50%;
   box-sizing: border-box;
 }
