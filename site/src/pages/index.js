@@ -11,7 +11,7 @@ import CustomCarousel from "../components/Carousel";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-//const inter = Inter({ subsets: ['latin'] })
+//const inter = Inter({ subsets: ['latin'] })aaa
 
 export default function Home() {
   const router = useRouter();
@@ -55,7 +55,7 @@ export default function Home() {
             ></img>
           </div>
 
-          <CustomCarousel dorm={"maple-hall"}/>
+          <CustomCarousel dorm={"maple-hall"} count={5}/>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
             <div className={styles.event_deck}>a</div>
