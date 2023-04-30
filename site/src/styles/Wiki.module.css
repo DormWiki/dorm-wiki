@@ -12,10 +12,9 @@
   display: flex;
   margin-top: 50px;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   justify-self: flex-end;
-  width: 45%;
-  outline: 1px solid black;
+  width: 20%;
 }
 
 .description p {

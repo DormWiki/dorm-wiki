@@ -51,7 +51,7 @@ export default function Wiki( {info} ) {
           <button type="button">Login</button>
         </div>
         <div className={styles.sidebar}>
-          <div className={styles.logoside}>
+          <div className={styles.logo_side}>
             <img src="/dw-logo-side.png" style={{width:125}}></img>
           </div>
           <ul>
@@ -66,7 +66,7 @@ export default function Wiki( {info} ) {
         <section className={styles.content}>
           <CustomCarousel dorm={"maple-hall"} />
           <div className={wiki.description}>
-            <h3> Information </h3>
+            <h3> Maple Hall </h3>
             <p>{info["maple-hall"]["description"]}</p>
           </div>
           <span className={wiki.review_box}>
