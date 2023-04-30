@@ -35,7 +35,15 @@ export default function Home() {
             <Link href="/events">Events</Link>
           </li>
           <li>
-            <Link href="/wiki">Wiki</Link>
+            <div className={styles.dropdown}>
+              <Link href="/wiki">Wiki</Link>
+              <div className={styles.dropdown_text}>
+                <Link href="/wiki/residence-halls">Residence halls</Link>
+                <Link href="/wiki/academic-apts">Academic-year apartments</Link>
+                <Link href="/wiki/year-apts">Full-year apartments</Link>
+                <Link href="/wiki/family-apts">Family apartments</Link>
+              </div>
+            </div>
           </li>
           <li>
             <Link href="/about">About</Link>
@@ -54,7 +62,7 @@ export default function Home() {
               src="/dw-logo-main.png"
             ></img>
           </div>
-          <CustomCarousel dorm={"maple-hall"}/>
+          <CustomCarousel dorm={"maple-hall"} />
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
             <div className={styles.event_deck}>a</div>
