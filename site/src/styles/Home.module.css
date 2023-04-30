@@ -293,6 +293,21 @@
   transform: translateZ(0);
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown:hover .dropdown_text {
+  display: block;
+}
+.dropdown_text {
+  text-align: left;
+  display: none;
+  background-color: var(--uw-purple);
+  position: absolute;
+}
+
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {

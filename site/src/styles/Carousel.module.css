@@ -11,3 +11,12 @@
   justify-content: center;
   display: flex;
 }
+
+.wrapper :global(.carousel img) {
+  width: 100%;
+}
+
+.wrapper :global(.carousel-root) {
+  height: 100%;
+  width: 100%;
+}
