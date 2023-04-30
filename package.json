@@ -3,6 +3,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
+    "react-search-box": "^3.0.0",
     "react-slideshow-image": "^4.2.1",
     "react-stars": "^2.2.5"
   }

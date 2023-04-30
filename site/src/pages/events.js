@@ -8,6 +8,14 @@ import Link from 'next/link'
 import CustomCarousel from '@/components/Carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+
+// return 4 closest events to today's date (inclusive)
+function getInfo() {
+    // return 
+    // get todays date 
+    // return 1 closest
+}
+
 export default function Events( {event_info} ) {
   const router = useRouter();
   

@@ -5,7 +5,9 @@ import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
 import React, { useState } from "react";
 import Events from './events';
-
+import getInfo from "./events.js";
+import { Component } from "react";
+import ReactSearchBox from "react-search-box";
 import { useRouter } from "next/router";
 import CustomCarousel from "../components/Carousel";
 
@@ -15,7 +17,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function Home() {
   const router = useRouter();
-
   return (
     <>
       <Head>
@@ -55,16 +56,21 @@ export default function Home() {
         <button type="button">Login</button>
       </div>
       <main className={styles.main}>
-        <div className={styles.content}>
-          <div>
+        <div className={styles.main_content}>
+          <div className={styles.big_logo}>
             <img
-              style={{ height: "250px", width: "250px" }}
+              style={{ height: "500px", width: "500px" }}
               src="/dw-logo-main.png"
             ></img>
           </div>
-          <CustomCarousel dorm={"maple-hall"} />
+
+          <div className={styles.search_wrapper}>
+            <input type="text"/>
+            
+          </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
+            {getInfo}
             <div className={styles.event_deck}>a</div>
             <div className={styles.event_deck}>a</div>
             <div className={styles.event_deck}>a</div>

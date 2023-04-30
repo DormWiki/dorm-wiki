@@ -10,11 +10,9 @@
 
 .description {
   display: flex;
-  margin-top: 50px;
+  margin-top: 3vw;
   flex-direction: column;
-  align-items: left;
-  justify-self: flex-end;
-  width: 20%;
+  width: 40%;
 }
 
 .description p {
