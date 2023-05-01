@@ -24,15 +24,16 @@ export default function Events( {event_info} ) {
   for (var i = 1; i <= 5; i++) {
     events_arr.push(
         <span className={events.event_box}>
-            <div className={events.event}>
-                <div className={events.event_info}>
-                    <h2>Event {i}</h2>
-                    <h3 className={events.subtitle}>
-                    Date, Location
-                    </h3>
-                    <p>Description.</p>
-                </div>
+        <div className={events.event}>
+            <div className={events.event_info}>
+                <h2>Event {i}</h2>
+                <h3 className={events.subtitle}>
+                Date, Location
+                </h3>
+                <p>Description. Description. Description. Description.
+                    Description. Description.</p>
             </div>
+        </div>
         </span>);
   }
 
@@ -44,30 +45,32 @@ export default function Events( {event_info} ) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png"/>
         </Head>
+        <div className={styles.logo}>
+        <div className={styles.navbar_logo_wrapper}>
+            <img src="/dw-logo-navbar.png"></img>
+        </div>
         <div className={styles.navbar}>
-        <ul>
-            <li>
-                <Link a href="/">Home</Link>
-            </li>
-            <li>
-                <Link href="/events">Events</Link>
-            </li>
-            <li>
-                <Link href="/wiki">Wiki</Link>
-            </li>
-            <li>
-                <Link href="/about">About</Link>
-            </li>
-            <li>
-                <Link href="/search">Search</Link>
-            </li>
-        </ul>
-            <button type="button">Login</button>
+            <ul>
+                <li>
+                    <Link a href="/">Home</Link>
+                </li>
+                <li>
+                    <Link href="/events">Events</Link>
+                </li>
+                <li>
+                    <Link href="/wiki">Wiki</Link>
+                </li>
+                <li>
+                    <Link href="/about">About</Link>
+                </li>
+                <li>
+                    <Link href="/search">Search</Link>
+                </li>
+                <button type="button" onClick={() => router.push('/login')}>Login</button>
+            </ul>
+        </div>
         </div>
         <div className={styles.sidebar}>
-            <div className={styles.logo_side}>
-            <img src="/dw-logo-side.png" style={{width:125}}></img>
-            </div>
             <ul>
             <li>
                 <Link href="#">Link</Link>
@@ -82,7 +85,7 @@ export default function Events( {event_info} ) {
                 <h2 className={events.title}>Trending</h2>
                 <CustomCarousel dorm={"events"}/>
                 <h2 className={events.title}>Upcoming</h2>
-               {events_arr}
+                {events_arr}
             </div>
         </main> 
     </>

@@ -7,14 +7,14 @@
 .title {
   width: 100%;
   margin-top: 50px;
-  margin-left: 10px;
+  margin-left: 3vw;
+  padding-bottom: 1vw;
   display: inline-block;
   font-size: 30px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   line-height: 10px;
-
 }
 
 .content {
@@ -24,7 +24,6 @@
   margin-right: 400px;
   height: 50px;
   display: inline-block;
-
   font-size: 14px;
   font-family: 'Inter';
   font-style: normal;
@@ -33,15 +32,14 @@
 }
 
 .event_box {
-  margin-top: 50px;
-  row-gap: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
+  align-items: left;
   width: 100%;
   min-height: 40%;
-
+  margin-left: 3vw;
+  margin-top: 1.5vw;
+  margin-bottom: 2vw;
   font-size: 14px;
   font-family: 'Inter';
   font-style: normal;

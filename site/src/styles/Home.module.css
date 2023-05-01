@@ -10,9 +10,7 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  
 }
-
 
 .main_content {
   display: flex;
@@ -24,6 +22,15 @@
   padding-top: 67px;
 }
 
+.h2 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: white;
+}
+
 .logo {
   display: flex;
   order: 1;
@@ -31,15 +38,6 @@
   align-self: flex-start;
   height: 20px;
   width: 100%;
-}
-
-.logo_side{
-  margin-top: 25px;
-  width: 100;
-  align-self: center;
-  position: relative;
-  align-items: center;
-  text-align: center;
 }
 
 .logo img{
@@ -62,7 +60,6 @@
   text-align: center;
 }
 
-
 .break {
   flex-basis: 100%;
   height: 0px;
@@ -78,6 +75,13 @@
   margin-right: 67px;
   padding-top: 67px;
   padding-left: 190px;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: white;
 }
 
 .navbar, .sidebar {
@@ -93,6 +97,14 @@
   line-height: 24px;
 }
 
+.navbar_logo_wrapper {
+  margin-left: 0;
+  margin-top: 0.75%;
+  display: flex;
+  position: fixed;
+  z-index: 102;
+  height: 5%;
+}
 
 .navbar ul {
   margin-left: auto;
@@ -165,6 +177,7 @@
   margin-top: 100px;
 }
 
+
 .navbar button {
   border: none;
   background-color: var(--uw-gold);
@@ -180,6 +193,15 @@
   line-height: 24px;
   color: white;
 }
+
+
+
+.login_button {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+
 
 .navbar button:hover {
   opacity: 85%;

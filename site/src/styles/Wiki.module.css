@@ -11,6 +11,7 @@
 .description {
   display: flex;
   margin-top: 3vw;
+  margin-top: 3vw;
   flex-direction: column;
   width: 40%;
 }

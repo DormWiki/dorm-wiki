@@ -8,32 +8,32 @@ import React, { useState } from "react";
 export default function Wiki() {
   return (
     <>
-      <div className={styles.navbar}>
-        <ul>
-          <li>
-            <Link a href="/">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/events">Events</Link>
-          </li>
-          <li>
-            <Link href="/wiki">Wiki</Link>
-          </li>
-          <li>
-            <Link href="/about">About</Link>
-          </li>
-          <li>
-            <Link href="/search">Search</Link>
-          </li>
-        </ul>
-        <button type="button">Login</button>
+      <div className={styles.logo}>
+        <div className={styles.navbar_logo_wrapper}>
+            <img src="/dw-logo-navbar.png"></img>
+        </div>
+        <div className={styles.navbar}>
+            <ul>
+                <li>
+                    <Link a href="/">Home</Link>
+                </li>
+                <li>
+                    <Link href="/events">Events</Link>
+                </li>
+                <li>
+                    <Link href="/wiki">Wiki</Link>
+                </li>
+                <li>
+                    <Link href="/about">About</Link>
+                </li>
+                <li>
+                    <Link href="/search">Search</Link>
+                </li>
+                <button type="button" onClick={() => router.push('/login')}>Login</button>
+            </ul>
+        </div>
       </div>
       <div className={styles.sidebar}>
-        <div className={styles.logoside}>
-          <img src="/dw-logo-side.png" style={{ width: 125 }}></img>
-        </div>
         <ul>
           <li>
             <Link href="#">Link</Link>
@@ -44,6 +44,9 @@ export default function Wiki() {
         </ul>
       </div>
       <section className={styles.content}>
+        <div className={styles.h2}>
+          <h2>Dorms</h2>
+        </div>
         <ul>
           <li>
             <Link href="/wiki/dorms/alder-hall">Alder Hall</Link>

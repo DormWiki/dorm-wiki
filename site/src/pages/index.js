@@ -17,6 +17,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function Home() {
   const router = useRouter();
+
   return (
     <>
       <Head>
@@ -52,8 +53,10 @@ export default function Home() {
           <li>
             <Link href="/search">Search</Link>
           </li>
+          <li>
+            <button type="button" onClick={() => router.push('/login')}>Login</button>
+          </li>
         </ul>
-        <button type="button">Login</button>
       </div>
       <main className={styles.main}>
         <div className={styles.main_content}>
@@ -63,18 +66,16 @@ export default function Home() {
               src="/dw-logo-main.png"
             ></img>
           </div>
-
           <div className={styles.search_wrapper}>
             <input type="text"/>
-            
           </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
             {getInfo}
-            <div className={styles.event_deck}>a</div>
-            <div className={styles.event_deck}>a</div>
-            <div className={styles.event_deck}>a</div>
-            <div className={styles.event_deck}>a</div>
+            <div className={styles.event_deck}>1</div>
+            <div className={styles.event_deck}>2</div>
+            <div className={styles.event_deck}>3</div>
+            <div className={styles.event_deck}>4</div>
           </div>
         </div>
       </main>
