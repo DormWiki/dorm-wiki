@@ -1,3 +1,14 @@
+@media (prefers-color-scheme: light) {
+  .content, .navbar, .sidebar, .main a:visited {
+    color: black;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .content, .navbar, .sidebar, .main a:visited {
+    color: white;
+  }
+}
+
 .main {
   display: flex;
   flex-direction: row;
@@ -22,13 +33,13 @@
   padding-top: 67px;
 }
 
+
 .h2 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
-  color: white;
 }
 
 .logo {
@@ -81,7 +92,6 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
-  color: white;
 }
 
 .navbar, .sidebar {
@@ -95,7 +105,6 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  color: white;
 }
 
 .navbar_logo_wrapper {
