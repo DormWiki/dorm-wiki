@@ -1,41 +1,52 @@
 import Head from 'next/head'
 import React, { useState } from 'react';
 import { useRouter } from "next/router";
+import Link from 'next/link'
+import CustomCarousel from '@/components/Carousel';
 
 import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
-import Link from 'next/link'
-import CustomCarousel from '@/components/Carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 // return 4 closest events to today's date (inclusive)
-function getInfo() {
+function getClosestUpcomingEvents(date) {
     // return 
     // get todays date 
     // return 1 closest
+    var closest = [];
+    return closest;
 }
+
+function getUpcomingEvents(event_info) {
+    var events_arr = [];
+    for (var i = 1; i <= 5; i++) {
+        events_arr.push(
+            <span className={events.event_box}>
+                <div className={events.event}>
+                    <div className={events.event_info}>
+                        <h2>Event {i}</h2>
+                        <h3 className={events.subtitle}>
+                        Date, Location
+                        </h3>
+                        <p>
+                            {event_info["id"]["title"]}
+                        </p>
+                        <p>
+                            Description. Description. Description. Description.
+                            Description. Description.
+                        </p>
+                    </div>
+                </div>
+            </span>);
+    }
+    return events_arr;
+}
+
 
 export default function Events( {event_info} ) {
   const router = useRouter();
-  
-  var events_arr = [];
-
-  for (var i = 1; i <= 5; i++) {
-    events_arr.push(
-        <span className={events.event_box}>
-        <div className={events.event}>
-            <div className={events.event_info}>
-                <h2>Event {i}</h2>
-                <h3 className={events.subtitle}>
-                Date, Location
-                </h3>
-                <p>Description. Description. Description. Description.
-                    Description. Description.</p>
-            </div>
-        </div>
-        </span>);
-  }
+  var events_arr = getUpcomingEvents(event_info);
 
   return (
     <>
@@ -91,3 +102,17 @@ export default function Events( {event_info} ) {
     </>
   );
 }
+
+export async function getStaticProps() {
+    const res = await fetch("http://localhost:3000/event_info.json").then((res) =>
+      res.json()
+    );
+    const event_info = res;
+  
+    return {
+      props: {
+        event_info
+      },
+    };
+}
+

@@ -1,9 +1,8 @@
 {
-  "event": {
-    "id": {
-      "description": "Game night",
+  "id": {
+      "title": "Game Night",
+      "description": "Hang out and play games all night",
       "date": "5/2/2023",
       "location": "Maple Hall"
-    }
   }  
 }

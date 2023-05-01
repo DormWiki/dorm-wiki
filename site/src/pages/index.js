@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
 import React, { useState } from "react";
 import Events from './events';
@@ -11,6 +10,7 @@ import ReactSearchBox from "react-search-box";
 import { useRouter } from "next/router";
 import CustomCarousel from "../components/Carousel";
 
+import styles from '@/styles/Home.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 //const inter = Inter({ subsets: ['latin'] })aaa

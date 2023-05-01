@@ -1,10 +1,17 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+
+import styles from "@/styles/Home.module.css";
+import login from '@/styles/Login.module.css';
+
 export default function Login() {
+
+  const router = useRouter();
+
   return (
     <>
       <div className={styles.logo}>
@@ -42,7 +49,18 @@ export default function Login() {
           </li>
         </ul>
       </div>
-      <section className={styles.content}>Login</section>
+      <main className={styles.main}>
+        <div className={styles.content}>
+          <h2 className={login.hrtitle}>
+             Welcome!
+          </h2>
+          <div className={login.button_wrapper}>
+            <button type="button" className={login.button}>
+              Sign in with Google
+            </button>
+          </div>
+        </div>
+      </main>
     </>
   );
 }

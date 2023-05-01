@@ -33,15 +33,6 @@
   padding-top: 67px;
 }
 
-
-.h2 {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
-}
-
 .logo {
   display: flex;
   order: 1;
@@ -76,6 +67,19 @@
   height: 0px;
 }
 
+.title {
+  width: 100%;
+  margin-top: 2.5vh;
+  margin-left: 3vw;
+  padding-bottom: .5vw;
+  display: inline-block;
+  font-size: 30px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  line-height: 10px;
+}
+
 .content {
   display: flex;
   flex-wrap: wrap;
@@ -93,6 +97,14 @@
   font-size: 18px;
   line-height: 24px;
 }
+
+.p, .list_wrapper {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  margin-left: 3vw;
+  margin-right: 10vw;
+}
+
 
 .navbar, .sidebar {
   display: flex;

@@ -6,9 +6,9 @@
 
 .title {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 2.5vh;
   margin-left: 3vw;
-  padding-bottom: 1vw;
+  padding-bottom: .5vw;
   display: inline-block;
   font-size: 30px;
   font-family: 'Inter';
@@ -36,10 +36,10 @@
   flex-direction: column;
   align-items: left;
   width: 100%;
-  min-height: 40%;
+  min-height: 50%;
   margin-left: 3vw;
   margin-top: 1.5vw;
-  margin-bottom: 2vw;
+  margin-bottom: 1.5vw;
   font-size: 14px;
   font-family: 'Inter';
   font-style: normal;
