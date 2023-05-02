@@ -1,7 +1,7 @@
 {
   "maple-hall": {
     "description": "Maple Hall features Area 01, a space designed to enhance collaborative learning and social experiences of residential students. Engineering Living Learning Community and Pre-Health Sciences Living Learning Community reside in Maple Hall.",
-    "rating": 5,
+    "rating": 4.5,
     "reviews": {
       "12512": 
       {
@@ -9,6 +9,13 @@
         "text": "Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom Drom  dorm",
         "date": "4/20/2023",
         "rating": 2
+      },
+      "451325": 
+      {
+        "name": "Anonymous",
+        "text": "cool place",
+        "date": "4/20/2023",
+        "rating": 5
       }
     },
     "eating": [
@@ -16,5 +23,8 @@
       "District Market",
       "Cultivate"
     ]
+  },
+  "alder-hall": {
+    
   }
 }
