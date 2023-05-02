@@ -29,9 +29,7 @@ function getUpcomingEvents(event_info) {
                         <h3 className={events.subtitle}>
                         Date, Location
                         </h3>
-                        <p>
-                            {event_info["id"]["title"]}
-                        </p>
+                        
                         <p>
                             Description. Description. Description. Description.
                             Description. Description.

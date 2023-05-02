@@ -1,0 +1,17 @@
+.button {
+  height: 5vh;
+  padding: 10px;
+}
+
+.button_wrapper, .hrtitle {
+  width: 100%;
+  text-align: center;
+}
+
+.hrtitle {
+  width: 100%;
+  display: fixed;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+}
