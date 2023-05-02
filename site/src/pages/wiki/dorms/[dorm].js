@@ -218,9 +218,10 @@ export default function Wiki( {info} ) {
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch("http://localhost:3000/info.json").then((res) =>
-    res.json()
-  );
+  const res = await fetch("http://localhost:3000/info.json")
+    .then((res) =>
+      res.json()
+    );
   const info = res;
 
   // By returning { props: { posts } }, the Blog component

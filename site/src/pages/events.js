@@ -19,24 +19,22 @@ function getClosestUpcomingEvents(date) {
 }
 
 function getUpcomingEvents(event_info) {
+    console.log(event_info);
     var events_arr = [];
     for (var i = 1; i <= 5; i++) {
         events_arr.push(
-            <span className={events.event_box}>
-                <div className={events.event}>
-                    <div className={events.event_info}>
-                        <h2>Event {i}</h2>
-                        <h3 className={events.subtitle}>
-                        Date, Location
-                        </h3>
-                        
-                        <p>
-                            Description. Description. Description. Description.
-                            Description. Description.
-                        </p>
-                    </div>
-                </div>
-            </span>);
+          <span className={events.event_box}>
+            <div className={events.event}>
+              <div className={events.event_info}>
+                <h2>{event_info["id"]["title"]}</h2>
+                <h3 className={events.subtitle}>
+                  {event_info["id"]["date"]}, {event_info["id"]["location"]}
+                </h3>
+                <p>{event_info["id"]["description"]}</p>
+              </div>
+            </div>
+          </span>
+        );
     }
     return events_arr;
 }
@@ -102,9 +100,10 @@ export default function Events( {event_info} ) {
 }
 
 export async function getStaticProps() {
-    const res = await fetch("http://localhost:3000/event_info.json").then((res) =>
-      res.json()
-    );
+    const res = await fetch("http://localhost:3000/event_info.json")
+        .then(res =>
+            res.json()
+        );
     const event_info = res;
   
     return {
