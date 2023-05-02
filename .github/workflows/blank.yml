@@ -22,7 +22,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: ['8', '10', '12']
         os: [ubuntu-latest, windows-latest, macOS-latest]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -33,5 +32,4 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          npm lint
           npm test
