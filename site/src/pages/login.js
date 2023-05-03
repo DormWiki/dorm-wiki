@@ -1,9 +1,9 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import Link from "next/link";
-import React, { useState } from "react";
+import Head from 'next/head';
+import React, { useState } from 'react';
 import { useRouter } from "next/router";
+import Image from 'next/image';
+import { Inter } from 'next/font/google';
+import Link from "next/link";
 
 import styles from "@/styles/Home.module.css";
 import login from '@/styles/Login.module.css';
@@ -27,7 +27,17 @@ export default function Login() {
                     <Link href="/events">Events</Link>
                 </li>
                 <li>
-                    <Link href="/wiki">Wiki</Link>
+                    <div className={styles.dropdown}>
+                        <Link href="/wiki">Wiki</Link>
+                        <div className={styles.dropdown_text}>
+                            <Link href="/wiki/residence-halls">Residence halls</Link>
+                            <Link href="/wiki/academic-apts">
+                                Academic-year apartments
+                            </Link>
+                            <Link href="/wiki/year-apts">Full-year apartments</Link>
+                            <Link href="/wiki/family-apts">Family apartments</Link>
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <Link href="/about">About</Link>

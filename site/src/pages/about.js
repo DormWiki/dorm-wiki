@@ -27,7 +27,17 @@ export default function About() {
                     <Link href="/events">Events</Link>
                 </li>
                 <li>
-                    <Link href="/wiki">Wiki</Link>
+                    <div className={styles.dropdown}>
+                        <Link href="/wiki">Wiki</Link>
+                        <div className={styles.dropdown_text}>
+                            <Link href="/wiki/residence-halls">Residence halls</Link>
+                            <Link href="/wiki/academic-apts">
+                                Academic-year apartments
+                            </Link>
+                            <Link href="/wiki/year-apts">Full-year apartments</Link>
+                            <Link href="/wiki/family-apts">Family apartments</Link>
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <Link href="/about">About</Link>

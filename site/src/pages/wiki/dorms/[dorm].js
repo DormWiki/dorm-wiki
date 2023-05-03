@@ -1,15 +1,14 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
-
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
-import styles from '@/styles/Home.module.css'
-import wiki from '@/styles/Wiki.module.css';
 import Link from "next/link";
 import ReactStars from "react-stars";
 import CustomCarousel from "../../../components/Carousel";
 
+import styles from '@/styles/Home.module.css'
+import wiki from '@/styles/Wiki.module.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
@@ -57,9 +56,7 @@ export default function Wiki( {info} ) {
             <li>
               <Link href="/search">Search</Link>
             </li>
-            <button type="button" onClick={() => router.push("/login")}>
-              Login
-            </button>
+            <Button type="button" onClick={() => router.push("/login")}>Login</Button>
           </ul>
         </div>
         <div className={styles.sidebar}>

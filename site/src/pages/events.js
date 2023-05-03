@@ -8,29 +8,23 @@ import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-
-// return 4 closest events to today's date (inclusive)
-function getClosestUpcomingEvents(date) {
-    // return 
-    // get todays date 
-    // return 1 closest
-    var closest = [];
-    return closest;
+function getInfo () {
+    return "";
 }
 
-function getUpcomingEvents(event_info) {
-    console.log(event_info);
+function getUpcomingEvents(events_info) {
     var events_arr = [];
     for (var i = 1; i <= 5; i++) {
         events_arr.push(
           <span className={events.event_box}>
             <div className={events.event}>
               <div className={events.event_info}>
-                <h2>{event_info["id"]["title"]}</h2>
+                <h2>{events_info["id"]["title"]}</h2>
                 <h3 className={events.subtitle}>
-                  {event_info["id"]["date"]}, {event_info["id"]["location"]}
+                  {events_info["id"]["date"]}, {events_info["id"]["location"]}
                 </h3>
-                <p>{event_info["id"]["description"]}</p>
+                <p>{events_info["id"]["description"]}</p>
+                <Link href="/event">Link to event page</Link>
               </div>
             </div>
           </span>
@@ -40,9 +34,9 @@ function getUpcomingEvents(event_info) {
 }
 
 
-export default function Events( {event_info} ) {
+export default function Events( {events_info} ) {
   const router = useRouter();
-  var events_arr = getUpcomingEvents(event_info);
+  var events_arr = getUpcomingEvents(events_info);
 
   return (
     <>
@@ -65,7 +59,17 @@ export default function Events( {event_info} ) {
                     <Link href="/events">Events</Link>
                 </li>
                 <li>
-                    <Link href="/wiki">Wiki</Link>
+                    <div className={styles.dropdown}>
+                        <Link href="/wiki">Wiki</Link>
+                        <div className={styles.dropdown_text}>
+                            <Link href="/wiki/residence-halls">Residence halls</Link>
+                            <Link href="/wiki/academic-apts">
+                                Academic-year apartments
+                            </Link>
+                            <Link href="/wiki/year-apts">Full-year apartments</Link>
+                            <Link href="/wiki/family-apts">Family apartments</Link>
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <Link href="/about">About</Link>
@@ -100,15 +104,15 @@ export default function Events( {event_info} ) {
 }
 
 export async function getStaticProps() {
-    const res = await fetch("http://localhost:3000/event_info.json")
+    const res = await fetch("http://localhost:3000/events_info.json")
         .then(res =>
             res.json()
         );
-    const event_info = res;
+    const events_info = res;
   
     return {
       props: {
-        event_info
+        events_info
       },
     };
 }
