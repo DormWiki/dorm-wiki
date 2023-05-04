@@ -1,0 +1,83 @@
+git
+DORM:
+{
+	"_id":"Maple Hall",
+	"info":{
+		"description":"maple hall description",
+		"roomType":["double","triple"],
+		"address":"1135 NE Campus Pkwy, Seattle, WA 98105",
+		"food":["Local Point","District Market"]
+	},
+	"review":{
+		"overallRating":{"$numberInt":"3"},
+		"reviews":[
+			// {
+			// 	"user":"jiali7@uw.edu",
+			// 	"text":"love it",
+			// 	"date":ISODate("2020-05-18T14:10:30.000Z"),
+			// 	"rating":{"$numberInt":"5"}
+			// },
+			// {
+			// 	"user":"yz0814@uw.edu",
+			// 	"text":"hate it",
+			// 	"date":ISODate("2021-01-15T06:31:15.000Z"),
+			// 	"rating":{"$numberInt":"1"}
+			// }
+		]
+	
+	},
+	"event":[{"$numberInt":"1"},{"$numberInt":"2"},{"$numberInt":"3"}]
+},
+
+{
+	"_id":"McMahon Hall",
+	"info":{
+		"description":"McMahon hall description",
+		"roomType":["single","double"],
+		"address":"4200 Little Canoe Channel NE, Seattle, WA 98195",
+		"food":["Center Table","District Market"]
+	},
+	"review":{
+		"overallRating":{"$numberInt":"3"},
+		"reviews":[
+			// {
+			// 	"user":"jiali7@uw.edu",
+			// 	"text":"like it",
+			// 	"date":"4/20/2023",
+			// 	"rating":{"$numberInt":"3"}
+			// },
+			// {
+			// 	"user":"yz0814@uw.edu",
+			// 	"text":"OK",
+			// 	"date":"4/30/2023",
+			// 	"rating":{"$numberInt":"3"}
+			// }
+		]
+	
+	},
+	"event":[{"$numberInt":"1"},{"$numberInt":"2"}]
+}
+
+event id (primary key)
+   - name
+   - time
+   - description
+   - organizer
+   - picture
+   - posted by (refe
+
+EVENT:
+{
+	"_id": ,
+	"name": ,
+	"startTime":,
+	"postDate": ,
+	"dorm_id": ,
+	"location": ,
+	"organizer_id": 
+}
+
+User:
+{
+	"_id": 
+}
