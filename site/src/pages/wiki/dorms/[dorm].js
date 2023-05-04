@@ -56,7 +56,7 @@ export default function Wiki( {info} ) {
             <li>
               <Link href="/search">Search</Link>
             </li>
-            <Button type="button" onClick={() => router.push("/login")}>Login</Button>
+            <button type="button" onClick={() => router.push("/login")}>Login</button>
           </ul>
         </div>
         <div className={styles.sidebar}>
