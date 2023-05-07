@@ -24,9 +24,9 @@
   "scripts": {
     "cypress:open": "cypress open",
     "data": "npm start --prefix server/",
-    "dev": "next dev --prefix site/",
-    "build": "next build --prefix site/",
-    "start": "next start --prefix site/",
-    "lint": "next lint --prefix site/"
+    "dev": "npm run dev --prefix site/",
+    "build": "npm run build --prefix site/",
+    "start": "npm run start --prefix site/",
+    "lint": "npm run lint --prefix site/"
   }
 }

@@ -173,14 +173,15 @@ export default function Wiki( {info} ) {
 }
 
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch("http://localhost:5050/wiki?dorm=maple-hall")
-    .then((res) =>
-      res.json()
-    );
-  const info = res;
+  const pid = context.params.dorm;
+  const res = await fetch(`http://localhost:5050/wiki?dorm=${pid}`);
+  const info = await res.json();
+  if (Object.keys(info).length === 0) {
+    return { notFound: true };
+  }
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
