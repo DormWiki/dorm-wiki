@@ -6,7 +6,6 @@ import { Inter } from 'next/font/google';
 import Link from "next/link";
 import ReactStars from "react-stars";
 import CustomCarousel from "../../../components/Carousel";
-
 import styles from '@/styles/Home.module.css'
 import wiki from '@/styles/Wiki.module.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -144,61 +143,23 @@ export default function Wiki( {info} ) {
           <CustomCarousel dorm={dorm} />
           <div className={wiki.description}>
             <h3> Information </h3>
-            <p>{info[dorm]["description"]}</p>
+            <p>{info[0]["info"]["description"]}</p>
           </div>
           <span className={wiki.review_box}>
             <div className={wiki.review}>
               <div className={wiki.review_text}>
                 <h2>Anonymous</h2>
                 <h3 className={wiki.subtitle}>
-                  {info[dorm]["reviews"]["12512"]["date"]}
+                  {info[0]["info"]["review"]}
                 </h3>
                 <h3> Cool dorm! </h3>
-                <p>{info[dorm]["reviews"]["12512"]["text"]}</p>
+                <p>{info[0]["info"]["review"]}</p>
               </div>
               <div className={wiki.review_rating}>
                 <ReactStars
                   edit={false}
                   starCount={5}
-                  value={info[dorm]["reviews"]["12512"]["rating"]}
-                  size={36}
-                  color2={"#ffd700"}
-                />
-              </div>
-            </div>
-            <div className={wiki.review}>
-              <div className={wiki.review_text}>
-                <h2>Anonymous</h2>
-                <h3 className={wiki.subtitle}>
-                  {info[dorm]["reviews"]["12512"]["date"]}
-                </h3>
-                <h3> Cool dorm! </h3>
-                <p>{info[dorm]["reviews"]["12512"]["text"]}</p>
-              </div>
-              <div className={wiki.review_rating}>
-                <ReactStars
-                  edit={false}
-                  starCount={5}
-                  value={info[dorm]["reviews"]["12512"]["rating"]}
-                  size={36}
-                  color2={"#ffd700"}
-                />
-              </div>
-            </div>
-            <div className={wiki.review}>
-              <div className={wiki.review_text}>
-                <h2>Anonymous</h2>
-                <h3 className={wiki.subtitle}>
-                  {info[dorm]["reviews"]["12512"]["date"]}
-                </h3>
-                <h3> Cool dorm! </h3>
-                <p>{info[dorm]["reviews"]["12512"]["text"]}</p>
-              </div>
-              <div className={wiki.review_rating}>
-                <ReactStars
-                  edit={false}
-                  starCount={5}
-                  value={info[dorm]["reviews"]["12512"]["rating"]}
+                  value={0}
                   size={36}
                   color2={"#ffd700"}
                 />
@@ -212,14 +173,15 @@ export default function Wiki( {info} ) {
 }
 
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch("http://localhost:3000/info.json")
-    .then((res) =>
-      res.json()
-    );
-  const info = res;
+  const pid = context.params.dorm;
+  const res = await fetch(`http://localhost:5050/wiki?dorm=${pid}`);
+  const info = await res.json();
+  if (Object.keys(info).length === 0) {
+    return { notFound: true };
+  }
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time

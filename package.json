@@ -1,17 +1,35 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
+    "cypress": "^12.11.0",
+    "dotenv": "^8.2.0",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.6",
+    "next": "^13.4.1",
+    "next-auth": "^4.22.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-search-box": "^3.0.0",
     "react-slideshow-image": "^4.2.1",
-    "react-stars": "^2.2.5"
+    "react-stars": "^2.2.5",
+    "swiper": "^9.2.4"
   },
   "devDependencies": {
+    "concurrently": "^8.0.1",
     "cypress": "^12.11.0",
+    "nodemon": "^2.0.22",
     "webpack": "^5.82.0"
   },
   "scripts": {
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "data": "npm start --prefix server/",
+    "dev": "npm run dev --prefix site/",
+    "build": "npm run build --prefix site/",
+    "start": "npm run start --prefix site/",
+    "lint": "npm run lint --prefix site/",
+    "all": "concurrently \"npm run data\" \"npm run dev\""
   }
 }
