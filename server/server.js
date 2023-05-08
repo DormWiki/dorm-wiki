@@ -42,13 +42,12 @@ app.get("/wiki", async (req, res) => {
   if (req.query.dorm == undefined) { // no parameter
     let results = await collection.find().project({_id: 1}).toArray(function(err, result) {
       if (err) throw err;
-        res.json(result).status(200);
+      res.json(result).status(200);
     });
   } else {
     let results = await collection.find({_id: req.query.dorm}).toArray(function(err, result) {
-        if (err) throw err;
-        console.log(result);
-        res.json(result).status(200);
+      if (err) throw err;
+      res.json(result).status(200);
     });
   }
 });
@@ -61,15 +60,71 @@ app.get("/getUpcomingEvents", async (req, res) => {
   if (req.query.dorm == undefined) { // no parameter
     let results = await collection.find().toArray(function(err, result) {
       if (err) throw err;
-        console.log(result);
-        res.json(result).status(200);
+      res.json(result).status(200);
     });
   } else {
     let results = await collection.find({dorm_id: req.query.dorm}).toArray(function(err, result) {
-        if (err) throw err;
-        console.log(result);
-        res.json(result).status(200);
+      if (err) throw err;
+      console.log(result);
+      res.json(result).status(200);
     });
   }
 });
+
+// postEvent: request to post an event
+app.post("/postEvent", async (req, res) => {
+  let collection = await db.collection("Event");
+  const count = await collection.countDocuments();
+  let newEvent = {
+    _id: (count),
+    name: req.body.name,
+	  startTime: req.body.startTime,
+	  postDate: req.body.postDate,
+	  dorm_id: req.body.dorm_id,
+	  location: req.body.location,
+    organizer: req.body.organizer
+  }
+  try{
+    const dorm = await db.collection('Dorm');
+    await dorm.updateOne(
+      { _id: req.body.dorm_id},
+      { $push: { event: count} }
+    )
+  }catch(err){
+    console.log(err);
+  }
+  
+  let results = await collection.insertOne(newEvent, function(err, result) {
+    if (err) throw err;
+    res.json({_id: result.insertedId}).status(200);
+  });
+  
+});
+
+// postReview: get review from frontend 
+app.post("/postReview", async(req, res) => {
+  let collection = await db.collection("Dorm");
+
+  try {
+    // Create new review object from request body
+    const newReview = {
+      user: req.body.user,
+      text: req.body.text,
+      date: req.body.date,
+      rating: req.body.rating
+    };
+    
+    const result = await collection.updateOne(
+      {_id: req.body.ID},
+      { $push: {review: newReview} }
+    );
+
+    res.status(200).send('Review posted successfully!');
+
+  } catch(err) {
+    res.status(500).send('Error posting review');
+  } 
+
+});
+
 
