@@ -9,6 +9,12 @@ DormWiki is a website designed to inform prospective/incoming students about var
 
 
 # Instructions for how to build and test the system.
+Run Cypress Test:
+1. Follow the instruction to install cypress (https://docs.cypress.io/guides/getting-started/installing-cypress)
+2. Add local IP to MongoDB in order to run the system
+   - Going to MongoDB and sign in by given account and password(on slack)
+   - Navigate to "Network Access" and current IP address
+4. Run Cypress e2e tests: `npm run cypress:open`
 
 
 
@@ -22,3 +28,4 @@ DormWiki is a website designed to inform prospective/incoming students about var
 
 
 # Operational use cases
+
