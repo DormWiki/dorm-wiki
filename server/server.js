@@ -7,6 +7,7 @@ import posts from "./routes/posts.mjs";
 
 import db from "./db/conn.mjs";
 import objectId from "mongodb";
+import bodyParser from 'body-parser';
 const ObjectId = objectId;
 
 const PORT = process.env.PORT || 5050;
@@ -14,6 +15,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
+
 
 // app.use("/", posts);
 
@@ -58,12 +61,12 @@ app.get("/wiki", async (req, res) => {
 app.get("/getUpcomingEvents", async (req, res) => {
   let collection = await db.collection("Event");
   if (req.query.dorm == undefined) { // no parameter
-    let results = await collection.find().sort({startTime: 1}).toArray(function(err, result) {
+    let results = await collection.find().sort({startTime: -1}).toArray(function(err, result) {
       if (err) throw err;
       res.json(result).status(200);
     });
   } else {
-    let results = await collection.find({dorm_id: req.query.dorm}).sort({startTime: 1}).toArray(function(err, result) {
+    let results = await collection.find({dorm_id: req.query.dorm}).sort({startTime: -1}).toArray(function(err, result) {
       if (err) throw err;
       console.log(result);
       res.json(result).status(200);
@@ -104,7 +107,7 @@ app.post("/postEvent", async (req, res) => {
 // postReview: get review from frontend 
 app.post("/postReview", async(req, res) => {
   let collection = await db.collection("Dorm");
-
+  console.log(req.body);
   try {
     // Create new review object from request body
     const newReview = {
@@ -119,10 +122,10 @@ app.post("/postReview", async(req, res) => {
       { $push: {review: newReview} }
     );
 
-    res.status(200).send('Review posted successfully!');
+    return res.status(200).send('Review posted successfully!');
 
   } catch(err) {
-    res.status(500).send('Error posting review');
+    return res.status(500).send('Error posting review');
   } 
 
 });

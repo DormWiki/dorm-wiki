@@ -147,13 +147,14 @@ export default function Wiki( {info} ) {
             <p>{info[0]["info"]["description"]}</p>
           </div>
           <div className={wiki.review_input}>
-            <form method="post" action="/api/postReview">
-              <label>Name:</label>
+            <form method="post" action="http://localhost:5050/postReview">
+              <label htmlFor="user">Name:</label>
               <input type="text" name="user"/><br/>
               <textarea type="text" name="text"/>
               <input type="hidden" name="date" value={new Date().toISOString()}/>
               <input type="number" name="rating" min="0" max="5"/>
               <input type="submit" id="submit" value="Submit"/>
+              <input type="hidden" name="ID" value={dorm}/>
             </form>
           </div>
           <span className={wiki.review_box}>
@@ -220,26 +221,26 @@ function genReviews(reviews) {
 export async function getStaticPaths() {
   return {
     paths: [
-      "/wiki/dorms/alder-hall",
-      "/wiki/dorms/elm-hall",
-      "/wiki/dorms/hansee-hall",
-      "/wiki/dorms/lander-hall",
-      "/wiki/dorms/madrona-hall",
+      //"/wiki/dorms/alder-hall",
+      //"/wiki/dorms/elm-hall",
+      //"/wiki/dorms/hansee-hall",
+      //"/wiki/dorms/lander-hall",
+      //"/wiki/dorms/madrona-hall",
       "/wiki/dorms/maple-hall",
-      "/wiki/dorms/mccarty-hall",
-      "/wiki/dorms/mccahon-hall",
-      "/wiki/dorms/oak-hall",
-      "/wiki/dorms/poplar-hall",
-      "/wiki/dorms/terry-hall",
-      "/wiki/dorms/willow-hall",
-      "/wiki/dorms/mercer-court",
-      "/wiki/dorms/stevens-court",
-      "/wiki/dorms/cedar-apartments",
-      "/wiki/dorms/commodore-duchess",
-      "/wiki/dorms/nordheim-court",
-      "/wiki/dorms/radford-court",
-      "/wiki/dorms/blakeley-village",
-      "/wiki/dorms/laurel-village",
+      //"/wiki/dorms/mccarty-hall",
+      //"/wiki/dorms/mccahon-hall",
+      //"/wiki/dorms/oak-hall",
+      //"/wiki/dorms/poplar-hall",
+      //"/wiki/dorms/terry-hall",
+      //"/wiki/dorms/willow-hall",
+      //"/wiki/dorms/mercer-court",
+      //"/wiki/dorms/stevens-court",
+      //"/wiki/dorms/cedar-apartments",
+      //"/wiki/dorms/commodore-duchess",
+      //"/wiki/dorms/nordheim-court",
+      //"/wiki/dorms/radford-court",
+      //"/wiki/dorms/blakeley-village",
+      //"/wiki/dorms/laurel-village",
       // Object variant:
     ],
     fallback: false,

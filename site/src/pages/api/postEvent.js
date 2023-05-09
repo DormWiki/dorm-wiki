@@ -1,7 +1,8 @@
 import DOMPurify from "isomorphic-dompurify";
 
-export default function handler(req, res) {
+const URL = "https://localhost:5050";
 
+export default function handler(req, res) {
     res.status(200).json({
         name: DOMPurify.sanitize(req.body.name),
 	    startTime: DOMPurify.sanitize(req.body.startTime),

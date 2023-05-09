@@ -95,7 +95,7 @@ export default function Events({ events_info }) {
             <div className={styles.content}>
                 <h2 className={events.title}>Trending</h2>
                 <CustomCarousel dorm={"events"}/>
-                <form method="post" action="/api/postEvent">
+                <form method="post" action="http://localhost:5050/postEvent">
                     <label>Name:</label>
                     <input type="text" name="name"/><br/>
                     <label>organizer:</label>
