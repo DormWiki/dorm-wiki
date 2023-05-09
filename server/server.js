@@ -5,10 +5,16 @@ import "./loadEnvironment.mjs";
 // import "express-async-errors";
 import posts from "./routes/posts.mjs";
 
+// for mongoDB
 import db from "./db/conn.mjs";
 import objectId from "mongodb";
 import bodyParser from 'body-parser';
 const ObjectId = objectId;
+// for google authentication
+import session from "express-session";
+import passport from 'passport';
+import googleStrategy from 'passport-google-oauth';
+const GoogleStrategy = googleStrategy.OAuth2Strategy;
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -18,7 +24,12 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
 
 
-// app.use("/", posts);
+// for google authentication
+app.use(session({
+  resave: false,
+  saveUninitialized: true,
+  secret: 'SECRET' 
+}));
 
 // Global error handling
 app.use((err, _req, res, next) => {
@@ -31,11 +42,16 @@ app.listen(PORT, () => {
 });
 
 // ***************************************************************************************************
-
 // Don't know how to insert date object on website T_T
 // Need to figure it out later OR implement the post event functionality
 // TODO 1: use date object to store dates -> sort events by time in getUpcomingEvents
 // TODO 2: following move to separate routes (low priority, still need to figure out why router doesn't work :'(
+
+
+// login
+app.get('/login', function(req, res) {
+  res.render('pages/auth');
+});
 
 
 // wiki: getting list of dorm names
@@ -130,4 +146,53 @@ app.post("/postReview", async(req, res) => {
 
 });
 
+
+
+
+
+
+// ***************************************************************************************************
+/*  PASSPORT SETUP  */
+
+var userProfile;
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/success', (req, res) => res.send(userProfile));
+app.get('/error', (req, res) => res.send("error logging in"));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+
+/*  Google AUTH  */
+ 
+const GOOGLE_CLIENT_ID = '330949585590-2e6pm4judqk693avjvspavummmhjlfi4.apps.googleusercontent.com';
+const GOOGLE_CLIENT_SECRET = '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';
+passport.use(new GoogleStrategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:5050/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+      userProfile=profile;
+      return done(null, userProfile);
+  }
+));
+ 
+app.get('/auth/google', 
+  passport.authenticate('google', { scope : ['profile', 'email'] }));
+ 
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/error' }),
+  function(req, res) {
+    // Successful authentication, redirect success.
+    res.redirect('/success');
+  });
 
