@@ -14,27 +14,27 @@ function getInfo () {
 
 function getUpcomingEvents(events_info) {
     var events_arr = [];
-    for (var i = 1; i <= 5; i++) {
+    events_info.forEach((event) => {
         events_arr.push(
           <span className={events.event_box}>
             <div className={events.event}>
               <div className={events.event_info}>
-                <h2>{events_info["id"]["title"]}</h2>
+                <h2>{event["name"]}</h2>
                 <h3 className={events.subtitle}>
-                  {events_info["id"]["date"]}, {events_info["id"]["location"]}
+                  {event["startTime"]}, {event["location"]}
                 </h3>
-                <p>{events_info["id"]["description"]}</p>
+                <p>description missing</p>
                 <Link href="/event">Link to event page</Link>
               </div>
             </div>
           </span>
         );
-    }
+    });
     return events_arr;
 }
 
 
-export default function Events( {events_info} ) {
+export default function Events({ events_info }) {
   const router = useRouter();
   var events_arr = getUpcomingEvents(events_info);
 
@@ -95,6 +95,20 @@ export default function Events( {events_info} ) {
             <div className={styles.content}>
                 <h2 className={events.title}>Trending</h2>
                 <CustomCarousel dorm={"events"}/>
+                <form method="post" action="/api/postEvent">
+                    <label>Name:</label>
+                    <input type="text" name="name"/><br/>
+                    <label>organizer:</label>
+                    <input type="text" name="organizer"/><br/>
+                    <label>Location:</label>
+                    <input type="text" name="location"/><br/>
+                    <input type="hidden" name="postDate" value={new Date().toISOString()}/>
+                    <label>Dorm:</label>
+                    <input type="text" name="dorm_id"/><br/>
+                    <label>When</label>
+                    <input type="datetime-local" name="startTime"/><br/>
+                    <input type="submit" id="submit" value="Submit"/>
+                </form>
                 <h2 className={events.title}>Upcoming</h2>
                 {events_arr}
             </div>
@@ -104,11 +118,11 @@ export default function Events( {events_info} ) {
 }
 
 export async function getStaticProps() {
-    const res = await fetch("http://localhost:3000/events_info.json")
-        .then(res =>
-            res.json()
-        );
-    const events_info = res;
+    const res = await fetch("http://localhost:5050/getUpcomingEvents")
+    if (!res.ok) {
+        throw new Error('fetch fail');
+    }
+    const events_info = await res.json();
   
     return {
       props: {

@@ -7,6 +7,8 @@ import Link from "next/link";
 
 import styles from "@/styles/Home.module.css";
 import login from '@/styles/Login.module.css';
+import { redirect } from 'next/navigation';
+import GoogleButton from '../components/GoogleButton';
 
 export default function Login() {
 
@@ -65,9 +67,7 @@ export default function Login() {
              Welcome!
           </h2>
           <div className={login.button_wrapper}>
-            <button type="button" className={login.button}>
-              Sign in with Google
-            </button>
+            <GoogleButton/>
           </div>
         </div>
       </main>

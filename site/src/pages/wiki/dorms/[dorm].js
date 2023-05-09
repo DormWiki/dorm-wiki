@@ -14,7 +14,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 export default function Wiki( {info} ) {
   const router = useRouter();
   const dorm = router.query.dorm;
-
+  let data = info[0];
+  let reviews = genReviews(data["review"]);
   return (
     <>
       <Head>
@@ -145,26 +146,18 @@ export default function Wiki( {info} ) {
             <h3> Information </h3>
             <p>{info[0]["info"]["description"]}</p>
           </div>
+          <div className={wiki.review_input}>
+            <form method="post" action="/api/postReview">
+              <label>Name:</label>
+              <input type="text" name="user"/><br/>
+              <textarea type="text" name="text"/>
+              <input type="hidden" name="date" value={new Date().toISOString()}/>
+              <input type="number" name="rating" min="0" max="5"/>
+              <input type="submit" id="submit" value="Submit"/>
+            </form>
+          </div>
           <span className={wiki.review_box}>
-            <div className={wiki.review}>
-              <div className={wiki.review_text}>
-                <h2>Anonymous</h2>
-                <h3 className={wiki.subtitle}>
-                  {info[0]["info"]["review"]}
-                </h3>
-                <h3> Cool dorm! </h3>
-                <p>{info[0]["info"]["review"]}</p>
-              </div>
-              <div className={wiki.review_rating}>
-                <ReactStars
-                  edit={false}
-                  starCount={5}
-                  value={0}
-                  size={36}
-                  color2={"#ffd700"}
-                />
-              </div>
-            </div>
+            {reviews}
           </span>
         </section>
       </main>
@@ -178,6 +171,9 @@ export async function getStaticProps(context) {
   // You can use any data fetching library
   const pid = context.params.dorm;
   const res = await fetch(`http://localhost:5050/wiki?dorm=${pid}`);
+  if (!res.ok) {
+    throw new Error('fetch failed');
+  }
   const info = await res.json();
   if (Object.keys(info).length === 0) {
     return { notFound: true };
@@ -190,6 +186,35 @@ export async function getStaticProps(context) {
       info
     },
   };
+}
+
+function genReviews(reviews) {
+  let rev_html = [];
+  reviews.forEach((r) => {
+    rev_html.push(
+      <div className={wiki.review}>
+        <div className={wiki.review_text}>
+          <h2>{r["user"]}</h2>
+          <h3 className={wiki.subtitle}>
+            {r["date"]}
+          </h3>
+          <h3>short title missing</h3>
+          <p>{r["text"]}</p>
+        </div>
+        <div className={wiki.review_rating}>
+          <ReactStars
+            edit={false}
+            starCount={5}
+            value={r["rating"]}
+            size={36}
+            color2={"#ffd700"}
+          />
+        </div>
+      </div>
+      );
+  })
+  return rev_html;
+  
 }
 
 export async function getStaticPaths() {

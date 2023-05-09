@@ -58,12 +58,12 @@ app.get("/wiki", async (req, res) => {
 app.get("/getUpcomingEvents", async (req, res) => {
   let collection = await db.collection("Event");
   if (req.query.dorm == undefined) { // no parameter
-    let results = await collection.find().toArray(function(err, result) {
+    let results = await collection.find().sort({startTime: 1}).toArray(function(err, result) {
       if (err) throw err;
       res.json(result).status(200);
     });
   } else {
-    let results = await collection.find({dorm_id: req.query.dorm}).toArray(function(err, result) {
+    let results = await collection.find({dorm_id: req.query.dorm}).sort({startTime: 1}).toArray(function(err, result) {
       if (err) throw err;
       console.log(result);
       res.json(result).status(200);
