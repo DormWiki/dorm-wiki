@@ -6,6 +6,7 @@
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "express": "^4.17.1",
+    "isomorphic-dompurify": "^1.4.0",
     "mongodb": "^3.6.6",
     "next": "^13.4.1",
     "next-auth": "^4.22.1",

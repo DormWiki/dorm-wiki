@@ -14,10 +14,12 @@ import styles from '@/styles/Home.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 //const inter = Inter({ subsets: ['latin'] })aaa
+const URL = 'http://localhost:5050';
 
-export default function Home() {
+export default function Home( {data} ) {
   const router = useRouter();
-
+  const events = data;
+  //const info = getInfo();
   return (
     <>
       <Head>
@@ -71,7 +73,6 @@ export default function Home() {
           </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
-            {getInfo}
             <div className={styles.event_deck}>1</div>
             <div className={styles.event_deck}>2</div>
             <div className={styles.event_deck}>3</div>
@@ -81,4 +82,19 @@ export default function Home() {
       </main>
     </>
   );
+}
+
+async function getEvents() {
+  const res = await fetch(URL + '/getUpcomingEvents');
+  if (!res.ok) {
+    throw new Error('fail fetch');
+  }
+  return res.json();
+}
+
+export const getStaticProps = async () => {
+  const data = await getEvents();
+  return {
+    props: {data},
+  }
 }

@@ -142,7 +142,7 @@
   border-bottom: 1px solid black;
   z-index: 101;
   flex-direction: row;
-  height: 7%;
+  height: 7vh;
   width: 100%;
 
 }
@@ -179,7 +179,7 @@
 
 .sidebar {
   z-index: 100;
-  margin-top: 63px;
+  margin-top: 7vh;
   flex-direction: column;
   height: 100vh;
   width: 10%;
@@ -264,12 +264,13 @@
 
 .navbar li {
   float: left;
+  height: 7vh;
 }
 
 .sidebar li a, .navbar li a {
   font-size: 20px;
   display: block;
-  padding: 20px;
+  padding: 15px;
 }
 
 .sidebar li a {
