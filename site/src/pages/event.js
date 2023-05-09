@@ -53,16 +53,6 @@ export default function Event( {event_info} ) {
             <button type="button" onClick={() => router.push("/login")}>Login</button>
           </ul>
         </div>
-        <div className={styles.sidebar}>
-            <ul>
-            <li>
-                <Link href="#">Link</Link>
-            </li>
-            <li>
-                <Link href="#">Link</Link>
-            </li>
-            </ul>
-        </div>
         </main>
     </>
   );

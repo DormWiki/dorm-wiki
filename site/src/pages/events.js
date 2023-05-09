@@ -81,16 +81,6 @@ export default function Events({ events_info }) {
             </ul>
         </div>
         </div>
-        <div className={styles.sidebar}>
-            <ul>
-            <li>
-                <Link href="#">Link</Link>
-            </li>
-            <li>
-                <Link href="#">Link</Link>
-            </li>
-            </ul>
-        </div>
         <main className={events.main}>
             <div className={styles.content}>
                 <h2 className={events.title}>Trending</h2>
