@@ -18,6 +18,8 @@
     "react-slideshow-image": "^4.2.1",
     "react-stars": "^2.2.5",
     "express-session": "^1.17.3",
+    "passport": "^0.6.0",
+    "passport-google-oauth": "^2.0.0",
     "swiper": "^9.2.4"
   },
   "devDependencies": {

@@ -140,7 +140,7 @@ export default function Wiki( {info} ) {
             </div>
           </ul>
         </div>
-        <section className={styles.content}>
+        <section className={wiki.content}>
           <CustomCarousel dorm={dorm} />
           <div className={wiki.description}>
             <h3> Information </h3>
