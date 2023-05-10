@@ -59,6 +59,27 @@
   height: auto;
 }
 
+.form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 3vw;
+  width: 100%;
+  font-size: 20px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  line-height: 3.5vh;
+}
+
+.submit {
+  padding: 1vw;
+  justify-content: left;
+  font-size: larger;
+  font-family: 'Inter';
+}
+
 .subtitle {
   font-size: smaller;
   color: gray;
