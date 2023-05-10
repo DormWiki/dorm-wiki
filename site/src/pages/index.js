@@ -69,7 +69,7 @@ export default function Home( {data} ) {
             ></img>
           </div>
           <div className={styles.search_wrapper}>
-            <input type="text"/>
+            <input className={styles.search} type="text" placeholder="Search..."/>
           </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>

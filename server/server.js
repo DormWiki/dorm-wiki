@@ -95,7 +95,7 @@ app.post("/postEvent", async (req, res) => {
   let collection = await db.collection("Event");
   const count = await collection.countDocuments();
   let newEvent = {
-    _id: (count+1),
+    _id: (count + 1),
     name: req.body.name,
 	  startTime: req.body.startTime,
 	  postDate: req.body.postDate,

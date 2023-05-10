@@ -53,9 +53,7 @@ export default function Events({ events_info, images }) {
         <div className={styles.navbar}>
           <ul>
             <li>
-              <Link a href="/">
-                Home
-              </Link>
+              <Link a href="/">Home</Link>
             </li>
             <li>
               <Link href="/events">Events</Link>
@@ -88,32 +86,36 @@ export default function Events({ events_info, images }) {
       <main className={events.main}>
         <div className={styles.content}>
           <h2 className={events.title}>Trending</h2>
-          <CustomCarousel paths={images} />
-          <div className={events.form}>
-            <form method="post" action="http://localhost:5050/postEvent">
-              <label>Name:</label>
-              <input type="text" name="name" />
-              <br />
-              <label>organizer:</label>
-              <input type="text" name="organizer" />
-              <br />
-              <label>Location:</label>
-              <input type="text" name="location" />
-              <br />
-              <input
-                type="hidden"
-                name="postDate"
-                value={new Date().toISOString()}
-              />
-              <label>Dorm:</label>
-              <input type="text" name="dorm_id" />
-              <br />
-              <label>When</label>
-              <input type="datetime-local" name="startTime" />
-              <br />
-              <input type="submit" id="submit" value="Submit" />
-            </form>
-          </div>
+          <CustomCarousel paths={images}/>
+          <h2 className={events.title}>Submit an Event</h2>
+          <span className={events.event_box}>
+            
+            <div className={events.form}>
+                <form method="post" action="http://localhost:5050/postEvent">
+                <label>Event title: </label>
+                <input type="text" name="name"/>
+                <br />
+                <label>Organizer: </label>
+                <input type="text" name="organizer" />
+                <br />
+                <label>Location: </label>
+                <input type="text" name="location" />
+                <br />
+                <input
+                    type="hidden"
+                    name="postDate"
+                    value={new Date().toISOString()}
+                />
+                <label>Dorm: </label>
+                <input type="text" name="dorm_id" />
+                <br />
+                <label>Date & Time: </label>
+                <input type="datetime-local" name="startTime" />
+                <br />
+                <input type="submit" id="submit" value="Submit" style={{padding: 5}}/>
+                </form>
+            </div>
+          </span>
           <h2 className={events.title}>Upcoming</h2>
           {events_arr}
         </div>
