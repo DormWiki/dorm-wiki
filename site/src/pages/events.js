@@ -85,20 +85,24 @@ export default function Events({ events_info }) {
             <div className={styles.content}>
                 <h2 className={events.title}>Trending</h2>
                 <CustomCarousel dorm={"events"}/>
-                <form method="post" action="http://localhost:5050/postEvent">
-                    <label>Name:</label>
-                    <input type="text" name="name"/><br/>
-                    <label>organizer:</label>
-                    <input type="text" name="organizer"/><br/>
-                    <label>Location:</label>
-                    <input type="text" name="location"/><br/>
-                    <input type="hidden" name="postDate" value={new Date().toISOString()}/>
-                    <label>Dorm:</label>
-                    <input type="text" name="dorm_id"/><br/>
-                    <label>When</label>
-                    <input type="datetime-local" name="startTime"/><br/>
-                    <input type="submit" id="submit" value="Submit"/>
-                </form>
+                <div className={events.form}>
+                    <form method="post" action="http://localhost:5050/postEvent">
+                        <label style={{padding: 10}}>Event Title:</label>
+                        <input type="text" name="name"/><br/>
+                        <label style={{padding: 10}}>Organizer:</label>
+                        <input type="text" name="organizer"/><br/>
+                        <label style={{padding: 10}}>Location:</label>
+                        <input type="text" name="location"/><br/>
+                        <input type="hidden" name="postDate" value={new Date().toISOString()}/>
+                        <label style={{padding: 10}}>Dorm:</label>
+                        <input type="text" name="dorm_id"/><br/>
+                        <label style={{padding: 10}}>Date:</label>
+                        <input type="datetime-local" name="startTime"/><br/>
+                        <div className={events.submit}> 
+                            <input type="submit" id="submit" value="Submit" style={{padding:10}}/>
+                        </div>
+                    </form>
+                </div>
                 <h2 className={events.title}>Upcoming</h2>
                 {events_arr}
             </div>
