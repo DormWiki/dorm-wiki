@@ -127,6 +127,7 @@ app.post("/postReview", async(req, res) => {
   try {
     // Create new review object from request body
     const newReview = {
+      title: req.body.title,
       user: req.body.user,
       text: req.body.text,
       date: req.body.date,
