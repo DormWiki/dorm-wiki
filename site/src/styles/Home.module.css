@@ -104,6 +104,11 @@
   margin-right: 10vw;
 }
 
+.search {
+  width: 100%;
+  padding: 1.5vw 1vw;
+  box-sizing: border-box;
+}
 
 .navbar, .sidebar {
   display: flex;
