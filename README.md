@@ -28,4 +28,10 @@ Run Cypress Test:
 
 
 # Operational use cases
-
+1. Displaying Dorm Page (Maple Hall)
+	From the Home page, by navigating to "Wiki" and then click "Maple Hall", we will fetch all the dorm information and 
+	reviews from database and display everything on the page.
+2. Post Review
+	In a dorm page(Maple Hall), right below the dorm picture, we will be able to fill out the review the dorm by putting in name, 
+	review, and rate for the dorm. Then we will send all the information to our database and store it there. If we refresh the
+	page, we will fetch all the dorm info from database again so the new review will be posted on the dorm page. 
