@@ -17,6 +17,7 @@
     "react-search-box": "^3.0.0",
     "react-slideshow-image": "^4.2.1",
     "react-stars": "^2.2.5",
+    "express-session": "^1.17.3",
     "swiper": "^9.2.4"
   },
   "devDependencies": {
