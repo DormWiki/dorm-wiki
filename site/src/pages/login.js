@@ -51,16 +51,6 @@ export default function Login() {
             </ul>
         </div>
       </div>
-      <div className={styles.sidebar}>
-        <ul>
-          <li>
-            <Link href="#">Link</Link>
-          </li>
-          <li>
-            <Link href="#">Link</Link>
-          </li>
-        </ul>
-      </div>
       <main className={styles.main}>
         <div className={styles.content}>
           <h2 className={login.hrtitle}>
