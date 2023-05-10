@@ -8,10 +8,13 @@ import ReactStars from "react-stars";
 import CustomCarousel from "../../../components/Carousel";
 import styles from '@/styles/Home.module.css'
 import wiki from '@/styles/Wiki.module.css';
+import path from "path";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
-export default function Wiki( {info} ) {
+const URL = "http://localhost:3000/";
+
+export default function Wiki( {info, images} ) {
   const router = useRouter();
   const dorm = router.query.dorm;
   let data = info[0];
@@ -141,7 +144,7 @@ export default function Wiki( {info} ) {
           </ul>
         </div>
         <section className={wiki.content}>
-          <CustomCarousel dorm={dorm} />
+          <CustomCarousel paths={images} />
           <div className={wiki.description}>
             <h3> Information </h3>
             <p>{info[0]["info"]["description"]}</p>
@@ -214,20 +217,32 @@ export async function getStaticProps(context) {
     return { notFound: true };
   }
 
+  const fs = require("fs");
+
+  const dir = path.resolve("./public", pid);
+
+  const filenames = fs.readdirSync(dir);
+
+  const images = filenames.map((name) =>
+    path.join("/", pid, name)
+  );
+  
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
   return {
     props: {
-      info
+      info,
+      images
     },
   };
 }
 
+
 function genReviews(reviews) {
   let rev_html = [];
-  reviews.forEach((r) => {
+  reviews.forEach((r, i) => {
     rev_html.push(
-      <div className={wiki.review}>
+      <div key={i} className={wiki.review}>
         <div className={wiki.review_text}>
           <h2>{r["user"]}</h2>
           <h3 className={wiki.subtitle}>
@@ -240,7 +255,7 @@ function genReviews(reviews) {
           <ReactStars
             edit={false}
             starCount={5}
-            value={r["rating"]}
+            value={parseFloat(r["rating"])}
             size={36}
             color2={"#ffd700"}
           />
@@ -255,26 +270,26 @@ function genReviews(reviews) {
 export async function getStaticPaths() {
   return {
     paths: [
-      //"/wiki/dorms/alder-hall",
-      //"/wiki/dorms/elm-hall",
-      //"/wiki/dorms/hansee-hall",
-      //"/wiki/dorms/lander-hall",
-      //"/wiki/dorms/madrona-hall",
+      "/wiki/dorms/alder-hall",
+      "/wiki/dorms/elm-hall",
+      "/wiki/dorms/hansee-hall",
+      "/wiki/dorms/lander-hall",
+      "/wiki/dorms/madrona-hall",
       "/wiki/dorms/maple-hall",
-      //"/wiki/dorms/mccarty-hall",
-      //"/wiki/dorms/mccahon-hall",
-      //"/wiki/dorms/oak-hall",
-      //"/wiki/dorms/poplar-hall",
-      //"/wiki/dorms/terry-hall",
-      //"/wiki/dorms/willow-hall",
-      //"/wiki/dorms/mercer-court",
-      //"/wiki/dorms/stevens-court",
-      //"/wiki/dorms/cedar-apartments",
-      //"/wiki/dorms/commodore-duchess",
-      //"/wiki/dorms/nordheim-court",
-      //"/wiki/dorms/radford-court",
-      //"/wiki/dorms/blakeley-village",
-      //"/wiki/dorms/laurel-village",
+      "/wiki/dorms/mccarty-hall",
+      "/wiki/dorms/mccahon-hall",
+      "/wiki/dorms/oak-hall",
+      "/wiki/dorms/poplar-hall",
+      "/wiki/dorms/terry-hall",
+      "/wiki/dorms/willow-hall",
+      "/wiki/dorms/mercer-court",
+      "/wiki/dorms/stevens-court",
+      "/wiki/dorms/cedar-apartments",
+      "/wiki/dorms/commodore-duchess",
+      "/wiki/dorms/nordheim-court",
+      "/wiki/dorms/radford-court",
+      "/wiki/dorms/blakeley-village",
+      "/wiki/dorms/laurel-village",
       // Object variant:
     ],
     fallback: false,

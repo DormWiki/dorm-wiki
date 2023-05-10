@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from "next/router";
 import Link from 'next/link'
 import CustomCarousel from '@/components/Carousel';
-
+import path from "path";
 import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -34,7 +34,7 @@ function getUpcomingEvents(events_info) {
 }
 
 
-export default function Events({ events_info }) {
+export default function Events({ events_info, images }) {
   const router = useRouter();
   var events_arr = getUpcomingEvents(events_info);
 
@@ -88,7 +88,7 @@ export default function Events({ events_info }) {
       <main className={events.main}>
         <div className={styles.content}>
           <h2 className={events.title}>Trending</h2>
-          <CustomCarousel dorm={"events"} />
+          <CustomCarousel paths={images} />
           <div className={events.form}>
             <form method="post" action="http://localhost:5050/postEvent">
               <label>Name:</label>
@@ -117,36 +117,7 @@ export default function Events({ events_info }) {
           <h2 className={events.title}>Upcoming</h2>
           {events_arr}
         </div>
-<<<<<<< HEAD
       </main>
-=======
-        <main className={events.main}>
-            <div className={styles.content}>
-                <h2 className={events.title}>Trending</h2>
-                <CustomCarousel dorm={"events"}/>
-                <div className={events.form}>
-                    <form method="post" action="http://localhost:5050/postEvent">
-                        <label style={{padding: 10}}>Event Title:</label>
-                        <input type="text" name="name"/><br/>
-                        <label style={{padding: 10}}>Organizer:</label>
-                        <input type="text" name="organizer"/><br/>
-                        <label style={{padding: 10}}>Location:</label>
-                        <input type="text" name="location"/><br/>
-                        <input type="hidden" name="postDate" value={new Date().toISOString()}/>
-                        <label style={{padding: 10}}>Dorm:</label>
-                        <input type="text" name="dorm_id"/><br/>
-                        <label style={{padding: 10}}>Date:</label>
-                        <input type="datetime-local" name="startTime"/><br/>
-                        <div className={events.submit}> 
-                            <input type="submit" id="submit" value="Submit" style={{padding:10}}/>
-                        </div>
-                    </form>
-                </div>
-                <h2 className={events.title}>Upcoming</h2>
-                {events_arr}
-            </div>
-        </main> 
->>>>>>> bf5e9f3ec8e0e2711882f89cc21e1a798cc7e1ee
     </>
   );
 }
@@ -157,10 +128,17 @@ export async function getStaticProps() {
         throw new Error('fetch fail');
     }
     const events_info = await res.json();
-  
+    const fs = require("fs");
+
+    const dir = path.resolve("./public", "events");
+
+    const filenames = fs.readdirSync(dir);
+
+    const images = filenames.map((name) => path.join("/", "events", name));
     return {
       props: {
-        events_info
+        events_info,
+        images
       },
     };
 }

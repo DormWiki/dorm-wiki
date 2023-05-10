@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup as bs
 import requests as rq
 import regex as re
 import urllib.request as ur
+from pathlib import Path
 
 # imgs are: class=carousel item
 # p
@@ -25,19 +26,18 @@ try:
         urls = [images[i].get("src") for i in range(len(images))]
         i = 1
         for url in urls:
-            filename = re.search(r'/([\w_-]+[.](jpg|gif|png))$', url)
+            url = URL + url
+            ending = url.split("/")[5].split("?")[0][:-5].split(".")[-1]
+            filename = "{}-{}.{}".format(dormName, i, ending)
+            print(filename)
             if not filename:
               print("Regex didn't match with the url: {}".format(url))
               continue
-            with open(filename.group(1), 'wb') as f:
-              if 'http' not in url:
-                  # sometimes an image source can be relative 
-                  # if it is provide the base url which also happens 
-                  # to be the site variable atm. 
-                  url = '{}{}'.format(URL, url)
-              response = rq.get(url)
-              f.write(response.content)
-              i += 1
+            Path("./misc/" + dormName).mkdir(parents=True, exist_ok=True)
+            with open("./misc/" + dormName + "/" + filename, "wb") as f:
+              f.write(rq.get(url).content)
+            i += 1
+          
 
         # dend, they dont have a uniform way of storing information!
         # print(beetSoup
