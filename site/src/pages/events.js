@@ -40,69 +40,84 @@ export default function Events({ events_info }) {
 
   return (
     <>
-       <Head>
+      <Head>
         <title>Dorm-Wiki</title>
         <meta name="description" content="Your go-to place for UW dorm info" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/dw-logo-icon.png"/>
-        </Head>
-        <div className={styles.logo}>
+        <link rel="icon" href="/dw-logo-icon.png" />
+      </Head>
+      <div className={styles.logo}>
         <div className={styles.navbar_logo_wrapper}>
-            <img src="/dw-logo-navbar.png"></img>
+          <img src="/dw-logo-navbar.png"></img>
         </div>
         <div className={styles.navbar}>
-            <ul>
-                <li>
-                    <Link a href="/">Home</Link>
-                </li>
-                <li>
-                    <Link href="/events">Events</Link>
-                </li>
-                <li>
-                    <div className={styles.dropdown}>
-                        <Link href="/wiki">Wiki</Link>
-                        <div className={styles.dropdown_text}>
-                            <Link href="/wiki/residence-halls">Residence halls</Link>
-                            <Link href="/wiki/academic-apts">
-                                Academic-year apartments
-                            </Link>
-                            <Link href="/wiki/year-apts">Full-year apartments</Link>
-                            <Link href="/wiki/family-apts">Family apartments</Link>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <Link href="/about">About</Link>
-                </li>
-                <li>
-                    <Link href="/search">Search</Link>
-                </li>
-                <button type="button" onClick={() => router.push('/login')}>Login</button>
-            </ul>
+          <ul>
+            <li>
+              <Link a href="/">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link href="/events">Events</Link>
+            </li>
+            <li>
+              <div className={styles.dropdown}>
+                <Link href="/wiki">Wiki</Link>
+                <div className={styles.dropdown_text}>
+                  <Link href="/wiki/residence-halls">Residence halls</Link>
+                  <Link href="/wiki/academic-apts">
+                    Academic-year apartments
+                  </Link>
+                  <Link href="/wiki/year-apts">Full-year apartments</Link>
+                  <Link href="/wiki/family-apts">Family apartments</Link>
+                </div>
+              </div>
+            </li>
+            <li>
+              <Link href="/about">About</Link>
+            </li>
+            <li>
+              <Link href="/search">Search</Link>
+            </li>
+            <button type="button" onClick={() => router.push("/login")}>
+              Login
+            </button>
+          </ul>
         </div>
+      </div>
+      <main className={events.main}>
+        <div className={styles.content}>
+          <h2 className={events.title}>Trending</h2>
+          <CustomCarousel dorm={"events"} />
+          <div className={events.form}>
+            <form method="post" action="http://localhost:5050/postEvent">
+              <label>Name:</label>
+              <input type="text" name="name" />
+              <br />
+              <label>organizer:</label>
+              <input type="text" name="organizer" />
+              <br />
+              <label>Location:</label>
+              <input type="text" name="location" />
+              <br />
+              <input
+                type="hidden"
+                name="postDate"
+                value={new Date().toISOString()}
+              />
+              <label>Dorm:</label>
+              <input type="text" name="dorm_id" />
+              <br />
+              <label>When</label>
+              <input type="datetime-local" name="startTime" />
+              <br />
+              <input type="submit" id="submit" value="Submit" />
+            </form>
+          </div>
+          <h2 className={events.title}>Upcoming</h2>
+          {events_arr}
         </div>
-        <main className={events.main}>
-            <div className={styles.content}>
-                <h2 className={events.title}>Trending</h2>
-                <CustomCarousel dorm={"events"}/>
-                <form method="post" action="http://localhost:5050/postEvent">
-                    <label>Name:</label>
-                    <input type="text" name="name"/><br/>
-                    <label>organizer:</label>
-                    <input type="text" name="organizer"/><br/>
-                    <label>Location:</label>
-                    <input type="text" name="location"/><br/>
-                    <input type="hidden" name="postDate" value={new Date().toISOString()}/>
-                    <label>Dorm:</label>
-                    <input type="text" name="dorm_id"/><br/>
-                    <label>When</label>
-                    <input type="datetime-local" name="startTime"/><br/>
-                    <input type="submit" id="submit" value="Submit"/>
-                </form>
-                <h2 className={events.title}>Upcoming</h2>
-                {events_arr}
-            </div>
-        </main> 
+      </main>
     </>
   );
 }

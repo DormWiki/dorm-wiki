@@ -58,15 +58,42 @@
   border-radius: 20px;
   height: auto;
 }
-
-.review_rating {
-  flex: 50%;
-  flex-basis: 100%;
+.review input {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.review textarea {
+  width: 30vw;
+  height: 10vh;
 }
 
-.review_rating img {
-  height: 30px;
-  width: 30px;
+.review input[type="submit"] {
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 20%;
+  transition: 0.2s;
+}
+
+.review input[type="submit"]:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.review input, .review textarea {
+  border-radius: 5px;
+  border: 1px solid black;
+  font-size: 16px;
+  font-family: 'Inter';
+  font-style: normal;
+  margin-top: 5px;
+}
+
+.review_rating {
+  width: 37.6*5px;
+}
+
+.review_rating span {
+  height: 36px;
+  width: 40px;
 }
 
 .subtitle {
@@ -115,9 +142,6 @@
   border-radius: 15px;
 }
 
-.review_input {
-
-}
 
 .wiki_square a {
   line-height: 15vh;
@@ -127,4 +151,9 @@
 
 .wiki_square:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.hr {
+  width: 80%;
+  border: 2px solid var(--uw-purple);
 }

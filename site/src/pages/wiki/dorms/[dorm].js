@@ -56,7 +56,9 @@ export default function Wiki( {info} ) {
             <li>
               <Link href="/search">Search</Link>
             </li>
-            <button type="button" onClick={() => router.push("/login")}>Login</button>
+            <button type="button" onClick={() => router.push("/login")}>
+              Login
+            </button>
           </ul>
         </div>
         <div className={styles.sidebar}>
@@ -94,9 +96,7 @@ export default function Wiki( {info} ) {
                 <Link href="/wiki/dorms/lander-hall">Lander Hall</Link>
               </li>
               <li>
-                <Link href="/wiki/dorms/maple-hall">
-                 Maple Hall
-                </Link>
+                <Link href="/wiki/dorms/maple-hall">Maple Hall</Link>
               </li>
               <li>
                 <Link href="/wiki/dorms/poplar-hall">Poplar Hall</Link>
@@ -146,18 +146,48 @@ export default function Wiki( {info} ) {
             <h3> Information </h3>
             <p>{info[0]["info"]["description"]}</p>
           </div>
-          <div className={wiki.review_input}>
-            <form method="post" action="http://localhost:5050/postReview">
-              <label htmlFor="user">Name:</label>
-              <input type="text" name="user"/><br/>
-              <textarea type="text" name="text"/>
-              <input type="hidden" name="date" value={new Date().toISOString()}/>
-              <input type="number" name="rating" min="0" max="5"/>
-              <input type="submit" id="submit" value="Submit"/>
-              <input type="hidden" name="ID" value={dorm}/>
-            </form>
-          </div>
           <span className={wiki.review_box}>
+            <div className={wiki.review}>
+              <div className={wiki.review_input}>
+                <form method="post" action="http://localhost:5050/postReview">
+                  <input
+                    placeholder="Name"
+                    type="text"
+                    name="user"
+                    autoComplete="off"
+                    required
+                  />
+                  <br />
+                  <textarea placeholder="Review" type="text" name="text" required/>
+                  <input
+                    type="hidden"
+                    name="date"
+                    value={new Date().toISOString()}
+                  />
+                  <input
+                    id="rating"
+                    type="hidden"
+                    name="rating"
+                    min="0"
+                    max="5"
+                    required
+                  />
+                  <input type="hidden" name="ID" value={dorm} />
+                  <br />
+                  <input type="submit" id="submit" value="Submit" />
+                </form>
+              </div>
+              <div className={wiki.review_rating}>
+                <ReactStars
+                  edit={true}
+                  starCount={5}
+                  size={36}
+                  color2={"#ffd700"}
+                  onChange={changeRating}
+                />
+              </div>
+            </div>
+            <hr className={wiki.hr}/>
             {reviews}
           </span>
         </section>
@@ -166,6 +196,10 @@ export default function Wiki( {info} ) {
   );
 }
 
+function changeRating(r) {
+  let rating = document.getElementById("rating");
+  rating.value = r;
+}
 
 export async function getStaticProps(context) {
   // Call an external API endpoint to get posts.
