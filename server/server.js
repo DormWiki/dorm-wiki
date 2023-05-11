@@ -149,12 +149,12 @@ app.post("/postReview", async(req, res) => {
 // login: log in a user to the website
 app.post("/login", async(req, res) => {
   let collection = await db.collection("User");
-  // Create a user object from request body
-  // const user = {
-  //   _id: req.body.email,
-  // };
+  //Create a user object from request body
+  const user = {
+    _id: req.body.email,
+  };
 
-  let results = await collection.insertOne(req.body.email, function(err, result) {
+  let results = await collection.updateOne(user, user, {upsert:true}, function(err, result) {
     if (err) throw err;
     return res.status(200);
   });
