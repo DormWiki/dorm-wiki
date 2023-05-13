@@ -4,8 +4,11 @@ import { useRouter } from "next/router";
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Link from "next/link";
+import Error from "next/error";
 import ReactStars from "react-stars";
 import CustomCarousel from "../../../components/Carousel";
+import Navbar from  "../../../components/Navbar";
+import Sidebar from "../../../components/Sidebar"
 import styles from '@/styles/Home.module.css'
 import wiki from '@/styles/Wiki.module.css';
 import path from "path";
@@ -16,9 +19,30 @@ const URL = "http://localhost:3000/";
 
 export default function Wiki( {info, images} ) {
   const router = useRouter();
+  const API = "http://localhost:5050/postReview";
   const dorm = router.query.dorm;
   let data = info[0];
   let reviews = genReviews(data["review"]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = {
+      user: event.target.user.value,
+      date: event.target.date.value,
+      rating: event.target.rating.value,
+      text: event.target.text.value,
+      ID: event.target.ID.value,
+    };
+
+    const response = await fetch (API, {method: 'POST', body: data});
+    const res = await response.status;
+    if (res === 200) {
+      event.target.parentNode.parentNode.className = wiki.review_submitted + " " + wiki.success;
+    } else {
+      router.push("/500");
+    }
+  };
+
   return (
     <>
       <Head>
@@ -27,122 +51,8 @@ export default function Wiki( {info, images} ) {
         <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.navbar_logo_wrapper}>
-          <img src="/dw-logo-navbar.png"></img>
-        </div>
-        <div className={styles.navbar}>
-          <ul>
-            <li>
-              <Link a href="/">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/events">Events</Link>
-            </li>
-            <li>
-              <div className={styles.dropdown}>
-                <Link href="/wiki">Wiki</Link>
-                <div className={styles.dropdown_text}>
-                  <Link href="/wiki/residence-halls">Residence halls</Link>
-                  <Link href="/wiki/academic-apts">
-                    Academic-year apartments
-                  </Link>
-                  <Link href="/wiki/year-apts">Full-year apartments</Link>
-                  <Link href="/wiki/family-apts">Family apartments</Link>
-                </div>
-              </div>
-            </li>
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
-              <Link href="/search">Search</Link>
-            </li>
-            <button type="button" onClick={() => router.push("/login")}>
-              Login
-            </button>
-          </ul>
-        </div>
-        <div className={styles.sidebar}>
-          <ul>
-            <h2>North Campus</h2>
-            <div className={styles.sidebar_sub}>
-              <li>
-                <Link href="/wiki/dorms/hansee-hall">Hansee Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/madrona-hall">Madrona Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/mccarty-hall">McCarty Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/mccahon-hall">McCahon Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/oak-hall">Oak Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/willow-hall">Willow Hall</Link>
-              </li>
-            </div>
-            <h2>West Campus</h2>
-            <div className={styles.sidebar_sub}>
-              <li>
-                <Link href="/wiki/dorms/alder-hall">Alder Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/elm-hall">Elm Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/lander-hall">Lander Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/maple-hall">Maple Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/poplar-hall">Poplar Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/terry-hall">Terry Hall</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/mercer-court">Mercer Court</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/stevens-court">Stevens Court</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/cedar-apartments">
-                  Cedar Apartments
-                </Link>
-              </li>
-            </div>
-            <h2>Off Campus</h2>
-            <div className={styles.sidebar_sub}>
-              <li>
-                <Link href="/wiki/dorms/commodore-duchess">
-                  Commodore Duchess
-                </Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/nordheim-court">Nordheim Court</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/radford-court">Radford Court</Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/blakeley-village">
-                  Blakeley Village
-                </Link>
-              </li>
-              <li>
-                <Link href="/wiki/dorms/laurel-village">Laural Village</Link>
-              </li>
-            </div>
-          </ul>
-        </div>
+        <Navbar />
+        <Sidebar />
         <section className={wiki.content}>
           <CustomCarousel paths={images} />
           <div className={wiki.description}>
@@ -150,9 +60,9 @@ export default function Wiki( {info, images} ) {
             <p>{info[0]["info"]["description"]}</p>
           </div>
           <span className={wiki.review_box}>
-            <div className={wiki.review}>
+            <div className={`${wiki.review} ${wiki.review_form}`}>
               <div className={wiki.review_input}>
-                <form method="post" action="http://localhost:5050/postReview">
+                <form onSubmit={handleSubmit} method="post">
                   <input
                     placeholder="Name"
                     type="text"
@@ -232,8 +142,9 @@ export async function getStaticProps(context) {
   return {
     props: {
       info,
-      images
+      images,
     },
+    revalidate: 360,
   };
 }
 
@@ -290,7 +201,6 @@ export async function getStaticPaths() {
       "/wiki/dorms/radford-court",
       "/wiki/dorms/blakeley-village",
       "/wiki/dorms/laurel-village",
-      // Object variant:
     ],
     fallback: false,
   };
