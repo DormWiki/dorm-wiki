@@ -7,10 +7,8 @@ import path from "path";
 import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Navbar from "../components/Navbar";
 
-function getInfo () {
-    return "";
-}
 
 function getUpcomingEvents(events_info) {
     var events_arr = [];
@@ -24,7 +22,9 @@ function getUpcomingEvents(events_info) {
                   {event["startTime"]}, {event["location"]}
                 </h3>
                 <p>description missing</p>
-                <Link href="/event">Link to event page</Link>
+                <Link href={`/events/${encodeURIComponent(event["_id"])}`}>
+                    Link to event page
+                </Link>
               </div>
             </div>
           </span>
@@ -32,7 +32,6 @@ function getUpcomingEvents(events_info) {
     });
     return events_arr;
 }
-
 
 export default function Events({ events_info, images }) {
   const router = useRouter();
@@ -46,75 +45,55 @@ export default function Events({ events_info, images }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
-      <div className={styles.logo}>
-        <div className={styles.navbar_logo_wrapper}>
-          <img src="/dw-logo-navbar.png"></img>
-        </div>
-        <div className={styles.navbar}>
-          <ul>
-            <li>
-              <Link a href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/events">Events</Link>
-            </li>
-            <li>
-              <div className={styles.dropdown}>
-                <Link href="/wiki">Wiki</Link>
-                <div className={styles.dropdown_text}>
-                  <Link href="/wiki/residence-halls">Residence halls</Link>
-                  <Link href="/wiki/academic-apts">
-                    Academic-year apartments
-                  </Link>
-                  <Link href="/wiki/year-apts">Full-year apartments</Link>
-                  <Link href="/wiki/family-apts">Family apartments</Link>
-                </div>
-              </div>
-            </li>
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
-              <Link href="/search">Search</Link>
-            </li>
-            <button type="button" onClick={() => router.push("/login")}>
-              Login
-            </button>
-          </ul>
-        </div>
-      </div>
+      <Navbar />
       <main className={events.main}>
-        <div className={styles.content}>
+        <div className={events.content}>
           <h2 className={events.title}>Trending</h2>
-          <CustomCarousel paths={images}/>
+          <div className={events.carousel}>
+            <CustomCarousel paths={images}/>
+          </div>
           <h2 className={events.title}>Submit an Event</h2>
-          <span className={events.event_box}>
-            <div className={events.form}>
-                <form method="post" action="http://localhost:5050/postEvent">
-                <label>Event title: </label>
-                <input type="text" name="name"/>
-                <br />
-                <label>Organizer: </label>
-                <input type="text" name="organizer" />
-                <br />
-                <label>Location: </label>
-                <input type="text" name="location" />
-                <br />
-                <input
-                    type="hidden"
-                    name="postDate"
-                    value={new Date().toISOString()}
-                />
-                <label>Dorm: </label>
-                <input type="text" name="dorm_id" />
-                <br />
-                <label>Date & Time: </label>
-                <input type="datetime-local" name="startTime" />
-                <br />
-                <input type="submit" id="submit" value="Submit" style={{padding: 5}}/>
-                </form>
+          <div className={events.form_wrapper}> 
+            <form method="post" action="http://localhost:5050/postEvent">
+            <div>
+                <label className={events.field}>Event title:
+                    <input type="text" name="name" required/>
+                </label>
             </div>
-          </span>
+            <div>
+                <label className={events.field}>Organizer:
+                    <input type="text" name="organizer" required/>
+                </label>
+            </div>
+            <div>
+                <label className={events.field}>Location:
+                    <input type="text" name="location" required/>
+                </label>
+            </div>
+            <input
+                type="hidden"
+                name="postDate"
+                value={new Date().toISOString()}/>
+            <div>
+                <label className={events.field}>Dorm:
+                    <input type="text" name="dorm_id" required/>
+                </label>
+            </div>
+            <div>
+                <label className={events.field}>Date & Time:
+                    <input type="datetime-local" name="startTime" required/>
+                </label>
+            </div>
+            <div>
+                <label className={events.field}>Event description:
+                    <div className={events.textarea}>
+                        <textarea type="text" name="text" required/>
+                    </div>
+                </label>
+            </div>
+            <input className={events.submit_button} type="submit" id="submit" value="Submit"/>
+            </form>
+          </div>
           <h2 className={events.title}>Upcoming</h2>
           {events_arr}
         </div>
@@ -143,4 +122,3 @@ export async function getStaticProps() {
       },
     };
 }
-

@@ -123,7 +123,6 @@ app.post("/postEvent", async (req, res) => {
 // postReview: get review from frontend 
 app.post("/postReview", async(req, res) => {
   let collection = await db.collection("Dorm");
-  console.log(req.body);
   try {
     // Create new review object from request body
     const newReview = {
@@ -139,12 +138,27 @@ app.post("/postReview", async(req, res) => {
       { $push: {review: newReview} }
     );
 
+
     return res.status(200).send('Review posted successfully!');
 
   } catch(err) {
     return res.status(500).send('Error posting review');
   } 
 
+});
+
+// login: log in a user to the website
+app.post("/login", async(req, res) => {
+  let collection = await db.collection("User");
+  //Create a user object from request body
+  const user = {
+    _id: req.body.email,
+  };
+
+  let results = await collection.updateOne(user, user, {upsert:true}, function(err, result) {
+    if (err) throw err;
+    return res.status(200);
+  });
 });
 
 
