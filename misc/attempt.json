@@ -1,0 +1,156 @@
+[
+  {
+    "_id": "mccarty-hall",
+    "info": {
+      "description": "McCarty Hall",
+      "roomType": [],
+      "address": "4330 Little Canoe Channel NE, Seattle, WA 98195",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "madrona-hall",
+    "info": {
+      "description": "madrona hall",
+      "roomType": [],
+      "address": "4320 Whitman Ln NE, Seattle, WA 98195",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "willow-hall",
+    "info": {
+      "description": "Willow Hallis a residence hall that includes the North Campus\u2019s Desk Service & Package Area, and Center Table, the new residential dining facility that features seven unique food stations including NOODLE, a globally-inspired station with a rotating menu, and SELECT, an allergen-free kitchen.",
+      "roomType": [],
+      "address": "4294 Little Canoe Channel Northeast, Seattle, Washington, 98195",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "stevens-court",
+    "info": {
+      "description": "stevens court",
+      "roomType": [],
+      "address": "3801 Brooklyn Ave NE, Seattle, WA 98105",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "lander-hall",
+    "info": {
+      "description": "Lander Hall holds Local Point, the largest dining hall for student residents in West Campus. The Boundless Leadership and Creativity Living Learning Community is located in Lander Hall.",
+      "roomType": [],
+      "address": "1201 Northeast Campus Parkway, Seattle,  Washington, 98105",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "elm-hall",
+    "info": {
+      "description": "Elm Hall offers Fitness Center West, a private fitness facility open only to students residing on campus.",
+      "roomType": [],
+      "address": "1218 Northeast Campus Parkway, Seattle, Washington, 98105",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "alder-hall",
+    "info": {
+      "description": "Alder Hall features the District Market, the Husky Grind cafe and Alder Commons, an auditorium and classroom space for events and programs. The Arts Living Learning Community is situated in Alder Hall.",
+      "roomType": [],
+      "address": "Alder Hall, 1315 NE Campus Pkwy, Seattle, WA 98105",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "cedar-apartments",
+    "info": {
+      "description": "Completed in 2011, Cedar Apartments consists of two apartment style residence halls for students living in West Campus.",
+      "roomType": [],
+      "address": "Cedar East, 1128, Northeast 41st Street, Seattle, Washington, 98105",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "mcmahon-hall",
+    "info": {
+      "description": "McMahon Hall was built in 1965 and was the second co-educational residence hall on campus. McMahon was once a center for innovative housing programs for students, including foreign language immersion floors, Peace Corps and inmates of state correctional institutions. The Business Living Learning Community is located in McMahon Hall.",
+      "roomType": [],
+      "address": "4200 Little Canoe Channel Northeast, Seattle, Washington, 98015",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "mercer-court",
+    "info": {
+      "description": "mercer court",
+      "roomType": [],
+      "address": "5000 25th Avenue NE, Seattle, Washington, 98015",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "laurel-village",
+    "info": {
+      "description": "Laurel Village is family housing provided at the UW for registered full time students at the Seattle campus who have dependent children or couples that are registered domestic partners.",
+      "roomType": [],
+      "address": "4200 Mary Gates Memorial Drive Northeast, Seattle, Washington, 98105",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "terry-hall",
+    "info": {
+      "description": "Terry Hall is home to the Honors Living Learning Community and the main office for Housing & Food Services.",
+      "roomType": [],
+      "address": "1035 Northeast Campus Parkway, Seattle, Washington, 98105",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "hansee-hall",
+    "info": {
+      "description": "Built in 1936, Hansee Hall is the oldest current residence hall on campus. The hall was formerly a women's dormitory. It was named in honor of Martha Lois Hansee, a former dean of women students. During World War II, Hansee Hall served as a barracks for Naval and Marine officer candidates.",
+      "roomType": [],
+      "address": "4340 Little Canoe Channel Northeast, Seattle, WA 98195",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  },
+  {
+    "_id": "commodore-duchess",
+    "info": {
+      "description": "The Commodore and Duchess Apartments were constructed as separate buildings two years apart, but were connected shortly after the completion of the Duchess in 1927.",
+      "roomType": [],
+      "address": "4009 15th Ave Northeast #4005, Seattle, WA 98105",
+      "food": []
+    },
+    "review": [],
+    "event": []
+  }
+]
