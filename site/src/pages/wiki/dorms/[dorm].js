@@ -27,6 +27,7 @@ export default function Wiki( {info, images} ) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
+      title: event.target.title.value,
       user: event.target.user.value,
       date: event.target.date.value,
       rating: event.target.rating.value,
@@ -34,13 +35,24 @@ export default function Wiki( {info, images} ) {
       ID: event.target.ID.value,
     };
 
-    const response = await fetch (API, {method: 'POST', body: data});
+
+    const response = await fetch(API, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      next: { revalidate: 1 },
+    });
     const res = await response.status;
     if (res === 200) {
       event.target.parentNode.parentNode.className = wiki.review_submitted + " " + wiki.success;
     } else {
       router.push("/500");
     }
+    setTimeout(() => {
+       router.reload(window.location.pathname);
+    }, 750);
   };
 
   return (
@@ -71,7 +83,20 @@ export default function Wiki( {info, images} ) {
                     required
                   />
                   <br />
-                  <textarea placeholder="Review" type="text" name="text" required/>
+                  <input
+                    placeholder="Title"
+                    type="text"
+                    name="title"
+                    autoComplete="off"
+                    required
+                  />
+                  <br />
+                  <textarea
+                    placeholder="Review"
+                    type="text"
+                    name="text"
+                    required
+                  />
                   <input
                     type="hidden"
                     name="date"
@@ -100,7 +125,7 @@ export default function Wiki( {info, images} ) {
                 />
               </div>
             </div>
-            <hr className={wiki.hr}/>
+            <hr className={wiki.hr} />
             {reviews}
           </span>
         </section>

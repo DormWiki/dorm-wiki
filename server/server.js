@@ -21,7 +21,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.urlencoded({limit: '5000mb', extended: true, parameterLimit: 100000000000}));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}));
 
 
 // for google authentication
@@ -132,12 +133,12 @@ app.post("/postReview", async(req, res) => {
       date: req.body.date,
       rating: req.body.rating
     };
-    
     const result = await collection.updateOne(
       {_id: req.body.ID},
       { $push: {review: newReview} }
     );
-
+    
+    console.log(req.body);
 
     return res.status(200).send('Review posted successfully!');
 
