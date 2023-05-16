@@ -17,11 +17,28 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const URL = 'http://localhost:5050';
 
-const BLDGS = ["Alder Hall", "Elm Hall", "Hansee Hall", "Lander Hall", "Madrona Hall",
-               "Maple Hall", "McCarty Hall", "McMahon Hall", "Oak Hall", "Poplar Hall",
-               "Terry Hall", "Willow Hall", "Mercer Court", "Stevens Court", 
-               "Cedar Apartments", "Commodore Duchess", "Nordheim Court", 
-               "Radford Court", "Blakely Village", "Laural Village"];
+export const BLDGS = [
+  "Alder Hall",
+  "Elm Hall",
+  "Hansee Hall",
+  "Lander Hall",
+  "Madrona Hall",
+  "Maple Hall",
+  "McCarty Hall",
+  "McMahon Hall",
+  "Oak Hall",
+  "Poplar Hall",
+  "Terry Hall",
+  "Willow Hall",
+  "Mercer Court",
+  "Stevens Court",
+  "Cedar Apartments",
+  "Commodore Duchess",
+  "Nordheim Court",
+  "Radford Court",
+  "Blakely Village",
+  "Laural Village"
+];
 
 function getSearchOptions() {
     var options = [];
@@ -33,26 +50,19 @@ function getSearchOptions() {
     return options;
 }
 
-export default function Home( {data} ) {
-  const [query, setQuery] = React.useState('');
+export default function Home( {info} ) {
   const router = useRouter();
-  const events = data;
+  const events = info.slice(0, 4);
   const options = getSearchOptions();
   
-  const handleChange = (value) => {
-    setQuery(value);
-    setQuery(value);
-    console.log(query);
-  };
-
-  const handleSubmit = () => {
-    if (query === '')
-      return;
-    const bld = "" + query.toLowerCase();
-    console.log(query);
-    let code = bld.replace(" ", "-"); 
-    console.log(code);
-    router.push(`/wiki/dorms/${code}`);
+  const handleSubmit = (value) => {
+    if (value != undefined) {
+      console.log(value);
+      const bld = "" + value.item.key.toLowerCase();
+      let code = bld.replace(" ", "-");
+      console.log(code);
+      router.push(`/wiki/dorms/${code}`);
+    }
   };
   return (
     <>
@@ -62,7 +72,7 @@ export default function Home( {data} ) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
-      <Navbar/>
+      <Navbar />
       <main className={styles.main}>
         <div className={styles.main_content}>
           <div className={styles.big_logo}>
@@ -72,20 +82,19 @@ export default function Home( {data} ) {
             ></img>
           </div>
           <div className={styles.search_wrapper}>
-            <ReactSearchBox 
+            <ReactSearchBox
               placeholder="Search..."
               value=""
               data={options}
-              onChange={handleChange}
+              onSelect={handleSubmit}
             />
-            <button onClick={handleSubmit}>Submit</button>
           </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
-            <div className={styles.event_deck}>1</div>
-            <div className={styles.event_deck}>2</div>
-            <div className={styles.event_deck}>3</div>
-            <div className={styles.event_deck}>4</div>
+            <div className={styles.event_deck}>{events[0]["_id"]}</div>
+            <div className={styles.event_deck}>{events[1]["_id"]}</div>
+            <div className={styles.event_deck}>{events[2]["_id"]}</div>
+            <div className={styles.event_deck}>{events[3]["_id"]}</div>
           </div>
         </div>
       </main>
@@ -93,11 +102,18 @@ export default function Home( {data} ) {
   );
 }
 
-async function getEvents() {
+
+export async function getServerSideProps() {
   const res = await fetch(URL + '/getUpcomingEvents');
+
   if (!res.ok) {
-    throw new Error('fail fetch');
+    throw new Error("fetch fail");
   }
-  return res.json();
+  const info = await res.json();
+  return {
+    props: {
+      info,
+    }, // will be passed to the page component as props
+  };
 }
 

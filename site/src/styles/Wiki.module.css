@@ -169,7 +169,7 @@
 }
 
 .wiki_square {
-  height: 15vh;
+  height: auto;
   width: 15vw;
   border: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -181,9 +181,15 @@
 
 
 .wiki_square a {
-  line-height: 15vh;
   width: 100%;
   display: block;
+  margin-bottom: 5px;
+}
+
+.wiki_square img {
+  width: 100%;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
 }
 
 .wiki_square:hover {
@@ -193,4 +199,9 @@
 .hr {
   width: 80%;
   border: 2px solid var(--uw-purple);
+}
+
+
+.hidden {
+  visibility: hidden;
 }
