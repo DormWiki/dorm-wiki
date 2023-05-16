@@ -13,9 +13,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function getUpcomingEvents(events_info) {
     var events_arr = [];
-    events_info.forEach((event) => {
+    events_info.forEach((event, i) => {
         events_arr.push(
-          <span className={events.event_box}>
+          <span key={i} className={events.event_box}>
             <div className={events.event}>
               <div className={events.event_info}>
                 <h2><u>
@@ -24,12 +24,12 @@ function getUpcomingEvents(events_info) {
                   </Link></u>
                 </h2>
                 <h3 className={events.subtitle}>
-                    <i>{event["startTime"]}, {event["dorm_id"]} ({event["location"]})</i>
+                    <i>{formatDate(event["startTime"])}, {event["dorm_id"]} ({event["location"]})</i>
                 </h3>
                 <p className={events.p}>
                   description missing.
                 </p>
-                <i>- <b>{event["organizer"]}</b> @ {event["postDate"]}.</i>
+                <i>- <b>{event["organizer"]}</b> @ {new Date(event["postDate"]).toLocaleDateString()}.</i>
               </div>
             </div>
           </span>
@@ -126,4 +126,18 @@ export async function getStaticProps() {
         images
       },
     };
+}
+
+
+// helper function that formats time strings
+function formatDate(string) {
+  let format = new Date(string).toLocaleString();
+
+  // mm/dd/year
+  let date = format.split(", ")[0];
+  // AM or PM
+  let timeFormat = format.split(", ")[1].split(" ")[1];
+  // xx:xx
+  let time = format.split(", ")[1].split(" ")[0].split(":").slice(0, -1).join(":");
+  return `${date}, ${time} ${timeFormat}`;
 }

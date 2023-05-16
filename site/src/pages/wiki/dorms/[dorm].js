@@ -187,7 +187,7 @@ function genReviews(reviews) {
         <div className={wiki.review_text}>
           <h2>{r["user"]}</h2>
           <h3 className={wiki.subtitle}>
-            {r["date"]}
+            {new Date(r["date"]).toLocaleDateString()}
           </h3>
           <h3>short title missing</h3>
           <p>{r["text"]}</p>
