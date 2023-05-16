@@ -7,7 +7,8 @@
 
  const Navbar = () => {
   const router = useRouter();
-  return (<><div className={styles.navbar_logo_wrapper}>
+  return (<>
+      <div className={styles.navbar_logo_wrapper}>
           <img src="/dw-logo-navbar.png"></img>
         </div>
         <div className={styles.navbar}>
@@ -35,9 +36,6 @@
             </li>
             <li>
               <Link href="/about">About</Link>
-            </li>
-            <li>
-              <Link href="/search">Search</Link>
             </li>
             <button type="button" onClick={() => router.push("/login")}>
               Login

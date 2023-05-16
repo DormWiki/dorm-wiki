@@ -53,6 +53,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
+  padding-bottom: 20px;
 }
 
 .review {
@@ -66,7 +67,7 @@
   height: auto;
 }
 .review_form {
-  height: 22vh;
+  height: 25vh;
 }
 
 .success {
@@ -95,10 +96,12 @@
 .review input {
   padding-top: 5px;
   padding-bottom: 5px;
+  padding-left: 5px;
 }
 .review textarea {
   width: 30vw;
   height: 10vh;
+  padding-left: 5px;
 }
 
 .review input[type="submit"] {
