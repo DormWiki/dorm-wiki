@@ -143,11 +143,16 @@ export async function getStaticProps(context) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const pid = context.params.dorm;
-  const res = await fetch(`http://localhost:5050/wiki?dorm=${pid}`);
-  if (!res.ok) {
-    throw new Error('fetch failed');
-  }
-  const info = await res.json();
+  const info = await fetch(`http://localhost:5050/wiki?dorm=${pid}`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(res.text);
+      }
+      return res;
+    })
+    .then (res => res.json())
+    .catch(console.error);
+
   if (Object.keys(info).length === 0) {
     return { notFound: true };
   }
