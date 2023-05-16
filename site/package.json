@@ -19,6 +19,8 @@
     "swiper": "^9.2.4",
     "react-responsive-carousel": "^3.2.23",
     "react-stars": "^2.2.5",
-    "isomorphic-dompurify": "^1.4.0"
+    "isomorphic-dompurify": "^1.4.0",
+    "react-search-box": "^3.0.0",
+    "fs": "^0.0.1-security" 
   }
 }
