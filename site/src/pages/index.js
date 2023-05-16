@@ -6,20 +6,54 @@ import React, { useState } from "react";
 import Events from './events';
 import getInfo from "./events.js";
 import { Component } from "react";
-import ReactSearchBox from "react-search-box";
 import { useRouter } from "next/router";
 import CustomCarousel from "../components/Carousel";
+import Navbar from '@/components/Navbar';
+import ReactSearchBox from "react-search-box";
 
 import styles from '@/styles/Home.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-//const inter = Inter({ subsets: ['latin'] })aaa
+
 const URL = 'http://localhost:5050';
 
+const BLDGS = ["Alder Hall", "Elm Hall", "Hansee Hall", "Lander Hall", "Madrona Hall",
+               "Maple Hall", "McCarty Hall", "McMahon Hall", "Oak Hall", "Poplar Hall",
+               "Terry Hall", "Willow Hall", "Mercer Court", "Stevens Court", 
+               "Cedar Apartments", "Commodore Duchess", "Nordheim Court", 
+               "Radford Court", "Blakely Village", "Laural Village"];
+
+function getSearchOptions() {
+    var options = [];
+    BLDGS.forEach((name) => {
+      options.push(
+        {key: name, value: name}
+      );
+    });
+    return options;
+}
+
 export default function Home( {data} ) {
+  const [query, setQuery] = React.useState('');
   const router = useRouter();
   const events = data;
-  //const info = getInfo();
+  const options = getSearchOptions();
+  
+  const handleChange = (value) => {
+    setQuery(value);
+    setQuery(value);
+    console.log(query);
+  };
+
+  const handleSubmit = () => {
+    if (query === '')
+      return;
+    const bld = "" + query.toLowerCase();
+    console.log(query);
+    let code = bld.replace(" ", "-"); 
+    console.log(code);
+    router.push(`/wiki/dorms/${code}`);
+  };
   return (
     <>
       <Head>
@@ -28,38 +62,7 @@ export default function Home( {data} ) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
-      <div className={styles.navbar}>
-        <ul>
-          <li>
-            <Link a href="/">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/events">Events</Link>
-          </li>
-          <li>
-            <div className={styles.dropdown}>
-              <Link href="/wiki">Wiki</Link>
-              <div className={styles.dropdown_text}>
-                <Link href="/wiki/residence-halls">Residence halls</Link>
-                <Link href="/wiki/academic-apts">Academic-year apartments</Link>
-                <Link href="/wiki/year-apts">Full-year apartments</Link>
-                <Link href="/wiki/family-apts">Family apartments</Link>
-              </div>
-            </div>
-          </li>
-          <li>
-            <Link href="/about">About</Link>
-          </li>
-          <li>
-            <Link href="/search">Search</Link>
-          </li>
-          <li>
-            <button type="button" onClick={() => router.push('/login')}>Login</button>
-          </li>
-        </ul>
-      </div>
+      <Navbar/>
       <main className={styles.main}>
         <div className={styles.main_content}>
           <div className={styles.big_logo}>
@@ -69,7 +72,13 @@ export default function Home( {data} ) {
             ></img>
           </div>
           <div className={styles.search_wrapper}>
-            <input className={styles.search} type="text" placeholder="Search..."/>
+            <ReactSearchBox 
+              placeholder="Search..."
+              value=""
+              data={options}
+              onChange={handleChange}
+            />
+            <button onClick={handleSubmit}>Submit</button>
           </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
@@ -92,9 +101,3 @@ async function getEvents() {
   return res.json();
 }
 
-export const getStaticProps = async () => {
-  const data = await getEvents();
-  return {
-    props: {data},
-  }
-}

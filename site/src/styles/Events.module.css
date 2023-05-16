@@ -62,11 +62,6 @@
   height: auto;
 }
 
-.carousel {
-  display: inline-block;
-  justify-content: left;
-}
-
 .form_wrapper {
   width: 30%;
   display: inline-block;
@@ -127,17 +122,26 @@
   align-self: right;
 }
 
-.event h3 {
-  font-size: 20px;
-}
-
 .event .subtitle {
-  font-size: 15px;
-  font-weight: normal;
+  font-size: 17px;
+  font-weight: 400;
+  margin-top: 5px;
 }
 
 .event h2 {
-  font-size: 25px;
+  font-size: 24px;
   flex: 50%;
   box-sizing: border-box;
+}
+
+.p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.description {
+  margin-right: 3vw;
+  margin-left: 3vw;
+  margin-top: 2vh;
 }

@@ -4,10 +4,11 @@ import { useRouter } from "next/router";
 import Link from 'next/link'
 import CustomCarousel from '@/components/Carousel';
 import path from "path";
+import Navbar from "../components/Navbar";
+
 import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Navbar from "../components/Navbar";
 
 
 function getUpcomingEvents(events_info) {
@@ -17,14 +18,18 @@ function getUpcomingEvents(events_info) {
           <span className={events.event_box}>
             <div className={events.event}>
               <div className={events.event_info}>
-                <h2>{event["name"]}</h2>
+                <h2><u>
+                  <Link href={`/events/${encodeURIComponent(event["_id"])}`}>
+                    {event["name"]}
+                  </Link></u>
+                </h2>
                 <h3 className={events.subtitle}>
-                  {event["startTime"]}, {event["location"]}
+                    <i>{event["startTime"]}, {event["dorm_id"]} ({event["location"]})</i>
                 </h3>
-                <p>description missing</p>
-                <Link href={`/events/${encodeURIComponent(event["_id"])}`}>
-                    Link to event page
-                </Link>
+                <p className={events.p}>
+                  description missing.
+                </p>
+                <i>- <b>{event["organizer"]}</b> @ {event["postDate"]}.</i>
               </div>
             </div>
           </span>
@@ -49,9 +54,8 @@ export default function Events({ events_info, images }) {
       <main className={events.main}>
         <div className={events.content}>
           <h2 className={events.title}>Trending</h2>
-          <div className={events.carousel}>
-            <CustomCarousel paths={images}/>
-          </div>
+          <div className={events.top}>
+          <CustomCarousel paths={images}/>
           <h2 className={events.title}>Submit an Event</h2>
           <div className={events.form_wrapper}> 
             <form method="post" action="http://localhost:5050/postEvent">
@@ -93,6 +97,7 @@ export default function Events({ events_info, images }) {
             </div>
             <input className={events.submit_button} type="submit" id="submit" value="Submit"/>
             </form>
+          </div>
           </div>
           <h2 className={events.title}>Upcoming</h2>
           {events_arr}

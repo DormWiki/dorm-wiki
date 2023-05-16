@@ -3,9 +3,21 @@
   padding: 10px;
 }
 
+.signin_box {
+  border-color: black;
+  margin-top: 25vh;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+  display: fixed;
+  border-radius: 4;
+}
+
 .button_wrapper, .hrtitle {
   width: 100%;
   text-align: center;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
 .hrtitle {
@@ -14,6 +26,7 @@
   align-self: center;
   align-items: center;
   text-align: center;
+  padding: .5vw;
 }
 
 .button {

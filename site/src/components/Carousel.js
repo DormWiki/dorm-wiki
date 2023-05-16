@@ -1,6 +1,7 @@
 import React from "react";
 import Image from 'next/image'
 import { Carousel } from "react-responsive-carousel";
+
 import styles from "@/styles/Carousel.module.css"
 
 function genImages(paths) {

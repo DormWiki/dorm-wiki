@@ -153,10 +153,12 @@
 .sidebar_sub li {
   margin-left: 10px;
 }
+
 .sidebar_sub.sidebar_sub li a {
   text-align: left;
   padding: 0;
 }
+
 .sidebar ul h2 {
   font-weight: normal;
   margin-left: 10px;
@@ -164,14 +166,16 @@
   font-size: 25px;
   margin-top: 20px;
 }
+
 .search_wrapper {
   width: 30%;
 }
 
 .search_wrapper input {
-  font-size: 20px;
+  font-size: 18px;
   width: 100%;
-  height: 2vw;
+  height: 4vh;
+  padding: 10px;
 }
 
 .big_logo {
@@ -196,8 +200,6 @@
 .sidebar::-webkit-scrollbar {
   width: 0px;
 }
-
-
 
 .upcoming_events {
   order: 3;
@@ -230,7 +232,6 @@
   margin-top: 100px;
 }
 
-
 .navbar button {
   border: none;
   background-color: var(--uw-gold);
@@ -247,14 +248,17 @@
   color: white;
 }
 
-
+.search_wrapper button {
+  margin-top: 1vh;
+  padding: 10px;
+  align-content: center;
+  width: 100%;
+}
 
 .login_button {
   font-size: 18px;
   line-height: 24px;
 }
-
-
 
 .navbar button:hover {
   opacity: 85%;

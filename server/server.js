@@ -91,6 +91,7 @@ app.get("/getUpcomingEvents", async (req, res) => {
   }
 });
 
+
 // postEvent: request to post an event
 app.post("/postEvent", async (req, res) => {
   let collection = await db.collection("Event");
