@@ -10,5 +10,5 @@ export default function handler(req, res) {
 	    dorm_id: DOMPurify.sanitize(req.body.dorm_id),
 	    location: DOMPurify.sanitize(req.body.location),
         organizer: DOMPurify.sanitize(req.body.organizer)
-    })
+    }) 
 }
