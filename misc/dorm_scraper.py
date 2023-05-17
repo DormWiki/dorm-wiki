@@ -68,6 +68,8 @@ def images() :
     print(AttributeError)
 
         # dend, they dont have a uniform way of storing information!
+        # if i find the uw faculity responsible for their website I will have a # stern talk with them
+        
         # print(beetSoup
         #       .find("strong", text="Mailing address:")
         #       .parent

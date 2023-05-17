@@ -1,21 +1,20 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Link from 'next/link'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import Link from "next/link";
 import React, { useState } from "react";
-import Events from './events';
+import Events from "./events";
 import getInfo from "./events.js";
 import { Component } from "react";
 import { useRouter } from "next/router";
 import CustomCarousel from "../components/Carousel";
-import Navbar from '@/components/Navbar';
+import Navbar from "@/components/Navbar";
 import ReactSearchBox from "react-search-box";
 
-import styles from '@/styles/Home.module.css'
+import styles from "@/styles/Home.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-
-const URL = 'http://localhost:5050';
+const URL = "http://localhost:5050";
 
 export const BLDGS = [
   "Alder Hall",
@@ -37,24 +36,22 @@ export const BLDGS = [
   "Nordheim Court",
   "Radford Court",
   "Blakely Village",
-  "Laural Village"
+  "Laural Village",
 ];
 
 function getSearchOptions() {
-    var options = [];
-    BLDGS.forEach((name) => {
-      options.push(
-        {key: name, value: name}
-      );
-    });
-    return options;
+  var options = [];
+  BLDGS.forEach((name) => {
+    options.push({ key: name, value: name });
+  });
+  return options;
 }
 
-export default function Home( {info} ) {
+export default function Home({ info }) {
   const router = useRouter();
   const events = info.slice(0, 4);
   const options = getSearchOptions();
-  
+
   const handleSubmit = (value) => {
     if (value != undefined) {
       console.log(value);
@@ -102,9 +99,8 @@ export default function Home( {info} ) {
   );
 }
 
-
 export async function getServerSideProps() {
-  const res = await fetch(URL + '/getUpcomingEvents');
+  const res = await fetch(URL + "/getUpcomingEvents");
 
   if (!res.ok) {
     throw new Error("fetch fail");
@@ -113,7 +109,6 @@ export async function getServerSideProps() {
   return {
     props: {
       info,
-    }, // will be passed to the page component as props
+    },
   };
 }
-
