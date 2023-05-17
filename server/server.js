@@ -105,18 +105,25 @@ app.get("/getUpcomingEvents", async (req, res) => {
 // postEvent: request to post an event
 app.post("/postEvent", async (req, res) => {
   let collection = await db.collection("Event");
+
+  // count how many documents are in the array table to find the correct
+  // index for the new event
   const count = await collection.countDocuments();
+
+  // create a new event to be inserted into the Dorm and Event table
   let newEvent = {
     _id: count + 1,
     name: req.body.name,
-    startTime: req.body.startTime,
-    postDate: req.body.postDate,
-    dorm_id: req.body.dorm_id,
-    location: req.body.location,
-    organizer: req.body.organizer,
-  };
-  try {
-    const dorm = await db.collection("Dorm");
+	  startTime: req.body.startTime,
+	  postDate: req.body.postDate,
+	  dorm_id: req.body.dorm_id,
+	  location: req.body.location,
+    organizer: req.body.organizer
+  }
+
+  // insert into the events array of a specific dorm object
+  try{
+    const dorm = await db.collection('Dorm');
     await dorm.updateOne(
       { _id: req.body.dorm_id },
       { $push: { event: count } }
@@ -125,6 +132,7 @@ app.post("/postEvent", async (req, res) => {
     console.log(err);
   }
 
+  // insert into the Event table
   let results = await collection.insertOne(newEvent, function (err, result) {
     if (err) throw err;
     res.json({ _id: result.insertedId }).status(200);
@@ -150,17 +158,19 @@ app.post("/postReview", async (req, res) => {
       date: req.body.date,
       rating: rating,
     };
+
+    // insert review into the review array of a specific dorm object
     const result = await collection.updateOne(
       { _id: req.body.ID },
       { $push: { review: newReview } }
     );
 
-    console.log(req.body);
+    return res.status(200).send('Review posted successfully!');
 
-    return res.status(200).send("Review posted successfully!");
-  } catch (err) {
-    return res.status(500).send("Error posting review");
-  }
+  } catch(err) {
+    return res.status(500).send('Error posting review');
+  } 
+
 });
 
 // ***************************************************************************************************
