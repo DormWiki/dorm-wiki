@@ -15,11 +15,8 @@ import path from "path";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
-const URL = "http://localhost:3000/";
-
 export default function Wiki( {info, images} ) {
   const router = useRouter();
-  const API = "http://localhost:5050/postReview";
   const dorm = router.query.dorm;
   let data = info[0];
   let reviews = genReviews(data["review"]);
@@ -36,7 +33,7 @@ export default function Wiki( {info, images} ) {
     };
 
 
-    const response = await fetch(API, {
+    const response = await fetch("http://localhost:3000/api/review", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -143,16 +140,16 @@ export async function getStaticProps(context) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const pid = context.params.dorm;
-  const info = await fetch(`http://localhost:5050/wiki?dorm=${pid}`)
+  const info = await fetch(`http://localhost:3000/api/wiki?dorm=${pid}`)
     .then((res) => {
       if (!res.ok) {
         throw new Error(res.text);
       }
       return res;
     })
-    .then (res => res.json())
+    .then((res) => res.json())
     .catch(console.error);
-
+    
   if (Object.keys(info).length === 0) {
     return { notFound: true };
   }

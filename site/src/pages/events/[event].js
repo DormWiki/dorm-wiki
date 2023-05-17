@@ -68,10 +68,10 @@ async function getEvents() {
 
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:5050/getUpcomingEvents");
+  const res = await fetch("http://localhost:3000/api/event");
 
   if (!res.ok) {
-    throw new Error("fetch fail");
+    throw new Error(res.text());
   }
   const info = await res.json();
   return {

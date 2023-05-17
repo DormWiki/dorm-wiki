@@ -55,49 +55,61 @@ export default function Events({ events_info, images }) {
         <div className={events.content}>
           <h2 className={events.title}>Trending</h2>
           <div className={events.top}>
-          <CustomCarousel paths={images}/>
-          <h2 className={events.title}>Submit an Event</h2>
-          <div className={events.form_wrapper}> 
-            <form method="post" action="http://localhost:5050/postEvent">
-            <div>
-                <label className={events.field}>Event title:
-                    <input type="text" name="name" required/>
-                </label>
-            </div>
-            <div>
-                <label className={events.field}>Organizer:
-                    <input type="text" name="organizer" required/>
-                </label>
-            </div>
-            <div>
-                <label className={events.field}>Location:
-                    <input type="text" name="location" required/>
-                </label>
-            </div>
-            <input
-                type="hidden"
-                name="postDate"
-                value={new Date().toISOString()}/>
-            <div>
-                <label className={events.field}>Dorm:
-                    <input type="text" name="dorm_id" required/>
-                </label>
-            </div>
-            <div>
-                <label className={events.field}>Date & Time:
-                    <input type="datetime-local" name="startTime" required/>
-                </label>
-            </div>
-            <div>
-                <label className={events.field}>Event description:
+            <CustomCarousel paths={images} />
+            <h2 className={events.title}>Submit an Event</h2>
+            <div className={events.form_wrapper}>
+              <form method="post" action="http://localhost:3000/api/event">
+                <div>
+                  <label className={events.field}>
+                    Event title:
+                    <input type="text" name="name" required />
+                  </label>
+                </div>
+                <div>
+                  <label className={events.field}>
+                    Organizer:
+                    <input type="text" name="organizer" required />
+                  </label>
+                </div>
+                <div>
+                  <label className={events.field}>
+                    Location:
+                    <input type="text" name="location" required />
+                  </label>
+                </div>
+                <input
+                  type="hidden"
+                  name="postDate"
+                  value={new Date().toISOString()}
+                />
+                <div>
+                  <label className={events.field}>
+                    Dorm:
+                    <input type="text" name="dorm_id" required />
+                  </label>
+                </div>
+                <div>
+                  <label className={events.field}>
+                    Date & Time:
+                    <input type="datetime-local" name="startTime" required />
+                  </label>
+                </div>
+                <div>
+                  <label className={events.field}>
+                    Event description:
                     <div className={events.textarea}>
-                        <textarea type="text" name="text" required/>
+                      <textarea type="text" name="text" required />
                     </div>
-                </label>
+                  </label>
+                </div>
+                <input
+                  className={events.submit_button}
+                  type="submit"
+                  id="submit"
+                  value="Submit"
+                />
+              </form>
             </div>
-            <input className={events.submit_button} type="submit" id="submit" value="Submit"/>
-            </form>
-          </div>
           </div>
           <h2 className={events.title}>Upcoming</h2>
           {events_arr}
@@ -108,9 +120,9 @@ export default function Events({ events_info, images }) {
 }
 
 export async function getStaticProps() {
-    const res = await fetch("http://localhost:5050/getUpcomingEvents")
+    const res = await fetch("http://localhost:3000/api/event");
     if (!res.ok) {
-        throw new Error('fetch fail');
+        throw new Error(res.text());
     }
     const events_info = await res.json();
     const fs = require("fs");
