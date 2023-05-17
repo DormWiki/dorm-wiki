@@ -188,12 +188,13 @@ export async function getStaticProps(context) {
   }
 
   const fs = require("fs");
+  let dormName = cleanName(pid).split(" ").join("-");
 
-  const dir = path.resolve(path.join(process.cwd(), "public", pid));
+  const dir = path.resolve(path.join("/public", dormName));
 
   const filenames = fs.readdirSync(dir);
 
-  let dormName = cleanName(pid).split(" ").join("-");
+
   const images = filenames.map((name) =>
     path.join("/", dormName, name)
   );
