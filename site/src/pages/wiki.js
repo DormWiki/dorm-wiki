@@ -93,9 +93,9 @@ function sortCards(sort) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/wiki");
+  const res = await fetch("http://localhost:5050/wiki");
   if (!res.ok) {
-    throw new Error(res.text());
+    throw new Error("fetch fail");
   }
   const info = await res.json();
   return {

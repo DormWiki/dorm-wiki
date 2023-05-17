@@ -50,7 +50,6 @@ function getSearchOptions() {
     return options;
 }
 
-
 export default function Home( {info} ) {
   const router = useRouter();
   const events = info.slice(0, 4);
@@ -105,10 +104,10 @@ export default function Home( {info} ) {
 
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/event");
+  const res = await fetch(URL + '/getUpcomingEvents');
 
   if (!res.ok) {
-    throw new Error(res.text());
+    throw new Error("fetch fail");
   }
   const info = await res.json();
   return {
