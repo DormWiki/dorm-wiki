@@ -190,7 +190,7 @@ export async function getStaticProps(context) {
   const fs = require("fs");
   let dormName = cleanName(pid).split(" ").join("-");
 
-  const dir = path.resolve(path.join("/public", dormName));
+  const dir = path.resolve(path.join(process.cwd(), "public", dormName));
 
   const filenames = fs.readdirSync(dir);
 
