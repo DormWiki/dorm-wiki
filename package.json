@@ -36,7 +36,6 @@
     "build": "npm run build --prefix site/",
     "start": "npm run start --prefix site/",
     "lint": "npm run lint --prefix site/",
-    "all": "concurrently \"npm run data\" \"npm run dev\"",
-    "v": "npm install && cd site && npm install && cd ../server && npm install"
+    "all": "concurrently \"npm run data\" \"npm run dev\""
   }
 }
