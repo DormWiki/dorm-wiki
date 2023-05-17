@@ -1,23 +1,22 @@
-import Head from 'next/head';
-import React, { useState } from 'react';
+import Head from "next/head";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
+import Image from "next/image";
+import { Inter } from "next/font/google";
 import Link from "next/link";
 import Error from "next/error";
 import ReactStars from "react-stars";
 import CustomCarousel from "../../../components/Carousel";
-import Navbar from  "../../../components/Navbar";
-import Sidebar from "../../../components/Sidebar"
-import styles from '@/styles/Home.module.css'
-import wiki from '@/styles/Wiki.module.css';
+import Navbar from "../../../components/Navbar";
+import Sidebar from "../../../components/Sidebar";
+import styles from "@/styles/Home.module.css";
+import wiki from "@/styles/Wiki.module.css";
 import path from "path";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-
 const URL = "http://localhost:3000/";
 
-export default function Wiki( {info, images} ) {
+export default function Wiki({ info, images }) {
   const router = useRouter();
   const API = "http://localhost:5050/postReview";
   const dorm = router.query.dorm;
@@ -34,8 +33,6 @@ export default function Wiki( {info, images} ) {
       text: event.target.text.value,
       ID: event.target.ID.value,
     };
-
-
     const response = await fetch(API, {
       method: "POST",
       body: JSON.stringify(data),
@@ -46,12 +43,13 @@ export default function Wiki( {info, images} ) {
     });
     const res = await response.status;
     if (res === 200) {
-      event.target.parentNode.parentNode.className = wiki.review_submitted + " " + wiki.success;
+      event.target.parentNode.parentNode.className =
+        wiki.review_submitted + " " + wiki.success;
     } else {
       router.push("/500");
     }
     setTimeout(() => {
-       router.reload(window.location.pathname);
+      router.reload(window.location.pathname);
     }, 750);
   };
 
@@ -150,7 +148,7 @@ export async function getStaticProps(context) {
       }
       return res;
     })
-    .then (res => res.json())
+    .then((res) => res.json())
     .catch(console.error);
 
   if (Object.keys(info).length === 0) {
@@ -163,22 +161,19 @@ export async function getStaticProps(context) {
 
   const filenames = fs.readdirSync(dir);
 
-  const images = filenames.map((name) =>
-    path.join("/", pid, name)
-  );
-  
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
+  const images = filenames.map((name) => path.join("/", pid, name));
+
   return {
     props: {
       info,
       images,
     },
+    // every 5 minutes check for new reviews
     revalidate: 360,
   };
 }
 
-
+// generates the review box
 function genReviews(reviews) {
   let rev_html = [];
   reviews.forEach((r, i) => {
@@ -202,10 +197,9 @@ function genReviews(reviews) {
           />
         </div>
       </div>
-      );
-  })
+    );
+  });
   return rev_html;
-  
 }
 
 export async function getStaticPaths() {
