@@ -206,7 +206,7 @@ export async function getStaticProps(context) {
       info,
       images,
     },
-    revalidate: 360,
+    revalidate: 10,
   };
 }
 

@@ -58,7 +58,10 @@ export default function Events({ events_info, images }) {
             <CustomCarousel paths={images} />
             <h2 className={events.title}>Submit an Event</h2>
             <div className={events.form_wrapper}>
-              <form method="post" action="/api/event">
+              <form
+                method="post"
+                action="https://dorm-wiki.vercel.app/api/event"
+              >
                 <div>
                   <label className={events.field}>
                     Event title:
