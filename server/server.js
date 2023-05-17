@@ -126,13 +126,20 @@ app.post("/postEvent", async (req, res) => {
 app.post("/postReview", async(req, res) => {
   let collection = await db.collection("Dorm");
   try {
+    // create a new rating object to be included in review
+    const rating = {
+      Environment: req.body.rating.Environment,
+      Food: req.body.rating.Food,
+      Walkability: req.body.rating.Walkability,
+      Safety: req.body.rating.Safety,
+    }
     // Create new review object from request body
     const newReview = {
       title: req.body.title,
       user: req.body.user,
       text: req.body.text,
       date: req.body.date,
-      rating: req.body.rating
+      rating: rating
     };
     const result = await collection.updateOne(
       {_id: req.body.ID},
@@ -149,19 +156,7 @@ app.post("/postReview", async(req, res) => {
 
 });
 
-// login: log in a user to the website
-app.post("/login", async(req, res) => {
-  let collection = await db.collection("User");
-  //Create a user object from request body
-  const user = {
-    _id: req.body.email,
-  };
 
-  let results = await collection.updateOne(user, user, {upsert:true}, function(err, result) {
-    if (err) throw err;
-    return res.status(200);
-  });
-});
 
 
 

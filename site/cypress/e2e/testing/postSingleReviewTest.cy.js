@@ -10,7 +10,12 @@ describe('POST /postReview', () => {
         title: 'bad dorm',
         text: 'I dont like this dorm!',
         date: '2021-06-12',
-        rating: 2,
+        rating: {
+          Environment: 1,
+          Food: 1,
+          Walkability: 1,
+          Safety: 1,
+        },
         ID: 'maple-hall'
       }
     }).then((response) => {
