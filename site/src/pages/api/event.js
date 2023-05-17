@@ -14,28 +14,28 @@ export async function getEvent(dorm) {
 	let client = await ClientPromise;
   let db = client.db("DormWiki");
   let collection = await db.collection("Event");
-	if (dorm == null) {
+	if (dorm === undefined) {
     // no parameter
     let results = await collection
       .find()
-      .sort({ startTime: -1 });
-		console.log(results);
+      .sort({ startTime: -1 })
+			.toArray();
 		return results;
   } else {
-    let results = await collection
-      .find({ dorm_id: req.query.dorm })
+		let results = await collection
+      .find({ dorm_id: dorm })
       .sort({ startTime: -1 })
-      .toArray(function (err, result) {
-        if (err) throw err;
-        console.log(result);
-        return JSON.stringify(result);
-      });
-  }
+      .toArray();
+    return results;
+	}
 }
 export default async function handler(req, res) {
-	
+	let client = await ClientPromise;
+	let db = client.db("DormWiki");
+	let collection = await db.collection("Event");
 	if (req.method == 'GET') {
-		getEvent(req.query.dorm);
+		let ret = await getEvent(req.query.dorm);
+		res.status(200).json(ret);
 	} else { // POST CALL
 		const count = await collection.countDocuments();
 		const body = req.body;

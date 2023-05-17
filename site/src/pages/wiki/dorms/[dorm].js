@@ -10,11 +10,13 @@ import CustomCarousel from "../../../components/Carousel";
 import Navbar from  "../../../components/Navbar";
 import Sidebar from "../../../components/Sidebar"
 import styles from '@/styles/Home.module.css'
+
 import wiki from '@/styles/Wiki.module.css';
 import path from "path";
+
+import { getWiki } from '@/pages/api/wiki';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import ClientPromise from '@/lib/mongodb';
 
 
 export default function Wiki( {info, images} ) {
@@ -138,46 +140,6 @@ function changeRating(r) {
   rating.value = r;
 }
 
-export async function getServerSideProps(context) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  let client = await ClientPromise;
-  let db = client.db("DormWiki");
-  let collection = await db.collection("Dorm");
-  const pid = context.params.dorm;
-  let info = await collection
-    .find({ _id: req.query.dorm })
-    .toArray(function (err, result) {
-      if (err) throw err;
-      return result;
-    });
-    
-  if (Object.keys(info).length === 0) {
-    return { notFound: true };
-  }
-
-  const fs = require("fs");
-
-  const dir = path.resolve("./public", pid);
-
-  const filenames = fs.readdirSync(dir);
-
-  const images = filenames.map((name) =>
-    path.join("/", pid, name)
-  );
-  
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      info,
-      images,
-    },
-    revalidate: 360,
-  };
-}
-
-
 function genReviews(reviews) {
   let rev_html = [];
   reviews.forEach((r, i) => {
@@ -201,10 +163,81 @@ function genReviews(reviews) {
           />
         </div>
       </div>
-      );
-  })
+    );
+  });
   return rev_html;
-  
 }
+
+function cleanName(string) {
+  let str = string.split("-");
+  str.forEach((string, i) => {
+    str[i] = string.charAt(0).toUpperCase() + string.slice(1);
+    if (string === "mcmahon" || string == "mccarty") {
+      str[i] = str[i].slice(0, 2) + str[i].charAt(2).toUpperCase() + str[i].slice(3);
+    }
+  });
+  return str.join(" ");
+}
+
+export async function getStaticProps(context) {
+  const pid = context.params.dorm;
+  let info = await getWiki(pid);
+    
+  if (Object.keys(info).length === 0) {
+    return { notFound: true };
+  }
+
+  const fs = require("fs");
+
+  const dir = path.resolve("./public", pid);
+
+  const filenames = fs.readdirSync(dir);
+
+  let dormName = cleanName(pid).split(" ").join("-");
+  const images = filenames.map((name) =>
+    path.join("/", dormName, name)
+  );
+  
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      info,
+      images,
+    },
+    revalidate: 360,
+  };
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      "/wiki/dorms/alder-hall",
+      "/wiki/dorms/elm-hall",
+      "/wiki/dorms/hansee-hall",
+      "/wiki/dorms/lander-hall",
+      "/wiki/dorms/madrona-hall",
+      "/wiki/dorms/maple-hall",
+      "/wiki/dorms/mccarty-hall",
+      "/wiki/dorms/mccahon-hall",
+      "/wiki/dorms/oak-hall",
+      "/wiki/dorms/poplar-hall",
+      "/wiki/dorms/terry-hall",
+      "/wiki/dorms/willow-hall",
+      "/wiki/dorms/mercer-court",
+      "/wiki/dorms/stevens-court",
+      "/wiki/dorms/cedar-apartments",
+      "/wiki/dorms/commodore-duchess",
+      "/wiki/dorms/nordheim-court",
+      "/wiki/dorms/radford-court",
+      "/wiki/dorms/blakeley-village",
+      "/wiki/dorms/laurel-village",
+    ],
+    fallback: false,
+  };
+}
+
+
+
 
 

@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { getWiki } from "./api/wiki";
 
 import styles from "@/styles/Home.module.css";
 import wiki from "@/styles/Wiki.module.css";
@@ -63,6 +64,7 @@ function genDorms(info, sort) {
   let arr = [];
     info.forEach( (dorm, i) => {
       if(sort === undefined || SORTS[sort].indexOf(dorm["_id"]) != -1) {
+        let name = cleanName(dorm["_id"]).split(" ").join("-");
         arr.push(
           <>
             <div
@@ -70,7 +72,7 @@ function genDorms(info, sort) {
               className={wiki.wiki_square}
             >
               <Link href={`/wiki/dorms/${dorm["_id"]}`}>
-                <img src={`http://localhost:3000/${dorm["_id"]}/${dorm["_id"]}-1.jpg`}/>
+                <Image alt={`front picture of ${cleanName(dorm["_id"])}`} src={`/${name}/${name}-1.jpg`}/>
                 {cleanName(dorm["_id"])}
               </Link>
             </div>
@@ -93,11 +95,7 @@ function sortCards(sort) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/wiki");
-  if (!res.ok) {
-    throw new Error(res.text());
-  }
-  const info = await res.json();
+  const info = await getWiki();
   return {
     props: {
       info,
@@ -109,6 +107,9 @@ function cleanName(string) {
   let str = string.split("-");
   str.forEach((string, i) => {
     str[i] = string.charAt(0).toUpperCase() + string.slice(1);
+    if (string === "mcmahon" || string == "mccarty") {
+      str[i] = str[i].slice(0, 2) + str[i].charAt(2).toUpperCase() + str[i].slice(3);
+    }
   });
   return str.join(" ");
 }
