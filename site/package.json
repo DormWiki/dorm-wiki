@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "cypress": "^12.11.0",
+    "mongodb": "^3.6.6",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "fs": "^0.0.1-security",
