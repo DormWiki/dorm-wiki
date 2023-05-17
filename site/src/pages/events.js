@@ -5,11 +5,13 @@ import Link from 'next/link'
 import CustomCarousel from '@/components/Carousel';
 import path from "path";
 import Navbar from "../components/Navbar";
+import { FileUploader } from "react-drag-drop-files";
 
 import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+const fileTypes = ["JPG", "PNG", "GIF"];
 
 function getUpcomingEvents(events_info) {
     var events_arr = [];
@@ -41,6 +43,11 @@ function getUpcomingEvents(events_info) {
 export default function Events({ events_info, images }) {
   const router = useRouter();
   var events_arr = getUpcomingEvents(events_info);
+
+  const [file, setFile] = useState(null);
+  const handleChange = (file) => {
+    setFile(file);
+  };
 
   return (
     <>
@@ -94,6 +101,12 @@ export default function Events({ events_info, images }) {
                         <textarea type="text" name="text" required/>
                     </div>
                 </label>
+            </div>
+            <div>
+                <label className={events.field}>Images:</label>
+            </div>
+            <div className={events.fileupload_wrapper}>
+              <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
             </div>
             <input className={events.submit_button} type="submit" id="submit" value="Submit"/>
             </form>

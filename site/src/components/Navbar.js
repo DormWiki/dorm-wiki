@@ -28,9 +28,7 @@
             <div className={styles.dropdown}>
               <Link href="/wiki">Wiki</Link>
               <div className={styles.dropdown_text}>
-                <Link
-                  href={{ pathname: "/wiki", query: { dorm: "residence" } }}
-                >
+                <Link href={{ pathname: "/wiki", query: { dorm: "residence" } }}>
                   Residence halls
                 </Link>
                 <Link href={{ pathname: "/wiki", query: { dorm: "academic" } }}>

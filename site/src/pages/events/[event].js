@@ -4,51 +4,51 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Navbar from '@/components/Navbar';
 
-import styles from '@/styles/Home.module.css';
 import event from '@/styles/Event.module.css';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 export  default function Event({ info }) {
   const router = useRouter();
   const event_id = router.query.event;
-  let event = [];
+  let evt = [];
   for (let i = 0; i < info.length; i++) {
     if (parseInt(info[i]["_id"]) === parseInt(event_id)) {
-      event = info[i];
+      evt = info[i];
     }
   }
+
+  console.log(event);
 
   return (
     <>
       <Head>
-        <title>{event["title"]}</title>
+        <title>{evt["name"]}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
-      <main className={styles.main}>
+      <main className={event.main}>
         <Navbar />
         <section className={event.content}>
           <div className={event.title}>
-            {event["_id"]}
+            {evt["name"]}
           </div>
-          <div className={event.dscription}>
+          <div className={event.description}>
             <div className={event.p}>
-              {event["postDate"]}
+              Posted: {formatDate(evt["postDate"])}
             </div>
             <div className={event.p}>
               [PHOTOS]
             </div>
             <div className={event.subtitle}>
-                Start time: [TIME] 
-                Dorm: [DORM], Location: [LOCATION]
+                Start time: {evt["startTime"]} <br/>
+                Dorm: {evt["dorm_id"]}, location: {evt["location"]}
                 <br/> 
             </div>
-            <h3>
-              <i>Organizer: [NAME]</i>
-            </h3>
+            <div className={event.subtitle}>
+              <i>Organizer: {evt["organizer"]}</i>
+            </div>
             <div className={event.p}>
-              [DESCRIPTION]
+              [insert event description]
             </div>
           </div>
           <div className={event.button}>
@@ -79,4 +79,16 @@ export async function getServerSideProps() {
       info
     }, // will be passed to the page component as props
   };
+}
+
+function formatDate(string) {
+  let format = new Date(string).toLocaleString();
+
+  // mm/dd/year
+  let date = format.split(", ")[0];
+  // AM or PM
+  let timeFormat = format.split(", ")[1].split(" ")[1];
+  // xx:xx
+  let time = format.split(", ")[1].split(" ")[0].split(":").slice(0, -1).join(":");
+  return `${date}, ${time} ${timeFormat}`;
 }

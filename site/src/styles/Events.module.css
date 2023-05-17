@@ -112,12 +112,6 @@
   opacity: 75%;
 }
 
-.subtitle {
-  font-size: smaller;
-  color: gray;
-  text-decoration: none;
-}
-
 .right {
   align-self: right;
 }
@@ -126,6 +120,9 @@
   font-size: 17px;
   font-weight: 400;
   margin-top: 5px;
+  font-size: smaller;
+  color: gray;
+  text-decoration: none;
 }
 
 .event h2 {
@@ -144,4 +141,8 @@
   margin-right: 3vw;
   margin-left: 3vw;
   margin-top: 2vh;
+}
+
+.fileupload_wrapper {
+  margin-bottom: 2vh;
 }
