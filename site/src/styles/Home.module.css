@@ -136,6 +136,10 @@
   width: 100%;
 }
 
+.navbar_logo_wrapper a {
+  height: 100%;
+}
+
 .navbar ul {
   margin-left: auto;
 }

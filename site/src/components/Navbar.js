@@ -10,7 +10,9 @@
   return (
     <>
       <div className={styles.navbar_logo_wrapper}>
-        <img src="/dw-logo-navbar.png"></img>
+        <Link href={"/"}>
+          <img src="/dw-logo-navbar.png"></img>
+        </Link>
       </div>
       <div className={styles.navbar}>
         <ul>
@@ -37,9 +39,7 @@
                 <Link href={{ pathname: "/wiki", query: { dorm: "year" } }}>
                   Full-year apartments
                 </Link>
-                <Link
-                  href={{ pathname: "/wiki", query: { dorm: "family" } }}
-                >
+                <Link href={{ pathname: "/wiki", query: { dorm: "family" } }}>
                   Family apartments
                 </Link>
               </div>
