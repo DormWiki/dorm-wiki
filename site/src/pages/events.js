@@ -58,7 +58,7 @@ export default function Events({ events_info, images }) {
             <CustomCarousel paths={images} />
             <h2 className={events.title}>Submit an Event</h2>
             <div className={events.form_wrapper}>
-              <form method="post" action="http://localhost:3000/api/event">
+              <form method="post" action="/api/event">
                 <div>
                   <label className={events.field}>
                     Event title:

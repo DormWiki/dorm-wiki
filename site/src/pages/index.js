@@ -16,9 +16,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { getEvent } from './api/event'
 
-
-const URL = 'http://localhost:5050';
-
 export const BLDGS = [
   "Alder Hall",
   "Elm Hall",

@@ -37,7 +37,7 @@ export default function Wiki( {info, images} ) {
     };
 
 
-    const response = await fetch("http://localhost:3000/api/review", {
+    const response = await fetch("/api/review", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -189,7 +189,7 @@ export async function getStaticProps(context) {
 
   const fs = require("fs");
 
-  const dir = path.resolve("./public", pid);
+  const dir = path.resolve(path.join(process.cwd(), "public", pid));
 
   const filenames = fs.readdirSync(dir);
 
