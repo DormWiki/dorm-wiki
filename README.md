@@ -6,7 +6,7 @@ DormWiki is a website designed to inform prospective/incoming students about var
 - api: Contains all of the code for the api.
 - server: Contains all of the code for the back end (http request, etc.).
 - database: MongoDB
-# Instructions for running the system
+## Instructions for running the system
 1. install the dependencies using `npm run v`
 2. run both servers(font and back) concurrently: `npm run all`
    OR 
@@ -42,9 +42,9 @@ Run Cypress Test:
 - Rating stars are 5px cut short
 - Scaling issues with dropdown menu on some mac displays
 - Google log in not working
-# To Contribute
+## To Contribute
 If you want to contribute to our project, here are some details you may find useful.
-## Layout
+### Layout
 - site: next.js root folder:
 	- public: contains all public resources (mostly images)
 	- Src: front-end code
