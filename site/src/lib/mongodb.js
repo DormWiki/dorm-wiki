@@ -1,7 +1,6 @@
 import { MongoClient } from "mongodb";
 
 const uri = process.env.ATLAS_URI;
-const options = {};
 
 let client;
 let clientPromise;
@@ -11,7 +10,7 @@ if (!process.env.ATLAS_URI) {
 }
 
 // In production mode, it's best to not use a global variable.
-client = new MongoClient(uri, options);
+client = new MongoClient(uri);
 clientPromise = client.connect();
 
 

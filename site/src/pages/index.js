@@ -14,6 +14,8 @@ import ReactSearchBox from "react-search-box";
 import styles from '@/styles/Home.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+import { getEvent } from './api/event'
+
 
 const URL = 'http://localhost:5050';
 
@@ -104,13 +106,8 @@ export default function Home( {info} ) {
 }
 
 
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/event");
-
-  if (!res.ok) {
-    throw new Error(res.text());
-  }
-  const info = await res.json();
+export async function getStaticProps() {
+  const info = await getEvent();
   return {
     props: {
       info,

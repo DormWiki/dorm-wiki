@@ -1,5 +1,5 @@
 import DOMPurify from 'isomorphic-dompurify';
-import ClientPromise from "../../../lib/mongodb";
+import ClientPromise from "@/lib/mongodb";
 
 const URL = "https://localhost:5050";
 
@@ -9,23 +9,33 @@ const URL = "https://localhost:5050";
 // - '/event?dorm=': return all the coming events in the given dorm
 // POST:
 // - '/event': post an event
-export default async function handler(req, res) {
+
+export async function getEvent(dorm) {
 	let client = await ClientPromise;
-	let db = client.db("DormWiki");
-	let collection = await db.collection("Event");
+  let db = client.db("DormWiki");
+  let collection = await db.collection("Event");
+	if (dorm == null) {
+    // no parameter
+    let results = await collection
+      .find()
+      .sort({ startTime: -1 });
+		console.log(results);
+		return results;
+  } else {
+    let results = await collection
+      .find({ dorm_id: req.query.dorm })
+      .sort({ startTime: -1 })
+      .toArray(function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        return JSON.stringify(result);
+      });
+  }
+}
+export default async function handler(req, res) {
+	
 	if (req.method == 'GET') {
-		if (req.query.dorm == undefined) { // no parameter
-			let results = await collection.find().sort({startTime: -1}).toArray(function(err, result) {
-			if (err) throw err;
-			res.json(result).status(200);
-			});
-		} else {
-			let results = await collection.find({dorm_id: req.query.dorm}).sort({startTime: -1}).toArray(function(err, result) {
-			if (err) throw err;
-			console.log(result);
-			res.json(result).status(200);
-			});
-		}
+		getEvent(req.query.dorm);
 	} else { // POST CALL
 		const count = await collection.countDocuments();
 		const body = req.body;

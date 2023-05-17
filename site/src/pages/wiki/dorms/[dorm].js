@@ -14,6 +14,8 @@ import wiki from '@/styles/Wiki.module.css';
 import path from "path";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+import ClientPromise from '@/lib/mongodb';
+
 
 export default function Wiki( {info, images} ) {
   const router = useRouter();
@@ -136,19 +138,19 @@ function changeRating(r) {
   rating.value = r;
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
+  let client = await ClientPromise;
+  let db = client.db("DormWiki");
+  let collection = await db.collection("Dorm");
   const pid = context.params.dorm;
-  const info = await fetch(`http://localhost:3000/api/wiki?dorm=${pid}`)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(res.text);
-      }
-      return res;
-    })
-    .then((res) => res.json())
-    .catch(console.error);
+  let info = await collection
+    .find({ _id: req.query.dorm })
+    .toArray(function (err, result) {
+      if (err) throw err;
+      return result;
+    });
     
   if (Object.keys(info).length === 0) {
     return { notFound: true };
@@ -205,30 +207,4 @@ function genReviews(reviews) {
   
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: [
-      "/wiki/dorms/alder-hall",
-      "/wiki/dorms/elm-hall",
-      "/wiki/dorms/hansee-hall",
-      "/wiki/dorms/lander-hall",
-      "/wiki/dorms/madrona-hall",
-      "/wiki/dorms/maple-hall",
-      "/wiki/dorms/mccarty-hall",
-      "/wiki/dorms/mccahon-hall",
-      "/wiki/dorms/oak-hall",
-      "/wiki/dorms/poplar-hall",
-      "/wiki/dorms/terry-hall",
-      "/wiki/dorms/willow-hall",
-      "/wiki/dorms/mercer-court",
-      "/wiki/dorms/stevens-court",
-      "/wiki/dorms/cedar-apartments",
-      "/wiki/dorms/commodore-duchess",
-      "/wiki/dorms/nordheim-court",
-      "/wiki/dorms/radford-court",
-      "/wiki/dorms/blakeley-village",
-      "/wiki/dorms/laurel-village",
-    ],
-    fallback: false,
-  };
-}
+

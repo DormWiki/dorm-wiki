@@ -1,5 +1,5 @@
 import DOMPurify from "isomorphic-dompurify";
-import ClientPromise from "../../../lib/mongodb";
+import ClientPromise from "@/lib/mongodb";
 
 const URL = "https://localhost:5050";
 
