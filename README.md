@@ -7,7 +7,7 @@ DormWiki is a website designed to inform prospective/incoming students about var
 - server: Contains all of the code for the back end (http request, etc.).
 - database: MongoDB
 ## Instructions for running the system
-Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave for some browsers (best to use Chrome).
+Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave (very scuffed) for some browsers (best to use Chrome).
 
 
 ## Using our website
