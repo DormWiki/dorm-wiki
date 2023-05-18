@@ -55,8 +55,8 @@ If you want to contribute to our project, here are some details you may find use
 		- Pages: all of the next.js code for the web pages
 		- Styles: css
 	- api: back-end code
-~~- server: Contains all of the code for the back end (http request, etc.)
-	- Server.js: contains the API endpoints~~
+- ~~server: Contains all of the code for the back end (http request, etc.)~~
+	- ~~Server.js: contains the API endpoints~~
 ## To Add New Tests
 Go to  site/e2e/.
 
