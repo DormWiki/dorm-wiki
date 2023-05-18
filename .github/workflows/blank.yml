@@ -26,6 +26,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - name: create env var
+        run: |
+          touch .env
+          echo "${{ATLAS_URI.ATLAS_URI}}" >> .env.local
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
