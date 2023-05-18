@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { getWiki } from "./api/wiki";
 
 import styles from "@/styles/Home.module.css";
 import wiki from "@/styles/Wiki.module.css";
@@ -57,22 +58,24 @@ export default function Wiki({ info }) {
 
 function genDorms(info, sort) {
   let arr = [];
-  info.forEach((dorm, i) => {
-    if (sort === undefined || SORTS[sort].indexOf(dorm["_id"]) != -1) {
-      arr.push(
-        <>
-          <div key={i} className={wiki.wiki_square}>
-            <Link href={`/wiki/dorms/${dorm["_id"]}`}>
-              <img
-                src={`http://localhost:3000/${dorm["_id"]}/${dorm["_id"]}-1.jpg`}
-              />
-              {cleanName(dorm["_id"])}
-            </Link>
-          </div>
-        </>
-      );
-    }
-  });
+    info.forEach( (dorm, i) => {
+      if(sort === undefined || SORTS[sort].indexOf(dorm["_id"]) != -1) {
+        let name = cleanName(dorm["_id"]).split(" ").join("-");
+        arr.push(
+          <>
+            <div
+              key={i}
+              className={wiki.wiki_square}
+            >
+              <Link href={`/wiki/dorms/${dorm["_id"]}`}>
+                <Image alt={`front picture of ${cleanName(dorm["_id"])}`} src={`/${name}/${name}-1.jpg`}/>
+                {cleanName(dorm["_id"])}
+              </Link>
+            </div>
+          </>
+        );
+      }
+    });
   return arr;
 }
 
@@ -89,11 +92,7 @@ function sortCards(sort) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:5050/wiki");
-  if (!res.ok) {
-    throw new Error("fetch fail");
-  }
-  const info = await res.json();
+  const info = await getWiki();
   return {
     props: {
       info,
@@ -106,10 +105,8 @@ function cleanName(string) {
   let str = string.split("-");
   str.forEach((string, i) => {
     str[i] = string.charAt(0).toUpperCase() + string.slice(1);
-    // please look away
-    if (string === "mcmahon" || string === "mccarty") {
-      str[i] =
-        str[i].slice(0, 2) + str[i].charAt(2).toUpperCase() + str[i].slice(3);
+    if (string === "mcmahon" || string == "mccarty") {
+      str[i] = str[i].slice(0, 2) + str[i].charAt(2).toUpperCase() + str[i].slice(3);
     }
   });
   return str.join(" ");

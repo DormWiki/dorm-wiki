@@ -1,24 +1,20 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { useRouter } from "next/router";
+import { getEvent } from '../api/event';
 import Link from "next/link";
 import Navbar from '@/components/Navbar';
 
 import event from '@/styles/Event.module.css';
 
 
-export  default function Event({ info }) {
-  const router = useRouter();
-  const event_id = router.query.event;
-  let evt = [];
+export  default function Event({ info, id }) {
+  let event = [];
   for (let i = 0; i < info.length; i++) {
-    if (parseInt(info[i]["_id"]) === parseInt(event_id)) {
-      evt = info[i];
+    if (parseInt(info[i]["_id"]) === parseInt(id)) {
+      event = info[i];
     }
   }
-
-  console.log(event);
-
   return (
     <>
       <Head>
@@ -62,21 +58,14 @@ export  default function Event({ info }) {
 );
 }
 
-async function getEvents() {
-  
-}
 
-
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:5050/getUpcomingEvents");
-
-  if (!res.ok) {
-    throw new Error("fetch fail");
-  }
-  const info = await res.json();
+export async function getServerSideProps(context) {
+  let id = context.params.event;
+  const info = await getEvent();
   return {
     props: {
-      info
+      info,
+      id
     }, // will be passed to the page component as props
   };
 }

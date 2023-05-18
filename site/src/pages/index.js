@@ -14,7 +14,10 @@ import ReactSearchBox from "react-search-box";
 import styles from "@/styles/Home.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const URL = "http://localhost:5050";
+import { getEvent } from './api/event'
+
+
+const URL = 'http://localhost:5050';
 
 export const BLDGS = [
   "Alder Hall",
@@ -99,13 +102,9 @@ export default function Home({ info }) {
   );
 }
 
-export async function getServerSideProps() {
-  const res = await fetch(URL + "/getUpcomingEvents");
 
-  if (!res.ok) {
-    throw new Error("fetch fail");
-  }
-  const info = await res.json();
+export async function getStaticProps() {
+  const info = await getEvent();
   return {
     props: {
       info,

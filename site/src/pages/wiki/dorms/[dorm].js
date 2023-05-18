@@ -7,16 +7,18 @@ import Link from "next/link";
 import Error from "next/error";
 import ReactStars from "react-stars";
 import CustomCarousel from "../../../components/Carousel";
-import Navbar from "../../../components/Navbar";
-import Sidebar from "../../../components/Sidebar";
-import styles from "@/styles/Home.module.css";
-import wiki from "@/styles/Wiki.module.css";
+import Navbar from  "../../../components/Navbar";
+import Sidebar from "../../../components/Sidebar"
+import styles from '@/styles/Home.module.css'
+
+import wiki from '@/styles/Wiki.module.css';
 import path from "path";
+
+import { getWiki } from '@/pages/api/wiki';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-const URL = "http://localhost:3000/";
 
-export default function Wiki({ info, images }) {
+export default function Wiki( {info, images} ) {
   const router = useRouter();
   const API = "http://localhost:5050/postReview";
   const dorm = router.query.dorm;
@@ -137,43 +139,6 @@ function changeRating(r) {
   rating.value = r;
 }
 
-export async function getStaticProps(context) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const pid = context.params.dorm;
-  const info = await fetch(`http://localhost:5050/wiki?dorm=${pid}`)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(res.text);
-      }
-      return res;
-    })
-    .then((res) => res.json())
-    .catch(console.error);
-
-  if (Object.keys(info).length === 0) {
-    return { notFound: true };
-  }
-
-  const fs = require("fs");
-
-  const dir = path.resolve("./public", pid);
-
-  const filenames = fs.readdirSync(dir);
-
-  const images = filenames.map((name) => path.join("/", pid, name));
-
-  return {
-    props: {
-      info,
-      images,
-    },
-    // every 5 minutes check for new reviews
-    revalidate: 360,
-  };
-}
-
-// generates the review box
 function genReviews(reviews) {
   let rev_html = [];
   reviews.forEach((r, i) => {
@@ -200,6 +165,47 @@ function genReviews(reviews) {
     );
   });
   return rev_html;
+}
+
+function cleanName(string) {
+  let str = string.split("-");
+  str.forEach((string, i) => {
+    str[i] = string.charAt(0).toUpperCase() + string.slice(1);
+    if (string === "mcmahon" || string == "mccarty") {
+      str[i] = str[i].slice(0, 2) + str[i].charAt(2).toUpperCase() + str[i].slice(3);
+    }
+  });
+  return str.join(" ");
+}
+
+export async function getStaticProps(context) {
+  const pid = context.params.dorm;
+  let info = await getWiki(pid);
+    
+  if (Object.keys(info).length === 0) {
+    return { notFound: true };
+  }
+
+  const fs = require("fs");
+
+  const dir = path.resolve("./public", pid);
+
+  const filenames = fs.readdirSync(dir);
+
+  let dormName = cleanName(pid).split(" ").join("-");
+  const images = filenames.map((name) =>
+    path.join("/", dormName, name)
+  );
+  
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      info,
+      images,
+    },
+    revalidate: 10,
+  };
 }
 
 export async function getStaticPaths() {
@@ -229,3 +235,8 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
+
+
+
+
+

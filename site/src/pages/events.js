@@ -7,6 +7,7 @@ import path from "path";
 import Navbar from "../components/Navbar";
 import { FileUploader } from "react-drag-drop-files";
 
+import { getEvent } from './api/event';
 import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -120,12 +121,8 @@ export default function Events({ events_info, images }) {
   );
 }
 
-export async function getStaticProps() {
-    const res = await fetch("http://localhost:5050/getUpcomingEvents")
-    if (!res.ok) {
-        throw new Error('fetch fail');
-    }
-    const events_info = await res.json();
+export async function getServerSideProps() {
+    const events_info = await getEvent();
     const fs = require("fs");
 
     const dir = path.resolve("./public", "events");
