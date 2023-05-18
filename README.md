@@ -20,6 +20,14 @@ Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave
 - Login: (eventually) user should sign in order to post an event and review
 
 ## Instructions for how to build and test the system.
+To run locally:
+1. install the dependencies using `npm run v`
+2. run both servers(font and back) concurrently: `npm run all`
+   OR 
+   To check the log in a cleaner way, you can run these commands in different terminal windows:
+	- `npm run dev` to start the web server
+	- `npm run data` to start the database server
+
 Run Cypress Test:
 1. Follow the instruction to install cypress (https://docs.cypress.io/guides/getting-started/installing-cypress)
 2. Add local IP to MongoDB in order to run the system
