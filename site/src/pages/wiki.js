@@ -69,7 +69,6 @@ function genDorms(info, sort) {
             >
               <Link href={`/wiki/dorms/${dorm["_id"]}`}>
                 <img fill={true} alt={`front picture of ${cleanName(dorm["_id"])}`} src={`/${name}/${name}-1.jpg`}/>
-                
                 {cleanName(dorm["_id"])}
               </Link>
             </div>
