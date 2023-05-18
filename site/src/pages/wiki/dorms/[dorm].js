@@ -20,7 +20,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function Wiki( {info, images} ) {
   const router = useRouter();
-  const API = "http://localhost:5050/postReview";
   const dorm = router.query.dorm;
   let data = info[0];
   let reviews = genReviews(data["review"]);

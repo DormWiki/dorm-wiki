@@ -9,10 +9,10 @@ import event from '@/styles/Event.module.css';
 
 
 export  default function Event({ info, id }) {
-  let event = [];
+  let evt = [];
   for (let i = 0; i < info.length; i++) {
     if (parseInt(info[i]["_id"]) === parseInt(id)) {
-      event = info[i];
+      evt = info[i];
     }
   }
   return (

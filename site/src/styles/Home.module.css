@@ -16,7 +16,7 @@
   min-height: 100vh;
   background-color: rgba(239, 244, 247, 0.897);
   
-  font-family: 'Inter';
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
