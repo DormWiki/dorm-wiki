@@ -7,7 +7,7 @@ DormWiki is a website designed to inform prospective/incoming students about var
 - server: Contains all of the code for the back end (http request, etc.).
 - database: MongoDB
 ## Instructions for running the system
-UPDATE 5/18: website is currently deployed at https://dorm-wiki.vercel.app/.
+UPDATE 5/18: website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave for some browsers on Mac.
 
 1. install the dependencies using `npm run v`
 2. run both servers(font and back) concurrently: `npm run all`
