@@ -50,12 +50,13 @@ If you want to contribute to our project, here are some details you may find use
 ### Layout
 - site: next.js root folder:
 	- public: contains all public resources (mostly images)
-	- Src: front-end code
+	- src: front-end code
 		- Components: react components
 		- Pages: all of the next.js code for the web pages
 		- Styles: css
-- server: Contains all of the code for the back end (http request, etc.)
-	- Server.js: contains the API endpoints
+	- api: back-end code
+~~- server: Contains all of the code for the back end (http request, etc.)
+	- Server.js: contains the API endpoints~~
 ## To Add New Tests
 Go to  site/e2e/.
 
