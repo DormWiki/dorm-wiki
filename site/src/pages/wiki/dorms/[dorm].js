@@ -35,7 +35,9 @@ export default function Wiki( {info, images} ) {
       text: event.target.text.value,
       ID: event.target.ID.value,
     };
-    const response = await fetch(API, {
+
+
+    const response = await fetch("/api/review", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -187,12 +189,13 @@ export async function getStaticProps(context) {
   }
 
   const fs = require("fs");
+  let dormName = cleanName(pid).split(" ").join("-");
 
-  const dir = path.resolve("./public", pid);
+  const dir = path.resolve(path.join(process.cwd(), "public", dormName));
 
   const filenames = fs.readdirSync(dir);
 
-  let dormName = cleanName(pid).split(" ").join("-");
+
   const images = filenames.map((name) =>
     path.join("/", dormName, name)
   );

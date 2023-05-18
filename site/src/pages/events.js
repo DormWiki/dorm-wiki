@@ -63,41 +63,51 @@ export default function Events({ events_info, images }) {
         <div className={events.content}>
           <h2 className={events.title}>Trending</h2>
           <div className={events.top}>
-          <CustomCarousel paths={images}/>
-          <h2 className={events.title}>Submit an Event</h2>
-          <div className={events.form_wrapper}> 
-            <form method="post" action="http://localhost:5050/postEvent">
-            <div>
-                <label className={events.field}>Event title:
-                    <input type="text" name="name" required/>
-                </label>
-            </div>
-            <div>
-                <label className={events.field}>Organizer:
-                    <input type="text" name="organizer" required/>
-                </label>
-            </div>
-            <div>
-                <label className={events.field}>Location:
-                    <input type="text" name="location" required/>
-                </label>
-            </div>
-            <input
-                type="hidden"
-                name="postDate"
-                value={new Date().toISOString()}/>
-            <div>
-                <label className={events.field}>Dorm:
-                    <input type="text" name="dorm_id" required/>
-                </label>
-            </div>
-            <div>
-                <label className={events.field}>Date & Time:
-                    <input type="datetime-local" name="startTime" required/>
-                </label>
-            </div>
-            <div>
-                <label className={events.field}>Event description:
+            <CustomCarousel paths={images} />
+            <h2 className={events.title}>Submit an Event</h2>
+            <div className={events.form_wrapper}>
+              <form
+                method="post"
+                action="https://dorm-wiki.vercel.app/api/event"
+              >
+                <div>
+                  <label className={events.field}>
+                    Event title:
+                    <input type="text" name="name" required />
+                  </label>
+                </div>
+                <div>
+                  <label className={events.field}>
+                    Organizer:
+                    <input type="text" name="organizer" required />
+                  </label>
+                </div>
+                <div>
+                  <label className={events.field}>
+                    Location:
+                    <input type="text" name="location" required />
+                  </label>
+                </div>
+                <input
+                  type="hidden"
+                  name="postDate"
+                  value={new Date().toISOString()}
+                />
+                <div>
+                  <label className={events.field}>
+                    Dorm:
+                    <input type="text" name="dorm_id" required />
+                  </label>
+                </div>
+                <div>
+                  <label className={events.field}>
+                    Date & Time:
+                    <input type="datetime-local" name="startTime" required />
+                  </label>
+                </div>
+                <div>
+                  <label className={events.field}>
+                    Event description:
                     <div className={events.textarea}>
                         <textarea type="text" name="text" required/>
                     </div>
