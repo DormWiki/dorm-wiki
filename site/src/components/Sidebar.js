@@ -1,5 +1,4 @@
 import styles from "@/styles/Home.module.css";
-import wiki from "@/styles/Wiki.module.css";
 import Link from "next/link";
 const Sidebar = () => {
   return (

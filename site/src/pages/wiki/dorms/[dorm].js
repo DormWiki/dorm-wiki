@@ -13,6 +13,7 @@ import styles from '@/styles/Home.module.css'
 
 import wiki from '@/styles/Wiki.module.css';
 import path from "path";
+import ReviewBar from "@/components/ReviewBar";
 
 import { getWiki } from '@/pages/api/wiki';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -59,7 +60,7 @@ export default function Wiki( {info, images} ) {
   return (
     <>
       <Head>
-        <title>{dorm}</title>
+        <title>{cleanName(dorm)}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
@@ -150,17 +151,20 @@ function genReviews(reviews) {
           <h3 className={wiki.subtitle}>
             {new Date(r["date"]).toLocaleDateString()}
           </h3>
-          <h3>short title missing</h3>
+          <h3>{r["title"]}</h3>
           <p>{r["text"]}</p>
         </div>
         <div className={wiki.review_rating}>
           <ReactStars
             edit={false}
             starCount={5}
-            value={parseFloat(r["rating"])}
+            value={averageReview((r["rating"]))}
             size={36}
             color2={"#ffd700"}
           />
+          <div>
+            <ReviewBar data={r["rating"]}/>
+          </div>
         </div>
       </div>
     );
@@ -177,6 +181,14 @@ function cleanName(string) {
     }
   });
   return str.join(" ");
+}
+
+function averageReview(data) {
+  let avg = 0;
+  for (const k in data) {
+    avg += data[k];
+  }
+  return avg / Object.entries(data).length;
 }
 
 export async function getStaticProps(context) {
