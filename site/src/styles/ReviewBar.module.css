@@ -1,15 +1,13 @@
-.out {
-    width: 100%;
-    border-radius: 5px;
-    height: 70%;
-    border: 1px solid gray;
-}
+
 
 .in {
+    height: 4vh;
     display: flex;
     justify-content: space-between;
     border-radius: 5px;
     font-size: smaller;
+    padding: 2px;
+    margin-bottom: 2px;
 }
 
 .right {

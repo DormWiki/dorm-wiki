@@ -67,7 +67,7 @@
   height: auto;
 }
 .review_form {
-  height: 25vh;
+  height: 28vh;
 }
 
 .success {
@@ -77,10 +77,6 @@
     background-color 0.2s,
     height 0.5s;
   transition-delay: 0s, 0.25s, 0.75s;
-}
-
-.failed {
-  background-color: red;
 }
 
 .review_submitted {
