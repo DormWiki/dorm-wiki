@@ -10,6 +10,9 @@ import { useRouter } from "next/router";
 import CustomCarousel from "../components/Carousel";
 import Navbar from "@/components/Navbar";
 import ReactSearchBox from "react-search-box";
+import { formatDate } from "@/misc";
+import confetti from "canvas-confetti";
+import Likebutton from "@/components/Likebutton";
 
 import styles from "@/styles/Home.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -49,6 +52,7 @@ function getSearchOptions() {
 
 export default function Home({ info }) {
   const router = useRouter();
+
   const events = info.slice(0, 4);
   const options = getSearchOptions();
 
@@ -61,6 +65,7 @@ export default function Home({ info }) {
       router.push(`/wiki/dorms/${code}`);
     }
   };
+
   return (
     <>
       <Head>
@@ -88,15 +93,40 @@ export default function Home({ info }) {
           </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
-            <div className={styles.event_deck}>{events[0]["_id"]}</div>
-            <div className={styles.event_deck}>{events[1]["_id"]}</div>
-            <div className={styles.event_deck}>{events[2]["_id"]}</div>
-            <div className={styles.event_deck}>{events[3]["_id"]}</div>
+            {genCards(events)}
           </div>
         </div>
       </main>
     </>
   );
+}
+
+function genCards(events) {
+  const router = useRouter();
+  let arr = [];
+  const handleClick = (value) => {
+    ;
+  };
+  events.forEach((event, i) => {
+    arr.push(
+      <>
+        <div key={i} className={styles.event_deck}>
+          <img src="/events/events1.jpg"></img>
+          <h2>{event["name"]}</h2>
+          <h4>{event["location"]}</h4>
+          <div className={styles.event_deck_button_container}>
+            <Likebutton />
+            <Link
+              href={`/events/${event["_id"]}`}
+              className={`${styles.event_button} ${styles.goto}`}
+            ></Link>
+          </div>
+          <h3>{formatDate(event["startTime"], true)}</h3>
+        </div>
+      </>
+    );
+  });
+  return arr;
 }
 
 

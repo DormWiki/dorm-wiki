@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { getWiki } from "./api/wiki";
+import { cleanName } from "@/misc";
 
 import styles from "@/styles/Home.module.css";
 import wiki from "@/styles/Wiki.module.css";
@@ -98,16 +99,4 @@ export async function getServerSideProps() {
       info,
     },
   };
-}
-
-// changes aaaa-aaaa to Aaaa Aaaa
-function cleanName(string) {
-  let str = string.split("-");
-  str.forEach((string, i) => {
-    str[i] = string.charAt(0).toUpperCase() + string.slice(1);
-    if (string === "mcmahon" || string == "mccarty") {
-      str[i] = str[i].slice(0, 2) + str[i].charAt(2).toUpperCase() + str[i].slice(3);
-    }
-  });
-  return str.join(" ");
 }

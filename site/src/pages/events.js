@@ -6,7 +6,7 @@ import CustomCarousel from '@/components/Carousel';
 import path from "path";
 import Navbar from "../components/Navbar";
 import { FileUploader } from "react-drag-drop-files";
-
+import { formatDate } from '@/misc';
 import { getEvent } from './api/event';
 import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
@@ -53,7 +53,7 @@ export default function Events({ events_info, images }) {
   return (
     <>
       <Head>
-        <title>Dorm-Wiki</title>
+        <title>Dorm Wiki</title>
         <meta name="description" content="Your go-to place for UW dorm info" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png" />
@@ -146,18 +146,4 @@ export async function getServerSideProps() {
         images
       },
     };
-}
-
-
-// helper function that formats time strings
-function formatDate(string) {
-  let format = new Date(string).toLocaleString();
-
-  // mm/dd/year
-  let date = format.split(", ")[0];
-  // AM or PM
-  let timeFormat = format.split(", ")[1].split(" ")[1];
-  // xx:xx
-  let time = format.split(", ")[1].split(" ")[0].split(":").slice(0, -1).join(":");
-  return `${date}, ${time} ${timeFormat}`;
 }
