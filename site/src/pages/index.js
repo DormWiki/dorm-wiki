@@ -58,10 +58,8 @@ export default function Home({ info }) {
 
   const handleSubmit = (value) => {
     if (value != undefined) {
-      console.log(value);
       const bld = "" + value.item.key.toLowerCase();
       let code = bld.replace(" ", "-");
-      console.log(code);
       router.push(`/wiki/dorms/${code}`);
     }
   };

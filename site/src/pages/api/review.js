@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       user: DOMPurify.sanitize(body.user),
       text: DOMPurify.sanitize(body.text),
       date: DOMPurify.sanitize(body.date),
-      rating: DOMPurify.sanitize(body.rating),
+      rating: body.rating,
     };
     const result = await collection.updateOne(
       { _id: req.body.ID },

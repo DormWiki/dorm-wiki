@@ -34,7 +34,6 @@ export default function Wiki( {info, images} ) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const data = {
       title: event.target.title.value,
       user: event.target.user.value,
@@ -43,9 +42,7 @@ export default function Wiki( {info, images} ) {
       text: event.target.text.value,
       ID: event.target.ID.value,
     };
-
-    console.log(JSON.stringify(data));
-
+    
     const response = await fetch("/api/review", {
      method: "POST",
      body: JSON.stringify(data),
@@ -64,6 +61,7 @@ export default function Wiki( {info, images} ) {
     setTimeout(() => {
      router.reload(window.location.pathname);
     }, 750);
+    
   };
 
   return (
@@ -225,11 +223,9 @@ function averageReview(data) {
 export async function getStaticProps(context) {
   const pid = context.params.dorm;
   let info = await getWiki(pid);
-    
   if (Object.keys(info).length === 0) {
     return { notFound: true };
   }
-
   const fs = require("fs");
   let dormName = cleanName(pid).split(" ").join("-");
 
@@ -263,7 +259,7 @@ export async function getStaticPaths() {
       "/wiki/dorms/madrona-hall",
       "/wiki/dorms/maple-hall",
       "/wiki/dorms/mccarty-hall",
-      "/wiki/dorms/mccahon-hall",
+      "/wiki/dorms/mcmahon-hall",
       "/wiki/dorms/oak-hall",
       "/wiki/dorms/poplar-hall",
       "/wiki/dorms/terry-hall",
