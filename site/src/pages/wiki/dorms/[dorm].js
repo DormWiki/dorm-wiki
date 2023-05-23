@@ -25,35 +25,44 @@ export default function Wiki( {info, images} ) {
   let data = info[0];
   let reviews = genReviews(data["review"]);
 
+  // all of this because I am too lazy to make my own star ratings or just encapsulate it in its own component
+  let types = ["enviornment", "food", "walkability", "safety"];
+  let ratings = { 'enviornment' : 0, 'food' : 0, 'walkability' : 0, 'safety' : 0};
+  const changeRating = (r, i) => {
+    ratings[types[i]] = r;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const data = {
       title: event.target.title.value,
       user: event.target.user.value,
       date: event.target.date.value,
-      rating: event.target.rating.value,
+      rating: ratings,
       text: event.target.text.value,
       ID: event.target.ID.value,
     };
 
+    console.log(JSON.stringify(data));
 
     const response = await fetch("/api/review", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      next: { revalidate: 1 },
+     method: "POST",
+     body: JSON.stringify(data),
+     headers: {
+       "Content-Type": "application/json",
+     },
+     next: { revalidate: 1 },
     });
     const res = await response.status;
     if (res === 200) {
-      event.target.parentNode.parentNode.className =
-        wiki.review_submitted + " " + wiki.success;
+     event.target.parentNode.parentNode.className =
+       wiki.review_submitted + " " + wiki.success;
     } else {
-      router.push("/500");
+     router.push("/500");
     }
     setTimeout(() => {
-      router.reload(window.location.pathname);
+     router.reload(window.location.pathname);
     }, 750);
   };
 
@@ -104,26 +113,51 @@ export default function Wiki( {info, images} ) {
                     name="date"
                     value={new Date().toISOString()}
                   />
-                  <input
-                    id="rating"
-                    type="hidden"
-                    name="rating"
-                    min="0"
-                    max="5"
-                    required
-                  />
                   <input type="hidden" name="ID" value={dorm} />
                   <br />
                   <input type="submit" id="submit" value="Submit" />
                 </form>
               </div>
               <div className={wiki.review_rating}>
+                <label>Enviorment</label>
                 <ReactStars
                   edit={true}
                   starCount={5}
                   size={36}
                   color2={"#ffd700"}
-                  onChange={changeRating}
+                  onChange={r => {
+                    changeRating(r, 0);
+                  }}
+                />
+                <label>Food</label>
+                <ReactStars
+                  edit={true}
+                  starCount={5}
+                  size={36}
+                  color2={"#ffd700"}
+                  onChange={r => {
+                    changeRating(r, 1);
+                  }}
+                />
+                <label>Walkability</label>
+                <ReactStars
+                  edit={true}
+                  starCount={5}
+                  size={36}
+                  color2={"#ffd700"}
+                  onChange={r => {
+                    changeRating(r, 2);
+                  }}
+                />
+                <label>Safety</label>
+                <ReactStars
+                  edit={true}
+                  starCount={5}
+                  size={36}
+                  color2={"#ffd700"}
+                  onChange={r => {
+                    changeRating(r, 3);
+                  }}
                 />
               </div>
             </div>
@@ -136,10 +170,7 @@ export default function Wiki( {info, images} ) {
   );
 }
 
-function changeRating(r) {
-  let rating = document.getElementById("rating");
-  rating.value = r;
-}
+
 
 function genReviews(reviews) {
   let rev_html = [];
@@ -152,7 +183,7 @@ function genReviews(reviews) {
             {new Date(r["date"]).toLocaleDateString()}
           </h3>
           <h3>{r["title"]}</h3>
-          <p>{r["text"]}</p>
+          <p style={{overflow: 'hidden'}}>{r["text"]}</p>
         </div>
         <div className={wiki.review_rating}>
           <ReactStars

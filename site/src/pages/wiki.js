@@ -80,18 +80,6 @@ function genDorms(info, sort) {
   return arr;
 }
 
-// idk
-function sortCards(sort) {
-  let items = document.querySelectorAll("section div div");
-  items.forEach((item) => {
-    let name = item.firstChild.innerText.split("-").join(" ").toLowerCase();
-    console.log(name);
-    if (SORTS[sort].indexOf(name) === -1) {
-      item.classList.add(wiki.hidden);
-    }
-  });
-}
-
 export async function getServerSideProps() {
   const info = await getWiki();
   return {

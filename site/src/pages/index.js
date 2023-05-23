@@ -102,7 +102,6 @@ export default function Home({ info }) {
 }
 
 function genCards(events) {
-  const router = useRouter();
   let arr = [];
   const handleClick = (value) => {
     ;
