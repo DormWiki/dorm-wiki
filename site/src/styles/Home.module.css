@@ -96,6 +96,8 @@
 }
 
 .p, .list_wrapper {
+  background-color: rebeccapurple;
+  padding: 1rem;
   margin-top: 2vh;
   margin-bottom: 2vh;
   margin-left: 3vw;
