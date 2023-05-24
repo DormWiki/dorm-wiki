@@ -1,15 +1,15 @@
 import DOMPurify from "isomorphic-dompurify";
 import ClientPromise from "@/lib/mongodb";
 
-const URL = "https://localhost:5050";
+// const URL = "https://localhost:5050";
 
 // handling all the review calls
 // POST:
 // '/review': post single review to the given dorm
 export default async function handler(req, res) {
-  	let client = await ClientPromise;
-    let db = client.db("DormWiki");
-    let collection = await db.collection("Dorm");
+  let client = await ClientPromise;
+  let db = client.db("DormWiki");
+  let collection = await db.collection("Dorm");
   try {
     // Create new review object from request body
     const body = req.body;

@@ -45,6 +45,7 @@ export default function Wiki({ info }) {
   const router = useRouter();
   const sort = router.query.dorm;
   let dormCards = genDorms(info, sort);
+  const {data: session} = useSession();
   return (
     <>
       <div className={styles.navbar_logo_wrapper}>
@@ -53,7 +54,7 @@ export default function Wiki({ info }) {
       <Navbar />
       <section className={styles.content}>
         <div className={wiki.wiki_grid}>
-          {dormCards}
+          {dormCards} 
         </div>
       </section>
     </>
