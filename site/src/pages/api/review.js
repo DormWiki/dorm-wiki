@@ -19,6 +19,7 @@ export default async function handler(req, res) {
       text: DOMPurify.sanitize(body.text),
       date: DOMPurify.sanitize(body.date),
       rating: DOMPurify.sanitize(body.rating),
+      poster: DOMPurify.sanitize(body.poster)
     };
     const result = await collection.updateOne(
       { _id: req.body.ID },
