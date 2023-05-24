@@ -32,6 +32,12 @@ export default function Wiki( {info, images} ) {
     ratings[types[i]] = r;
   };
 
+  const changeChars = (event) => {
+    let count = event.target.value.length;
+    let max = document.getElementById("max_chars");
+    max.innerText = `${count}/300`;
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
@@ -73,7 +79,7 @@ export default function Wiki( {info, images} ) {
       </Head>
       <main className={styles.main}>
         <Navbar />
-        <Sidebar />
+        <Sidebar selected={dorm} />
         <section className={wiki.content}>
           <CustomCarousel paths={images} />
           <div className={wiki.description}>
@@ -104,8 +110,12 @@ export default function Wiki( {info, images} ) {
                     placeholder="Review"
                     type="text"
                     name="text"
+                    maxlength="300"
+                    onChange={changeChars}
                     required
                   />
+                  <br />
+                  <p id="max_chars" className={wiki.char_count}>0/300</p>
                   <input
                     type="hidden"
                     name="date"
@@ -123,7 +133,7 @@ export default function Wiki( {info, images} ) {
                   starCount={5}
                   size={36}
                   color2={"#ffd700"}
-                  onChange={r => {
+                  onChange={(r) => {
                     changeRating(r, 0);
                   }}
                 />
@@ -133,7 +143,7 @@ export default function Wiki( {info, images} ) {
                   starCount={5}
                   size={36}
                   color2={"#ffd700"}
-                  onChange={r => {
+                  onChange={(r) => {
                     changeRating(r, 1);
                   }}
                 />
@@ -143,7 +153,7 @@ export default function Wiki( {info, images} ) {
                   starCount={5}
                   size={36}
                   color2={"#ffd700"}
-                  onChange={r => {
+                  onChange={(r) => {
                     changeRating(r, 2);
                   }}
                 />
@@ -153,7 +163,7 @@ export default function Wiki( {info, images} ) {
                   starCount={5}
                   size={36}
                   color2={"#ffd700"}
-                  onChange={r => {
+                  onChange={(r) => {
                     changeRating(r, 3);
                   }}
                 />

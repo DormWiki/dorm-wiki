@@ -67,7 +67,7 @@
   height: auto;
 }
 .review_form {
-  height: 28vh;
+  height: 30vh;
 }
 
 .success {
@@ -98,6 +98,7 @@
   width: 30vw;
   height: 10vh;
   padding-left: 5px;
+  resize: none;
 }
 
 .review input[type="submit"] {
@@ -109,24 +110,32 @@
 
 .review input[type="submit"]:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .review input, .review textarea {
-  border-radius: 5px;
-  border: 1px solid black;
+  border: 0px;
+  border-bottom: 1px solid black;
+  background-color: transparent;
   font-size: 16px;
   font-family: 'Inter';
   font-style: normal;
   margin-top: 5px;
 }
 
-.review_rating {
-  width: 37.6*5px;
+.review input:focus, .review textarea:focus {
+  outline: none;
 }
 
-.review_rating span {
-  height: 36px;
-  width: 40px;
+.review .char_count {
+  font-size: 12px;
+  width: 100%;
+  text-align: right;
+}
+
+.review_rating {
+  line-height: normal;
+  width: 12em;
 }
 
 .subtitle {
