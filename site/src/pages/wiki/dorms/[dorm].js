@@ -116,7 +116,7 @@ export default function Wiki( {info, images} ) {
                     placeholder="Review"
                     type="text"
                     name="text"
-                    maxlength="300"
+                    maxLength="300"
                     onChange={changeChars}
                     required
                   />
