@@ -72,12 +72,13 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
-  padding: 10px;
+  padding: 1.5vw;
   width: 75%;
   border: 2px solid black;
   border-radius: 20px;
   height: auto;
 }
+
 .review_form {
   height: 30vh;
 }
@@ -221,4 +222,12 @@
 
 .hidden {
   visibility: hidden;
+}
+
+.review_p {
+  overflow: visible;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  max-width: 80%;
+  width: 40vw;
 }

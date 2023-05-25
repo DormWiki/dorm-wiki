@@ -197,7 +197,9 @@ function genReviews(reviews) {
             {new Date(r["date"]).toLocaleDateString()}
           </h3>
           <h3>{r["title"]}</h3>
-          <p style={{overflow: 'hidden'}}>{r["text"]}</p>
+          <div className={wiki.review_p}>
+            {r["text"]}
+          </div>
         </div>
         <div className={wiki.review_rating}>
           <ReactStars
