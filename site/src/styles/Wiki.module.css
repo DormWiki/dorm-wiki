@@ -3,8 +3,21 @@
   margin-left: 100px;
 }
 
+.top_wrapper {
+  display: flex;
+  justify-content: stretch;
+}
+
 #carousel img {
   height: 400px;
+}
+
+.carousel_wrapper {
+  width: 70%;
+}
+
+.summary {
+  width: 30%;
 }
 
 .description, .review_box, .content, .review, .wiki_grid {
@@ -20,8 +33,7 @@
 }
 
 .description {
-  
-  width: 40%;
+  width: 100%;
 }
 
 .description p {
@@ -48,7 +60,7 @@
   margin-right: 10%;
   padding-top: 7vh;
   padding-left: 10%;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -67,7 +79,7 @@
   height: auto;
 }
 .review_form {
-  height: 25vh;
+  height: 30vh;
 }
 
 .success {
@@ -77,10 +89,6 @@
     background-color 0.2s,
     height 0.5s;
   transition-delay: 0s, 0.25s, 0.75s;
-}
-
-.failed {
-  background-color: red;
 }
 
 .review_submitted {
@@ -102,6 +110,7 @@
   width: 30vw;
   height: 10vh;
   padding-left: 5px;
+  resize: none;
 }
 
 .review input[type="submit"] {
@@ -113,24 +122,32 @@
 
 .review input[type="submit"]:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .review input, .review textarea {
-  border-radius: 5px;
-  border: 1px solid black;
+  border: 0px;
+  border-bottom: 1px solid black;
+  background-color: transparent;
   font-size: 16px;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   margin-top: 5px;
 }
 
-.review_rating {
-  width: 37.6*5px;
+.review input:focus, .review textarea:focus {
+  outline: none;
 }
 
-.review_rating span {
-  height: 36px;
-  width: 40px;
+.review .char_count {
+  font-size: 12px;
+  width: 100%;
+  text-align: right;
+}
+
+.review_rating {
+  line-height: normal;
+  width: 12em;
 }
 
 .subtitle {

@@ -7,12 +7,7 @@ DormWiki is a website designed to inform prospective/incoming students about var
 - server: Contains all of the code for the back end (http request, etc.).
 - database: MongoDB
 ## Instructions for running the system
-1. install the dependencies using `npm run v`
-2. run both servers(font and back) concurrently: `npm run all`
-   OR 
-   To check the log in a cleaner way, you can run these commands in different terminal windows:
-	- `npm run dev` to start the web server
-	- `npm run data` to start the database server
+Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave (very scuffed) for some browsers (best to use Chrome).
 
 
 ## Using our website
@@ -25,6 +20,14 @@ DormWiki is a website designed to inform prospective/incoming students about var
 - Login: (eventually) user should sign in order to post an event and review
 
 ## Instructions for how to build and test the system.
+To run locally:
+1. install the dependencies using `npm run v`
+2. run both servers(font and back) concurrently: `npm run all`
+   OR 
+   To check the log in a cleaner way, you can run these commands in different terminal windows:
+	- `npm run dev` to start the web server
+	- `npm run data` to start the database server
+
 Run Cypress Test:
 1. Follow the instruction to install cypress (https://docs.cypress.io/guides/getting-started/installing-cypress)
 2. Add local IP to MongoDB in order to run the system
@@ -47,12 +50,13 @@ If you want to contribute to our project, here are some details you may find use
 ### Layout
 - site: next.js root folder:
 	- public: contains all public resources (mostly images)
-	- Src: front-end code
+	- src: front-end code
 		- Components: react components
 		- Pages: all of the next.js code for the web pages
 		- Styles: css
-- server: Contains all of the code for the back end (http request, etc.)
-	- Server.js: contains the API endpoints
+	- api: back-end code
+- ~~server: Contains all of the code for the back end (http request, etc.)~~
+	- ~~Server.js: contains the API endpoints~~
 ## To Add New Tests
 Go to  site/e2e/.
 

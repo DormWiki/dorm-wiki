@@ -1,24 +1,20 @@
 import Head from 'next/head';
 import React, { useState } from 'react';
 import { useRouter } from "next/router";
+import { getEvent } from '../api/event';
 import Link from "next/link";
 import Navbar from '@/components/Navbar';
 
 import event from '@/styles/Event.module.css';
 
 
-export  default function Event({ info }) {
-  const router = useRouter();
-  const event_id = router.query.event;
+export  default function Event({ info, id }) {
   let evt = [];
   for (let i = 0; i < info.length; i++) {
-    if (parseInt(info[i]["_id"]) === parseInt(event_id)) {
+    if (parseInt(info[i]["_id"]) === parseInt(id)) {
       evt = info[i];
     }
   }
-
-  console.log(event);
-
   return (
     <>
       <Head>
@@ -33,27 +29,34 @@ export  default function Event({ info }) {
             {evt["name"]}
           </div>
           <div className={event.description}>
-            <div className={event.p}>
-              Posted: {formatDate(evt["postDate"])}
+            <div className={event.subtitle}>
+              <i>Posted {formatDate(evt["postDate"])}</i>
             </div>
-            <div className={event.p}>
-              [PHOTOS]
+            <img
+              src="/events/events1.jpg"
+              style={{ height: "500px", width: "700px"}}
+            ></img>
+            <div className={event.subtitle}>
+                <b><u>Start time</u></b>: {formatDate(evt["startTime"])}
             </div>
             <div className={event.subtitle}>
-                Start time: {evt["startTime"]} <br/>
-                Dorm: {evt["dorm_id"]}, location: {evt["location"]}
-                <br/> 
+                <b><u>Dorm/location</u></b>: {evt["dorm_id"]}, {evt["location"]}
             </div>
             <div className={event.subtitle}>
-              <i>Organizer: {evt["organizer"]}</i>
+              <b><u>Organizer</u></b>: {evt["organizer"]} ([contact info])
             </div>
             <div className={event.p}>
               [insert event description]
             </div>
           </div>
-          <div className={event.button}>
+          <div className={event.save_button}>
             <button type="button">
-              Save to your events
+              <span>
+                <img 
+                  src="/bookmark.png"
+                  style={{ height: "50px", width: "50px"}}>
+                </img>
+              </span> 
             </button>
           </div>
         </section>
@@ -62,25 +65,19 @@ export  default function Event({ info }) {
 );
 }
 
-async function getEvents() {
-  
-}
-
-
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:5050/getUpcomingEvents");
-
-  if (!res.ok) {
-    throw new Error("fetch fail");
-  }
-  const info = await res.json();
+export async function getServerSideProps(context) {
+  let id = context.params.event;
+  const info = await getEvent();
   return {
     props: {
-      info
+      info,
+      id
     }, // will be passed to the page component as props
   };
 }
 
+// Given a date, reformats it to be more readable
+// E.g. 2023-06-13T00:24 --> 6/13/2023, 12:24 AM
 function formatDate(string) {
   let format = new Date(string).toLocaleString();
 
