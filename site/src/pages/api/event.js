@@ -44,6 +44,7 @@ export default async function handler(req, res) {
 			_id: (count + 1),
 			name: DOMPurify.sanitize(body.name),
 			startTime: DOMPurify.sanitize(body.startTime),
+			description: DOMPurify.sanitize(body.description),
 			postDate: DOMPurify.sanitize(body.postDate),
 			dorm_id: DOMPurify.sanitize(body.dorm_id),
 			location: DOMPurify.sanitize(body.location),
