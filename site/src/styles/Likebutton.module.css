@@ -1,0 +1,32 @@
+.event_button {
+  width: 3vw;
+  height: 6vh;
+  background-color: rgba(0, 0, 0, 0.048);
+  box-shadow: inset 0px 4px 4px 0px rgba(0, 0, 0, 0.02);
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.goto {
+ background-image: url("/sprites/depart.jpg");
+ background-size: 50%;
+ background-repeat: no-repeat;
+ background-position: center;
+}
+
+.like {
+ background-image: url("/sprites/like.png");
+ filter: grayscale(1);
+ background-size: 50%;
+ background-repeat: no-repeat;
+ background-position: center;
+}
+
+.like.clicked{
+  filter: grayscale(0);
+}
+
+.like:hover{
+ transition: 0.1s;
+ background-size: 70%;
+}

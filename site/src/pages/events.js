@@ -6,7 +6,7 @@ import CustomCarousel from '@/components/Carousel';
 import path from "path";
 import Navbar from "../components/Navbar";
 import { FileUploader } from "react-drag-drop-files";
-
+import { formatDate } from '@/misc';
 import { getEvent } from './api/event';
 import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
@@ -53,7 +53,7 @@ export default function Events({ events_info, images }) {
   return (
     <>
       <Head>
-        <title>Dorm-Wiki</title>
+        <title>Dorm Wiki</title>
         <meta name="description" content="Your go-to place for UW dorm info" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png" />
@@ -62,66 +62,70 @@ export default function Events({ events_info, images }) {
       <main className={events.main}>
         <div className={events.content}>
           <h2 className={events.title}>Trending</h2>
-          <div className={events.top}>
-            <CustomCarousel paths={images} />
-            <h2 className={events.title}>Submit an Event</h2>
-            <div className={events.form_wrapper}>
-              <form
-                method="post"
-                action="https://dorm-wiki.vercel.app/api/event"
-              >
-                <div>
-                  <label className={events.field}>
-                    Event title:
-                    <input type="text" name="name" required />
-                  </label>
-                </div>
-                <div>
-                  <label className={events.field}>
-                    Organizer:
-                    <input type="text" name="organizer" required />
-                  </label>
-                </div>
-                <div>
-                  <label className={events.field}>
-                    Location:
-                    <input type="text" name="location" required />
-                  </label>
-                </div>
-                <input
-                  type="hidden"
-                  name="postDate"
-                  value={new Date().toISOString()}
-                />
-                <div>
-                  <label className={events.field}>
-                    Dorm:
-                    <input type="text" name="dorm_id" required />
-                  </label>
-                </div>
-                <div>
-                  <label className={events.field}>
-                    Date & Time:
-                    <input type="datetime-local" name="startTime" required />
-                  </label>
-                </div>
-                <div>
-                  <label className={events.field}>
-                    Event description:
-                    <div className={events.textarea}>
-                        <textarea type="text" name="text" required/>
+            <div className={events.top_wrapper}>
+              <div className={events.carousel_wrapper}>
+                <CustomCarousel paths={images} />
+              </div>
+              <div className={events.submit_event_wrapper}>
+                <h2 className={events.title_right}>Submit an Event</h2>
+                <div className={events.form_fields_wrapper}>
+                  <form
+                    method="post"
+                    action="https://dorm-wiki.vercel.app/api/event"
+                  >
+                    <div>
+                      <label className={events.field}>
+                        Event title:
+                        <input type="text" name="name" required />
+                      </label>
                     </div>
-                </label>
+                    <div>
+                      <label className={events.field}>
+                        Organizer:
+                        <input type="text" name="organizer" required />
+                      </label>
+                    </div>
+                    <div>
+                      <label className={events.field}>
+                        Location:
+                        <input type="text" name="location" required />
+                      </label>
+                    </div>
+                    <input
+                      type="hidden"
+                      name="postDate"
+                      value={new Date().toISOString()}
+                    />
+                    <div>
+                      <label className={events.field}>
+                        Dorm:
+                        <input type="text" name="dorm_id" required />
+                      </label>
+                    </div>
+                    <div>
+                      <label className={events.field}>
+                        Date & Time:
+                        <input type="datetime-local" name="startTime" required />
+                      </label>
+                    </div>
+                    <div>
+                      <label className={events.field}>
+                        Event description:
+                        <div className={events.textarea}>
+                            <textarea type="text" name="text" required/>
+                        </div>
+                    </label>
+                </div>
+                <div>
+                    <label className={events.field}>Images:</label>
+                </div>
+                <div className={events.fileupload_wrapper}>
+                  <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+                </div>
+                <input className={events.submit_button} type="submit" id="submit" value="Submit"/>
+                </form>
+              </div>
             </div>
-            <div>
-                <label className={events.field}>Images:</label>
-            </div>
-            <div className={events.fileupload_wrapper}>
-              <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
-            </div>
-            <input className={events.submit_button} type="submit" id="submit" value="Submit"/>
-            </form>
-          </div>
           </div>
           <h2 className={events.title}>Upcoming</h2>
           {events_arr}
@@ -146,18 +150,4 @@ export async function getServerSideProps() {
         images
       },
     };
-}
-
-
-// helper function that formats time strings
-function formatDate(string) {
-  let format = new Date(string).toLocaleString();
-
-  // mm/dd/year
-  let date = format.split(", ")[0];
-  // AM or PM
-  let timeFormat = format.split(", ")[1].split(" ")[1];
-  // xx:xx
-  let time = format.split(", ")[1].split(" ")[0].split(":").slice(0, -1).join(":");
-  return `${date}, ${time} ${timeFormat}`;
 }

@@ -1,87 +1,60 @@
-import styles from "@/styles/Home.module.css";
-import wiki from "@/styles/Wiki.module.css";
+import styles from "@/styles/Sidebar.module.css";
 import Link from "next/link";
-const Sidebar = () => {
+import { cleanName } from "@/misc";
+let DORMS = [
+  "alder-hall",
+  "elm-hall",
+  "hansee-hall",
+  "lander-hall",
+  "madrona-hall",
+  "maple-hall",
+  "mccarty-hall",
+  "mcmahon-hall",
+  "oak-hall",
+  "poplar-hall",
+  "terry-hall",
+  "willow-hall",
+  "mercer-court",
+  "stevens-court",
+  "cedar-apartments",
+  "commodore-duchess",
+  "nordheim-court",
+  "radford-court",
+  "blakeley-village",
+  "laurel-village"
+];
+const genLinks = (select) => {
+  let ret = [];
+  DORMS.forEach((dorm) => {
+    console.log(dorm + " " + select);
+    if(dorm === select) {
+      ret.push(
+        <>
+          <Link className={styles.selected} href={`/wiki/dorms/${dorm}`}>
+            {cleanName(dorm)}
+          </Link>
+        </>
+      );
+    } else {
+      ret.push(
+        <>
+          <Link href={`/wiki/dorms/${dorm}`}>
+            {cleanName(dorm)}
+          </Link>
+        </>
+      );
+    }
+  })
+  return ret;
+}
+
+const Sidebar = ({selected}) => {
   return (
     <>
-      <div className={styles.sidebar}>
-        <ul>
-          <h2>North Campus</h2>
-          <div className={styles.sidebar_sub}>
-            <li>
-              <Link href="/wiki/dorms/hansee-hall">Hansee Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/madrona-hall">Madrona Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/mccarty-hall">McCarty Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/mccahon-hall">McCahon Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/oak-hall">Oak Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/willow-hall">Willow Hall</Link>
-            </li>
-          </div>
-          <h2>West Campus</h2>
-          <div className={styles.sidebar_sub}>
-            <li>
-              <Link href="/wiki/dorms/alder-hall">Alder Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/elm-hall">Elm Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/lander-hall">Lander Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/maple-hall">Maple Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/poplar-hall">Poplar Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/terry-hall">Terry Hall</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/mercer-court">Mercer Court</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/stevens-court">Stevens Court</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/cedar-apartments">Cedar Apartments</Link>
-            </li>
-          </div>
-          <h2>Off Campus</h2>
-          <div className={styles.sidebar_sub}>
-            <li>
-              <Link href="/wiki/dorms/commodore-duchess">
-                Commodore Duchess
-              </Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/nordheim-court">Nordheim Court</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/radford-court">Radford Court</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/blakeley-village">Blakeley Village</Link>
-            </li>
-            <li>
-              <Link href="/wiki/dorms/laurel-village">Laural Village</Link>
-            </li>
-          </div>
-        </ul>
-      </div>
+      <div className={styles.sidebar}>{genLinks(selected)}</div>
     </>
   );
 };
 
-
 export default Sidebar;
+

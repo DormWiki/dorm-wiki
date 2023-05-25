@@ -11,7 +11,7 @@
   padding-bottom: .5vw;
   display: inline-block;
   font-size: 30px;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   line-height: 10px;
@@ -27,7 +27,7 @@
   margin-right: 67px;
   padding-top: 67px;
   margin-left: 67;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -44,7 +44,7 @@
   margin-top: 1.5vw;
   margin-bottom: 1.5vw;
   font-size: 14px;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 200;
   line-height: 24px;
@@ -62,12 +62,37 @@
   height: auto;
 }
 
-.form_wrapper {
-  width: 30%;
+.title_right {
+  padding-bottom: .5vw;
   display: inline-block;
-  margin-left: 3vw;
+  font-size: 30px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 8px;
+}
+
+.top_wrapper {
+  display: flex;
+  justify-content: stretch;
+}
+
+.submit_event_wrapper {
+  margin-top: 4.5vh;
+  margin-left: 0;
+  width: 35%;
+}
+
+.form_fields_wrapper {
   margin-top: 2vh;
   margin-bottom: 2vh;
+  margin-right: 4vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel_wrapper {
+  width: 70%;
 }
 
 .field input {
@@ -90,7 +115,7 @@
   margin-bottom: 1.5vh;
   resize: vertical;
   overflow-y: scroll;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -101,7 +126,7 @@
 .submit_button {
   padding: 10px;
   border-radius: 6px;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -109,7 +134,6 @@
 
 .submit_button:hover {
   background-color: var(--uw-gold);
-  opacity: 75%;
 }
 
 .right {
@@ -117,11 +141,10 @@
 }
 
 .event .subtitle {
-  font-size: 17px;
   font-weight: 400;
-  margin-top: 5px;
-  font-size: smaller;
-  color: gray;
+  margin-top: .5vh;
+  font-size: medium;
+  color: #7a7a7a;
   text-decoration: none;
 }
 

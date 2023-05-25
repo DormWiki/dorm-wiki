@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { getWiki } from "./api/wiki";
+import { cleanName } from "@/misc";
 
 import styles from "@/styles/Home.module.css";
 import wiki from "@/styles/Wiki.module.css";
@@ -69,7 +70,6 @@ function genDorms(info, sort) {
             >
               <Link href={`/wiki/dorms/${dorm["_id"]}`}>
                 <img fill={true} alt={`front picture of ${cleanName(dorm["_id"])}`} src={`/${name}/${name}-1.jpg`}/>
-                
                 {cleanName(dorm["_id"])}
               </Link>
             </div>
@@ -80,18 +80,6 @@ function genDorms(info, sort) {
   return arr;
 }
 
-// idk
-function sortCards(sort) {
-  let items = document.querySelectorAll("section div div");
-  items.forEach((item) => {
-    let name = item.firstChild.innerText.split("-").join(" ").toLowerCase();
-    console.log(name);
-    if (SORTS[sort].indexOf(name) === -1) {
-      item.classList.add(wiki.hidden);
-    }
-  });
-}
-
 export async function getServerSideProps() {
   const info = await getWiki();
   return {
@@ -99,16 +87,4 @@ export async function getServerSideProps() {
       info,
     },
   };
-}
-
-// changes aaaa-aaaa to Aaaa Aaaa
-function cleanName(string) {
-  let str = string.split("-");
-  str.forEach((string, i) => {
-    str[i] = string.charAt(0).toUpperCase() + string.slice(1);
-    if (string === "mcmahon" || string == "mccarty") {
-      str[i] = str[i].slice(0, 2) + str[i].charAt(2).toUpperCase() + str[i].slice(3);
-    }
-  });
-  return str.join(" ");
 }
