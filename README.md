@@ -58,7 +58,7 @@ If you want to contribute to our project, here are some details you may find use
 - ~~server: Contains all of the code for the back end (http request, etc.)~~
 	- ~~Server.js: contains the API endpoints~~
 ## To Add New Tests
-Go to  site/e2e/.
+Go to  site/cypress/e2e/testing.
 
 Create a test named by the component you want to test using camelCase notation and ending with Test.cy.js (e.g. postSingleEventTest.cy.js).
 
