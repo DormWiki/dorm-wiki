@@ -3,8 +3,21 @@
   margin-left: 100px;
 }
 
+.top_wrapper {
+  display: flex;
+  justify-content: stretch;
+}
+
 #carousel img {
   height: 400px;
+}
+
+.carousel_wrapper {
+  width: 70%;
+}
+
+.summary {
+  width: 30%;
 }
 
 .description, .review_box, .content, .review, .wiki_grid {
@@ -20,8 +33,7 @@
 }
 
 .description {
-  
-  width: 40%;
+  width: 100%;
 }
 
 .description p {
@@ -48,7 +60,7 @@
   margin-right: 10%;
   padding-top: 7vh;
   padding-left: 10%;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -118,7 +130,7 @@
   border-bottom: 1px solid black;
   background-color: transparent;
   font-size: 16px;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   margin-top: 5px;
 }

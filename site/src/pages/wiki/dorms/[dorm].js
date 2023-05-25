@@ -81,10 +81,16 @@ export default function Wiki( {info, images} ) {
         <Navbar />
         <Sidebar selected={dorm} />
         <section className={wiki.content}>
-          <CustomCarousel paths={images} />
-          <div className={wiki.description}>
-            <h3> Information </h3>
-            <p>{info[0]["info"]["description"]}</p>
+          <div className={wiki.top_wrapper}>
+            <div className={wiki.carousel_wrapper}>
+              <CustomCarousel paths={images} />
+            </div>
+            <div className={wiki.summary}>
+              <div className={wiki.description}>
+                <h3> Information </h3>
+                <p>{info[0]["info"]["description"]}</p>
+              </div>
+            </div>
           </div>
           <span className={wiki.review_box}>
             <div className={`${wiki.review} ${wiki.review_form}`}>

@@ -83,11 +83,44 @@ export default function Home({ info }) {
           </div>
           <div className={styles.search_wrapper}>
             <ReactSearchBox
-              placeholder="Search..."
+              placeholder="Search for a dorm"
               value=""
               data={options}
               onSelect={handleSubmit}
             />
+          </div>
+          <div className={styles.full_span}>
+            <div className={styles.standout}>
+              <h2><i>Finding the perfect dorm has never been simpler.</i></h2>
+            </div>
+            <p>
+            Choosing a dorm can be overwhelming. We've gathered dorm information and condensed
+            it down to just the essentials help you determine which dorm(s) will suit you best. 
+            Get started by searching for a dorm.
+            </p>
+            <div className={styles.standout}>
+              <h2>Submit reviews</h2>
+            </div>
+            <img
+                style={{ height: "125px", width: "125px"}}
+                src="/write.png"
+            ></img>
+            <p>
+              Had a particularly good/bad experience at a dorm? Help others learn more about
+              a dorm by writing a review.
+            </p>
+            <div className={styles.standout}>
+              <h2>Find events</h2>
+            </div>
+            <img
+                style={{ height: "70px", width: "150px"}}
+                src="/banner.png"
+            ></img>
+            <p>
+              There are always plenty of great events going on, but it can be hard to remember which event
+              is happening when and where. We've centralized all the upcoming event information so it
+              is easy to plan ahead.
+            </p>
           </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
@@ -125,7 +158,6 @@ function genCards(events) {
   });
   return arr;
 }
-
 
 export async function getStaticProps() {
   const info = await getEvent();

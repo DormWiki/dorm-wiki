@@ -7,11 +7,11 @@
 .title {
   width: 100%;
   margin-top: 5vh;
-  margin-left: 2vw;
+  margin-left: 3vw;
   padding-bottom: .5vw;
   display: inline-block;
   font-size: 30px;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 600;
   line-height: 10px;
@@ -25,8 +25,7 @@
   height: 100%;
   width: 100%;
   padding-top: 5vh;
-  margin-left: 2vw;
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -39,20 +38,29 @@
   margin-top: 2vh;
 }
 
-.button button {
-  padding: 10px;
-  margin-right: 6vw;
+.save_button button {
+  margin-right: 4vw;
   border-radius: 4px;
+  border-radius: 6px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  height: auto;
+}
+
+.save_button button:hover {
+  background-color: var(--uw-gold);
 }
 
 .p {
+  margin-top: 2vh;
   margin-bottom: 1vh;
   font-size: 16px;
 }
 
 .subtitle {
-  font-size: smaller;
-  color: gray;
+  font-size: medium;
   text-decoration: none;
-  margin-bottom: 1vh;
+  margin-bottom: .75vh;
 }

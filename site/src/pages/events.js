@@ -62,66 +62,70 @@ export default function Events({ events_info, images }) {
       <main className={events.main}>
         <div className={events.content}>
           <h2 className={events.title}>Trending</h2>
-          <div className={events.top}>
-            <CustomCarousel paths={images} />
-            <h2 className={events.title}>Submit an Event</h2>
-            <div className={events.form_wrapper}>
-              <form
-                method="post"
-                action="https://dorm-wiki.vercel.app/api/event"
-              >
-                <div>
-                  <label className={events.field}>
-                    Event title:
-                    <input type="text" name="name" required />
-                  </label>
-                </div>
-                <div>
-                  <label className={events.field}>
-                    Organizer:
-                    <input type="text" name="organizer" required />
-                  </label>
-                </div>
-                <div>
-                  <label className={events.field}>
-                    Location:
-                    <input type="text" name="location" required />
-                  </label>
-                </div>
-                <input
-                  type="hidden"
-                  name="postDate"
-                  value={new Date().toISOString()}
-                />
-                <div>
-                  <label className={events.field}>
-                    Dorm:
-                    <input type="text" name="dorm_id" required />
-                  </label>
-                </div>
-                <div>
-                  <label className={events.field}>
-                    Date & Time:
-                    <input type="datetime-local" name="startTime" required />
-                  </label>
-                </div>
-                <div>
-                  <label className={events.field}>
-                    Event description:
-                    <div className={events.textarea}>
-                        <textarea type="text" name="text" required/>
+            <div className={events.top_wrapper}>
+              <div className={events.carousel_wrapper}>
+                <CustomCarousel paths={images} />
+              </div>
+              <div className={events.submit_event_wrapper}>
+                <h2 className={events.title_right}>Submit an Event</h2>
+                <div className={events.form_fields_wrapper}>
+                  <form
+                    method="post"
+                    action="https://dorm-wiki.vercel.app/api/event"
+                  >
+                    <div>
+                      <label className={events.field}>
+                        Event title:
+                        <input type="text" name="name" required />
+                      </label>
                     </div>
-                </label>
+                    <div>
+                      <label className={events.field}>
+                        Organizer:
+                        <input type="text" name="organizer" required />
+                      </label>
+                    </div>
+                    <div>
+                      <label className={events.field}>
+                        Location:
+                        <input type="text" name="location" required />
+                      </label>
+                    </div>
+                    <input
+                      type="hidden"
+                      name="postDate"
+                      value={new Date().toISOString()}
+                    />
+                    <div>
+                      <label className={events.field}>
+                        Dorm:
+                        <input type="text" name="dorm_id" required />
+                      </label>
+                    </div>
+                    <div>
+                      <label className={events.field}>
+                        Date & Time:
+                        <input type="datetime-local" name="startTime" required />
+                      </label>
+                    </div>
+                    <div>
+                      <label className={events.field}>
+                        Event description:
+                        <div className={events.textarea}>
+                            <textarea type="text" name="text" required/>
+                        </div>
+                    </label>
+                </div>
+                <div>
+                    <label className={events.field}>Images:</label>
+                </div>
+                <div className={events.fileupload_wrapper}>
+                  <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+                </div>
+                <input className={events.submit_button} type="submit" id="submit" value="Submit"/>
+                </form>
+              </div>
             </div>
-            <div>
-                <label className={events.field}>Images:</label>
-            </div>
-            <div className={events.fileupload_wrapper}>
-              <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
-            </div>
-            <input className={events.submit_button} type="submit" id="submit" value="Submit"/>
-            </form>
-          </div>
           </div>
           <h2 className={events.title}>Upcoming</h2>
           {events_arr}
