@@ -547,6 +547,16 @@
   }
 }
 
+.footer {
+  height: 10vh;
+  width: 100%;
+  font-size: smaller;
+  text-align: center;
+  line-height: 10vh;
+  color: white;
+  background-color: var(--uw-purple);
+}
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
