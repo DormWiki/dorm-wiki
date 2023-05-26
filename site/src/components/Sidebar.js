@@ -26,7 +26,6 @@ let DORMS = [
 const genLinks = (select) => {
   let ret = [];
   DORMS.forEach((dorm) => {
-    console.log(dorm + " " + select);
     if(dorm === select) {
       ret.push(
         <>

@@ -34,6 +34,7 @@
 
 .description {
   width: 100%;
+  height: 80%;
 }
 
 .description p {
@@ -80,26 +81,7 @@
 }
 
 .review_form {
-  height: 30vh;
-}
-
-.success {
-  background-color: green;
-  height: 0px;
-  transition: 
-    background-color 0.2s,
-    height 0.5s;
-  transition-delay: 0s, 0.25s, 0.75s;
-}
-
-.review_submitted {
-  width: 75%;
-  overflow: hidden;
-  border-radius: 20px; 
-}
-
-.review_submitted .review_input, .review_submitted .review_rating {
-  display: none;
+  min-height: 30vh;
 }
 
 .review input {
@@ -230,4 +212,8 @@
   word-wrap: break-word;
   max-width: 80%;
   width: 40vw;
+}
+
+.average {
+  margin-top: auto;
 }

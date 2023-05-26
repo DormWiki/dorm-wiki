@@ -24,6 +24,7 @@ export default function Wiki( {info, images} ) {
   const dorm = router.query.dorm;
   let data = info[0];
   let reviews = genReviews(data["review"]);
+  let avg = getAverage(data["review"]);
 
   // all of this because I am too lazy to make my own star ratings or just encapsulate it in its own component
   let types = ["enviornment", "food", "walkability", "safety"];
@@ -59,14 +60,10 @@ export default function Wiki( {info, images} ) {
     });
     const res = await response.status;
     if (res === 200) {
-     event.target.parentNode.parentNode.className =
-       wiki.review_submitted + " " + wiki.success;
+      router.reload(window.location.pathname);
     } else {
      router.push("/500");
     }
-    setTimeout(() => {
-     router.reload(window.location.pathname);
-    }, 750);
     
   };
 
@@ -88,7 +85,10 @@ export default function Wiki( {info, images} ) {
             <div className={wiki.summary}>
               <div className={wiki.description}>
                 <h3> Information </h3>
-                <p>{info[0]["info"]["description"]}</p>
+                <p>{data["info"]["description"]}</p>
+                <div className={wiki.average}>
+                  {avg}
+                </div>
               </div>
             </div>
           </div>
@@ -182,6 +182,32 @@ export default function Wiki( {info, images} ) {
       </main>
     </>
   );
+}
+
+
+function getAverage(reviews) {
+  let avg = {
+    Overall: 0,
+    Enviornment: 0,
+    Food: 0,
+    Walkability: 0,
+    Safety: 0
+  }
+  reviews.forEach((r) => {
+    avg.Overall += averageReview(r["rating"]);
+    avg.Enviornment += r["rating"].enviornment;
+    avg.Food += r["rating"].food;
+    avg.Walkability += r["rating"].walkability;
+    avg.Safety += r["rating"].safety;
+  })
+
+  avg.Overall = avg.Overall / reviews.length;
+  avg.Enviornment = avg.Enviornment / reviews.length;
+  avg.Food = avg.Food / reviews.length;
+  avg.Walkability = avg.Walkability / reviews.length;
+  avg.Safety = avg.Safety / reviews.length;
+
+  return <ReviewBar data={avg}/>
 }
 
 
