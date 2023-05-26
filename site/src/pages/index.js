@@ -13,6 +13,7 @@ import ReactSearchBox from "react-search-box";
 import { formatDate } from "@/misc";
 import confetti from "canvas-confetti";
 import Likebutton from "@/components/Likebutton";
+import Footer from "@/components/Footer";
 
 import styles from "@/styles/Home.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -128,6 +129,7 @@ export default function Home({ info }) {
           </div>
         </div>
       </main>
+      <Footer/>
     </>
   );
 }
