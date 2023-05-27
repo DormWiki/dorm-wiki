@@ -142,19 +142,25 @@ function genCards(events) {
   events.forEach((event, i) => {
     arr.push(
       <>
-        <div key={i} className={styles.event_deck}>
-          <img src="/events/events1.jpg"></img>
-          <h2>{event["name"]}</h2>
-          <h4>{event["location"]}</h4>
-          <div className={styles.event_deck_button_container}>
-            <Likebutton />
-            <Link
-              href={`/events/${event["_id"]}`}
-              className={`${styles.event_button} ${styles.goto}`}
-            ></Link>
+        <Link className={styles.event_link} href={`/events/${event["_id"]}`}>
+          <div key={i} className={styles.event_deck}>
+            <img src="/events/events1.jpg"></img>
+            <h2>{event["name"]}</h2>
+            <h4>{event["location"]}</h4>
+            <div className={styles.event_deck_button_container}>
+              <div
+                className={styles.no_link}
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                <Likebutton id={event["_id"]} />
+              </div>
+              {event["likes"] === undefined ? 0 : event["likes"]}
+            </div>
+            <h3>{formatDate(event["startTime"], true)}</h3>
           </div>
-          <h3>{formatDate(event["startTime"], true)}</h3>
-        </div>
+        </Link>
       </>
     );
   });

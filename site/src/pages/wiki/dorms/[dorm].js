@@ -86,7 +86,11 @@ export default function Wiki( {info, images} ) {
               <div className={wiki.description}>
                 <h3> Information </h3>
                 <p>{data["info"]["description"]}</p>
+
                 <div className={wiki.average}>
+                  <hr />
+                  <h3>Reviews</h3>
+                  <br/>
                   {avg}
                 </div>
               </div>
@@ -121,7 +125,9 @@ export default function Wiki( {info, images} ) {
                     required
                   />
                   <br />
-                  <p id="max_chars" className={wiki.char_count}>0/300</p>
+                  <p id="max_chars" className={wiki.char_count}>
+                    0/300
+                  </p>
                   <input
                     type="hidden"
                     name="date"
@@ -200,13 +206,14 @@ function getAverage(reviews) {
     avg.Walkability += r["rating"].walkability;
     avg.Safety += r["rating"].safety;
   })
-
-  avg.Overall = avg.Overall / reviews.length;
-  avg.Enviornment = avg.Enviornment / reviews.length;
-  avg.Food = avg.Food / reviews.length;
-  avg.Walkability = avg.Walkability / reviews.length;
-  avg.Safety = avg.Safety / reviews.length;
-
+  if (reviews.length !== 0) {
+    avg.Overall = avg.Overall / reviews.length;
+    avg.Enviornment = avg.Enviornment / reviews.length;
+    avg.Food = avg.Food / reviews.length;
+    avg.Walkability = avg.Walkability / reviews.length;
+    avg.Safety = avg.Safety / reviews.length;
+  }
+  console.log(avg);
   return <ReviewBar data={avg}/>
 }
 

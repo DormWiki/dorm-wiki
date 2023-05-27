@@ -2,10 +2,10 @@ import styles from '@/styles/Likebutton.module.css';
 import React, { useState } from "react";
 import confetti from "canvas-confetti";
 
-const Likebutton = () => {
+const Likebutton = ( {id} ) => {
   const [isSelected, setSelected] = useState(false);
 
-  const toggleSelect = (event) => {
+  const toggleSelect = async (event) => {
     setSelected(!isSelected);
     if (!isSelected) {
       let canvas = event.target.getBoundingClientRect();
@@ -18,13 +18,18 @@ const Likebutton = () => {
           y: canvas.top / window.innerHeight,
         },
       });
+    await fetch(`/events/${id}/like`, {method: 'POST'});
+    } else {
+      await fetch(`/events/${id}/like`, {method: 'DELETE'});
     }
   };
 
   return (
     <>
       <button
-        onClick={toggleSelect}
+        onClick={(e)=> {
+          toggleSelect(e);
+        }}
         className={
           isSelected
             ? `${styles.event_button} ${styles.like} ${styles.clicked}`

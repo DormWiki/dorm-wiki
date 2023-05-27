@@ -186,6 +186,10 @@
   height: auto;
 }
 
+
+.event_link {
+  color: black !important;
+}
 .event_deck {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -195,15 +199,18 @@
   height: 50vh;
   width: 18vw;
   border-radius: 15px;
+  transition: 0.2s;
 }
 
 .event_deck:hover {
-
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.005);
 }
 
 .event_deck_button_container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 70%;
 }
 
@@ -299,16 +306,22 @@
 .navbar li {
   float: left;
   height: 7vh;
+  line-height: 7vh;
 }
 
  .navbar li a {
   font-size: 20px;
   display: block;
-  padding: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .navbar li a:hover {
   color: var(--uw-gold);
+}
+
+.no_link {
+  height: 6vh;
 }
 
 .description {
@@ -409,22 +422,28 @@
 }
 
 .dropdown {
+  line-height: 24px;
   position: relative;
   display: inline-block;
-  transition: ease-out 0.25s;
+}
+
+.dropdown_text a {
+  padding: 20px;
+  font-size: 16px;
 }
 
 .dropdown:hover .dropdown_text {
-  height: 376px;
+  display: block;
 }
 
 .dropdown_text {
   text-align: left;
   overflow: hidden;
-  height: 0;
-  transition: height 0.3s;
+  height: auto;
+  display: none;
   background-color: var(--uw-purple);
   position: absolute;
+  padding-top: 20px;
 }
 
 .full_span {
