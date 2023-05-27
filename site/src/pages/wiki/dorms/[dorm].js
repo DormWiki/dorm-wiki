@@ -9,13 +9,13 @@ import ReactStars from "react-stars";
 import CustomCarousel from "../../../components/Carousel";
 import Navbar from  "../../../components/Navbar";
 import Sidebar from "../../../components/Sidebar"
-import styles from '@/styles/Home.module.css'
-
-import wiki from '@/styles/Wiki.module.css';
+import Footer from "@/components/Footer";
 import path from "path";
 import ReviewBar from "@/components/ReviewBar";
-
 import { getWiki } from '@/pages/api/wiki';
+
+import styles from '@/styles/Home.module.css'
+import wiki from '@/styles/Wiki.module.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
@@ -186,6 +186,7 @@ export default function Wiki( {info, images} ) {
           </span>
         </section>
       </main>
+      <Footer/>
     </>
   );
 }

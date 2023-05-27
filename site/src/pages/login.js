@@ -7,6 +7,7 @@ import Link from "next/link";
 import { redirect } from 'next/navigation';
 import Navbar from "../components/Navbar";
 import GoogleButton from '../components/GoogleButton';
+import Footer from "@/components/Footer";
 
 import styles from "@/styles/Home.module.css";
 import login from '@/styles/Login.module.css';
@@ -29,6 +30,7 @@ export default function Login() {
           </div>
         </div>
       </main>
+      <Footer/>
     </>
   );
 }

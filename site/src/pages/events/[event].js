@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { getEvent } from '../api/event';
 import Link from "next/link";
 import Navbar from '@/components/Navbar';
+import Footer from "@/components/Footer";
 
 import event from '@/styles/Event.module.css';
 
@@ -61,6 +62,7 @@ export  default function Event({ info, id }) {
           </div>
         </section>
       </main>
+      <Footer/>
   </>
 );
 }
