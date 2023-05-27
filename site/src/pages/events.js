@@ -41,6 +41,7 @@ function getUpcomingEvents(events_info) {
           </span>
         );
     });
+    
     return events_arr;
 }
 

@@ -50,7 +50,7 @@ const genLinks = (select) => {
 const Sidebar = ({selected}) => {
   return (
     <>
-      <div className={styles.sidebar}>{genLinks(selected)}</div>
+      <div key={0} className={styles.sidebar}>{genLinks(selected)}</div>
     </>
   );
 };

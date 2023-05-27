@@ -1,7 +1,7 @@
 import DOMPurify from 'isomorphic-dompurify';
 import ClientPromise from "@/lib/mongodb";
 
-const URL = "https://localhost:5050";
+// const URL = "https://localhost:5050";
 
 // Handling event calls
 // GET: 
@@ -39,14 +39,17 @@ export default async function handler(req, res) {
 	} else { // POST CALL
 		const count = await collection.countDocuments();
 		const body = req.body;
+		// Create a new event object to be inserted into the Dorm and Event table
 		let newEvent = {
 			_id: (count + 1),
 			name: DOMPurify.sanitize(body.name),
 			startTime: DOMPurify.sanitize(body.startTime),
+			description: DOMPurify.sanitize(body.description),
 			postDate: DOMPurify.sanitize(body.postDate),
 			dorm_id: DOMPurify.sanitize(body.dorm_id),
 			location: DOMPurify.sanitize(body.location),
-			organizer: DOMPurify.sanitize(body.organizer)
+			organizer: DOMPurify.sanitize(body.organizer),
+			poster: DOMPurify.sanitize(body.poster)
 		}
 		try{
 			const dorm = await db.collection('Dorm');
