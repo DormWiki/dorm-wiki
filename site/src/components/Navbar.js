@@ -2,10 +2,30 @@
  import { useRouter } from "next/router";
 
  import styles from "@/styles/Home.module.css";
+ import { useSession, signIn, signOut } from "next-auth/react";
 
+async function checkLogin(data) {
+  console.log(data);
+  if(data) {
+    return (
+    <>
+      <img src={await data.user.image} alt={`profile picture for ${data.user.name}`}/>
+    </>
+    )
+  } else {
+    return (
+      <>
+        <button type="button" onClick={() => router.push("/login")}>
+          Login
+        </button>
+      </>
+    );
+  }
+}
 
  const Navbar = () => {
-  const router = useRouter();
+  const { data: session } = useSession();
+  const picture = checkLogin(session);
   return (
     <>
       <div className={styles.navbar_logo_wrapper}>
@@ -45,9 +65,8 @@
           <li>
             <Link href="/about">About</Link>
           </li>
-          <button type="button" onClick={() => router.push("/login")}>
-            Login
-          </button>
+          {picture}
+
         </ul>
       </div>
     </>
