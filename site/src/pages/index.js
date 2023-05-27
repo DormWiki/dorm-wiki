@@ -1,23 +1,23 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import Link from 'next/link'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import Link from "next/link";
 import React, { useState } from "react";
-import Events from './events';
+import Events from "./events";
 import getInfo from "./events.js";
 import { Component } from "react";
 import { useRouter } from "next/router";
 import CustomCarousel from "../components/Carousel";
-import Navbar from '@/components/Navbar';
+import Navbar from "@/components/Navbar";
 import ReactSearchBox from "react-search-box";
+import { formatDate } from "@/misc";
+import confetti from "canvas-confetti";
+import Likebutton from "@/components/Likebutton";
 
-import styles from '@/styles/Home.module.css'
+import styles from "@/styles/Home.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { getEvent } from './api/event'
-
-
-const URL = 'http://localhost:5050';
 
 export const BLDGS = [
   "Alder Hall",
@@ -39,34 +39,31 @@ export const BLDGS = [
   "Nordheim Court",
   "Radford Court",
   "Blakely Village",
-  "Laural Village"
+  "Laural Village",
 ];
 
 function getSearchOptions() {
-    var options = [];
-    BLDGS.forEach((name) => {
-      options.push(
-        {key: name, value: name}
-      );
-    });
-    return options;
+  var options = [];
+  BLDGS.forEach((name) => {
+    options.push({ key: name, value: name });
+  });
+  return options;
 }
 
-
-export default function Home( {info} ) {
+export default function Home({ info }) {
   const router = useRouter();
+
   const events = info.slice(0, 4);
   const options = getSearchOptions();
-  
+
   const handleSubmit = (value) => {
     if (value != undefined) {
-      console.log(value);
       const bld = "" + value.item.key.toLowerCase();
       let code = bld.replace(" ", "-");
-      console.log(code);
       router.push(`/wiki/dorms/${code}`);
     }
   };
+
   return (
     <>
       <Head>
@@ -86,18 +83,48 @@ export default function Home( {info} ) {
           </div>
           <div className={styles.search_wrapper}>
             <ReactSearchBox
-              placeholder="Search..."
+              placeholder="Search for a dorm"
               value=""
               data={options}
               onSelect={handleSubmit}
             />
           </div>
+          <div className={styles.full_span}>
+            <div className={styles.standout}>
+              <h2><i>Finding the perfect dorm has never been simpler.</i></h2>
+            </div>
+            <p>
+            Choosing a dorm can be overwhelming. We've gathered dorm information and condensed
+            it down to just the essentials help you determine which dorm(s) will suit you best. 
+            Get started by searching for a dorm.
+            </p>
+            <div className={styles.standout}>
+              <h2>Submit reviews</h2>
+            </div>
+            <img
+                style={{ height: "125px", width: "125px"}}
+                src="/write.png"
+            ></img>
+            <p>
+              Had a particularly good/bad experience at a dorm? Help others learn more about
+              a dorm by writing a review.
+            </p>
+            <div className={styles.standout}>
+              <h2>Find events</h2>
+            </div>
+            <img
+                style={{ height: "70px", width: "150px"}}
+                src="/banner.png"
+            ></img>
+            <p>
+              There are always plenty of great events going on, but it can be hard to remember which event
+              is happening when and where. We've centralized all the upcoming event information so it
+              is easy to plan ahead.
+            </p>
+          </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
           <div className={styles.upcoming_events}>
-            <div className={styles.event_deck}>{events[0]["_id"]}</div>
-            <div className={styles.event_deck}>{events[1]["_id"]}</div>
-            <div className={styles.event_deck}>{events[2]["_id"]}</div>
-            <div className={styles.event_deck}>{events[3]["_id"]}</div>
+            {genCards(events)}
           </div>
         </div>
       </main>
@@ -105,13 +132,38 @@ export default function Home( {info} ) {
   );
 }
 
+function genCards(events) {
+  let arr = [];
+  const handleClick = (value) => {
+    ;
+  };
+  events.forEach((event, i) => {
+    arr.push(
+      <>
+        <div key={i} className={styles.event_deck}>
+          <img src="/events/events1.jpg"></img>
+          <h2>{event["name"]}</h2>
+          <h4>{event["location"]}</h4>
+          <div className={styles.event_deck_button_container}>
+            <Likebutton />
+            <Link
+              href={`/events/${event["_id"]}`}
+              className={`${styles.event_button} ${styles.goto}`}
+            ></Link>
+          </div>
+          <h3>{formatDate(event["startTime"], true)}</h3>
+        </div>
+      </>
+    );
+  });
+  return arr;
+}
 
 export async function getStaticProps() {
   const info = await getEvent();
   return {
     props: {
       info,
-    }, // will be passed to the page component as props
+    },
   };
 }
-

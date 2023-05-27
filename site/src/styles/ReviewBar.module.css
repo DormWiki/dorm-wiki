@@ -1,0 +1,17 @@
+.in {
+    height: 4vh;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    font-size: smaller;
+    padding: 2px;
+    margin-bottom: 2px;
+}
+
+.right {
+    padding-left: au    to;
+}
+
+.in li::marker{
+    display: none;
+}

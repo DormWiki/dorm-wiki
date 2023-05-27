@@ -1,7 +1,6 @@
 import DOMPurify from "isomorphic-dompurify";
 import ClientPromise from "@/lib/mongodb";
 
-// const URL = "https://localhost:5050";
 
 // handling all the review calls
 // POST:
@@ -18,8 +17,8 @@ export default async function handler(req, res) {
       user: DOMPurify.sanitize(body.user),
       text: DOMPurify.sanitize(body.text),
       date: DOMPurify.sanitize(body.date),
-      rating: DOMPurify.sanitize(body.rating),
-      poster: DOMPurify.sanitize(body.poster)
+      rating: body.rating,
+      poster: body.poster
     };
     const result = await collection.updateOne(
       { _id: req.body.ID },

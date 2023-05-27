@@ -16,6 +16,7 @@
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0",
     "react": "^18.2.0",
+    "react-canvas-confetti": "^1.4.0",
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-search-box": "^3.0.0",
@@ -37,6 +38,6 @@
     "start": "npm run start --prefix site/",
     "lint": "npm run lint --prefix site/",
     "all": "concurrently \"npm run data\" \"npm run dev\"",
-    "v": "npm install && cd site && npm install && cd ../server && npm install"
+    "v": "npm install && cd site &&  npm install && cd ../server && npm install"
   }
 }

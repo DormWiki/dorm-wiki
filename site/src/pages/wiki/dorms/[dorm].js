@@ -1,8 +1,8 @@
-import Head from 'next/head';
-import React, { useState } from 'react';
+import Head from "next/head";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
+import Image from "next/image";
+import { Inter } from "next/font/google";
 import Link from "next/link";
 import Error from "next/error";
 import ReactStars from "react-stars";
@@ -13,10 +13,10 @@ import styles from '@/styles/Home.module.css'
 
 import wiki from '@/styles/Wiki.module.css';
 import path from "path";
+import ReviewBar from "@/components/ReviewBar";
 
 import { getWiki } from '@/pages/api/wiki';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
 
 
 export default function Wiki( {info, images} ) {
@@ -25,52 +25,72 @@ export default function Wiki( {info, images} ) {
   let data = info[0];
   let reviews = genReviews(data["review"]);
 
+  // all of this because I am too lazy to make my own star ratings or just encapsulate it in its own component
+  let types = ["enviornment", "food", "walkability", "safety"];
+  let ratings = { 'enviornment' : 0, 'food' : 0, 'walkability' : 0, 'safety' : 0};
+  const changeRating = (r, i) => {
+    ratings[types[i]] = r;
+  };
+
+  const changeChars = (event) => {
+    let count = event.target.value.length;
+    let max = document.getElementById("max_chars");
+    max.innerText = `${count}/300`;
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {
       title: event.target.title.value,
       user: event.target.user.value,
       date: event.target.date.value,
-      rating: event.target.rating.value,
+      rating: ratings,
       text: event.target.text.value,
       ID: event.target.ID.value,
     };
-
-
-    const response = await fetch("http://localhost:3000/api/review", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      next: { revalidate: 1 },
+    
+    const response = await fetch("/api/review", {
+     method: "POST",
+     body: JSON.stringify(data),
+     headers: {
+       "Content-Type": "application/json",
+     },
+     next: { revalidate: 1 },
     });
     const res = await response.status;
     if (res === 200) {
-      event.target.parentNode.parentNode.className = wiki.review_submitted + " " + wiki.success;
+     event.target.parentNode.parentNode.className =
+       wiki.review_submitted + " " + wiki.success;
     } else {
-      router.push("/500");
+     router.push("/500");
     }
     setTimeout(() => {
-       router.reload(window.location.pathname);
+     router.reload(window.location.pathname);
     }, 750);
+    
   };
 
   return (
     <>
       <Head>
-        <title>{dorm}</title>
+        <title>{cleanName(dorm)}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
       <main className={styles.main}>
         <Navbar />
-        <Sidebar />
+        <Sidebar selected={dorm} />
         <section className={wiki.content}>
-          <CustomCarousel paths={images} />
-          <div className={wiki.description}>
-            <h3> Information </h3>
-            <p>{info[0]["info"]["description"]}</p>
+          <div className={wiki.top_wrapper}>
+            <div className={wiki.carousel_wrapper}>
+              <CustomCarousel paths={images} />
+            </div>
+            <div className={wiki.summary}>
+              <div className={wiki.description}>
+                <h3> Information </h3>
+                <p>{info[0]["info"]["description"]}</p>
+              </div>
+            </div>
           </div>
           <span className={wiki.review_box}>
             <div className={`${wiki.review} ${wiki.review_form}`}>
@@ -96,20 +116,16 @@ export default function Wiki( {info, images} ) {
                     placeholder="Review"
                     type="text"
                     name="text"
+                    maxLength="300"
+                    onChange={changeChars}
                     required
                   />
+                  <br />
+                  <p id="max_chars" className={wiki.char_count}>0/300</p>
                   <input
                     type="hidden"
                     name="date"
                     value={new Date().toISOString()}
-                  />
-                  <input
-                    id="rating"
-                    type="hidden"
-                    name="rating"
-                    min="0"
-                    max="5"
-                    required
                   />
                   <input type="hidden" name="ID" value={dorm} />
                   <br />
@@ -117,12 +133,45 @@ export default function Wiki( {info, images} ) {
                 </form>
               </div>
               <div className={wiki.review_rating}>
+                <label>Enviorment</label>
                 <ReactStars
                   edit={true}
                   starCount={5}
                   size={36}
                   color2={"#ffd700"}
-                  onChange={changeRating}
+                  onChange={(r) => {
+                    changeRating(r, 0);
+                  }}
+                />
+                <label>Food</label>
+                <ReactStars
+                  edit={true}
+                  starCount={5}
+                  size={36}
+                  color2={"#ffd700"}
+                  onChange={(r) => {
+                    changeRating(r, 1);
+                  }}
+                />
+                <label>Walkability</label>
+                <ReactStars
+                  edit={true}
+                  starCount={5}
+                  size={36}
+                  color2={"#ffd700"}
+                  onChange={(r) => {
+                    changeRating(r, 2);
+                  }}
+                />
+                <label>Safety</label>
+                <ReactStars
+                  edit={true}
+                  starCount={5}
+                  size={36}
+                  color2={"#ffd700"}
+                  onChange={(r) => {
+                    changeRating(r, 3);
+                  }}
                 />
               </div>
             </div>
@@ -135,10 +184,7 @@ export default function Wiki( {info, images} ) {
   );
 }
 
-function changeRating(r) {
-  let rating = document.getElementById("rating");
-  rating.value = r;
-}
+
 
 function genReviews(reviews) {
   let rev_html = [];
@@ -150,17 +196,20 @@ function genReviews(reviews) {
           <h3 className={wiki.subtitle}>
             {new Date(r["date"]).toLocaleDateString()}
           </h3>
-          <h3>short title missing</h3>
-          <p>{r["text"]}</p>
+          <h3>{r["title"]}</h3>
+          <p style={{overflow: 'hidden'}}>{r["text"]}</p>
         </div>
         <div className={wiki.review_rating}>
           <ReactStars
             edit={false}
             starCount={5}
-            value={parseFloat(r["rating"])}
+            value={averageReview((r["rating"]))}
             size={36}
             color2={"#ffd700"}
           />
+          <div>
+            <ReviewBar data={r["rating"]}/>
+          </div>
         </div>
       </div>
     );
@@ -179,21 +228,28 @@ function cleanName(string) {
   return str.join(" ");
 }
 
+function averageReview(data) {
+  let avg = 0;
+  for (const k in data) {
+    avg += data[k];
+  }
+  return avg / Object.entries(data).length;
+}
+
 export async function getStaticProps(context) {
   const pid = context.params.dorm;
   let info = await getWiki(pid);
-    
   if (Object.keys(info).length === 0) {
     return { notFound: true };
   }
-
   const fs = require("fs");
+  let dormName = cleanName(pid).split(" ").join("-");
 
-  const dir = path.resolve("./public", pid);
+  const dir = path.resolve(path.join(process.cwd(), "public", dormName));
 
   const filenames = fs.readdirSync(dir);
 
-  let dormName = cleanName(pid).split(" ").join("-");
+
   const images = filenames.map((name) =>
     path.join("/", dormName, name)
   );
@@ -219,7 +275,7 @@ export async function getStaticPaths() {
       "/wiki/dorms/madrona-hall",
       "/wiki/dorms/maple-hall",
       "/wiki/dorms/mccarty-hall",
-      "/wiki/dorms/mccahon-hall",
+      "/wiki/dorms/mcmahon-hall",
       "/wiki/dorms/oak-hall",
       "/wiki/dorms/poplar-hall",
       "/wiki/dorms/terry-hall",
