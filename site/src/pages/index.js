@@ -134,9 +134,6 @@ export default function Home({ info }) {
 
 function genCards(events) {
   let arr = [];
-  const handleClick = (value) => {
-    ;
-  };
   events.forEach((event, i) => {
     arr.push(
       <>

@@ -4,14 +4,19 @@
  import styles from "@/styles/Home.module.css";
  import { useSession, signIn, signOut } from "next-auth/react";
 
-async function checkLogin(data) {
-  console.log(data);
+function checkLogin(data) {
   if(data) {
     return (
-    <>
-      <img src={await data.user.image} alt={`profile picture for ${data.user.name}`}/>
-    </>
-    )
+      <>
+        <div className={styles.gmail_logo_wrapper}>
+          <img
+            className={styles.gmail_logo}
+            src={data.user.image}
+            alt={`profile picture for ${data.user.name}`}
+          />
+        </div>
+      </>
+    );
   } else {
     return (
       <>
