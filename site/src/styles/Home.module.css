@@ -354,6 +354,24 @@
   max-width: 100%;
 }
 
+.navbar .gmail_logo_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 7vh;
+}
+
+.navbar .gmail_logo {
+  border-radius: 10px;
+  height: 3.5vh !important;
+  width: auto !important;
+  margin: 0px;
+  padding: 0px;
+}
+
 .card {
   padding: 1rem 1.2rem;
   border-radius: var(--border-radius);

@@ -45,7 +45,6 @@ export default function Wiki({ info }) {
   const router = useRouter();
   const sort = router.query.dorm;
   let dormCards = genDorms(info, sort);
-  const {data: session} = useSession();
   return (
     <>
       <Navbar />
