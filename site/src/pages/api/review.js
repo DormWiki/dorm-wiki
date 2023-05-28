@@ -6,9 +6,9 @@ import ClientPromise from "@/lib/mongodb";
 // POST:
 // '/review': post single review to the given dorm
 export default async function handler(req, res) {
-  	let client = await ClientPromise;
-    let db = client.db("DormWiki");
-    let collection = await db.collection("Dorm");
+  let client = await ClientPromise;
+  let db = client.db("DormWiki");
+  let collection = await db.collection("Dorm");
   try {
     // Create new review object from request body
     const body = req.body;
@@ -18,6 +18,7 @@ export default async function handler(req, res) {
       text: DOMPurify.sanitize(body.text),
       date: DOMPurify.sanitize(body.date),
       rating: body.rating,
+      poster: body.poster
     };
     const result = await collection.updateOne(
       { _id: req.body.ID },

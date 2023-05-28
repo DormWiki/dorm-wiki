@@ -2,8 +2,8 @@
 DormWiki is a website designed to inform prospective/incoming students about various dorms on campus. It will summarize all the information students need to know about the dorm, helping them find the one that most suits their needs. The website also will help current students stay updated about events happening at their dorms, fostering a sense of community and belonging.
 
 ## Layout
-- site: Contains all of the code for the front end.
-- api: Contains all of the code for the api.
+- site: Contains all of the code for the front end and API.
+  - src/pages/api: contains the code for all API calls.
 - server: Contains all of the code for the back end (http request, etc.).
 - database: MongoDB
 ## Instructions for running the system
@@ -17,7 +17,7 @@ Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave
 - Wiki: shows the previews of the dorms; clicking the dorm types in the dropdown list filters the dorms
 	Dorm page: shows pictures, reviews/ratings for the dorm; ability for users to submit a review
 - About: understand the DormWiki’s purpose and goals, learn about the developers
-- Login: (eventually) user should sign in order to post an event and review
+- Login: user should sign in through Google to to post an event or a review
 
 ## Instructions for how to build and test the system.
 To run locally:
@@ -50,14 +50,15 @@ If you want to contribute to our project, here are some details you may find use
 ### Layout
 - site: next.js root folder:
 	- public: contains all public resources (mostly images)
-	- Src: front-end code
+	- src: front-end code
 		- Components: react components
 		- Pages: all of the next.js code for the web pages
 		- Styles: css
-- server: Contains all of the code for the back end (http request, etc.)
-	- Server.js: contains the API endpoints
+	- api: back-end code
+- ~~server: Contains all of the code for the back end (http request, etc.)~~
+	- ~~Server.js: contains the API endpoints~~
 ## To Add New Tests
-Go to  site/e2e/.
+Go to  site/cypress/e2e/testing.
 
 Create a test named by the component you want to test using camelCase notation and ending with Test.cy.js (e.g. postSingleEventTest.cy.js).
 

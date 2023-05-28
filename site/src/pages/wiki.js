@@ -51,7 +51,9 @@ export default function Wiki({ info }) {
       </div>
       <Navbar />
       <section className={styles.content}>
-        <div className={wiki.wiki_grid}>{dormCards}</div>
+        <div className={wiki.wiki_grid}>
+          {dormCards} 
+        </div>
       </section>
     </>
   );
