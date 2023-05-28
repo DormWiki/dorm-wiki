@@ -2,7 +2,7 @@ import styles from '@/styles/Likebutton.module.css';
 import React, { useState } from "react";
 import confetti from "canvas-confetti";
 
-const Likebutton = ( {id} ) => {
+const Likebutton = ( {id, onClick} ) => {
   const [isSelected, setSelected] = useState(false);
 
   const toggleSelect = async (event) => {
@@ -28,6 +28,7 @@ const Likebutton = ( {id} ) => {
     <>
       <button
         onClick={(e)=> {
+          onClick(e);
           toggleSelect(e);
         }}
         className={

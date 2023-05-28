@@ -160,14 +160,15 @@ function genCards(events) {
             </div>
             <h4>{event["location"]}</h4>
             <div className={styles.event_deck_button_container}>
-                <div
-                  className={styles.no_link}
-                  onClick={(e) => {
-                    e.preventDefault();
-                  }}>
-                  <Likebutton id={event["_id"]} />
-                </div>
-              {event["likes"] === undefined ? 0 : event["likes"]}
+              <div
+                className={styles.no_link}
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                <Likebutton onClick={change_event} id={event["_id"]} />
+              </div>
+              <div>{event["likes"] === undefined ? 0 : event["likes"]}</div>
             </div>
             <h3>{formatDate(event["startTime"], true)}</h3>
           </div>
@@ -176,6 +177,18 @@ function genCards(events) {
     );
   });
   return arr;
+}
+
+// this is horribly scuffed
+// if we add another class to Likebutton component this
+// won't work
+// can be solved by using array.some but im too lazy
+function change_event(event) {
+  let clicked = event.target.classList.length === 2;
+  let likes = event.target.parentElement.nextElementSibling.innerText;
+  event.target.parentElement.nextElementSibling.innerText = clicked
+    ? parseInt(likes) + 1
+    : parseInt(likes) - 1;
 }
 
 export async function getStaticProps() {

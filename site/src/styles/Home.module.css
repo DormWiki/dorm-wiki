@@ -370,6 +370,7 @@
   width: auto !important;
   margin: 0px;
   padding: 0px;
+  cursor: pointer;
 }
 
 .card {
