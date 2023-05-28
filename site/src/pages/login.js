@@ -50,5 +50,5 @@ if (session) { // logged in already
       </main>
     </>
   );
-}
+  }
 }
