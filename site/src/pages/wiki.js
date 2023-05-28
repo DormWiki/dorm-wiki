@@ -11,6 +11,8 @@ import Footer from "@/components/Footer";
 import styles from "@/styles/Home.module.css";
 import wiki from "@/styles/Wiki.module.css";
 import Navbar from "../components/Navbar";
+
+
 const SORTS = {
   residence: [
     "alder-hall",

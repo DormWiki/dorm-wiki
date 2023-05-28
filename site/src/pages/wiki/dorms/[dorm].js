@@ -84,19 +84,18 @@ export default function Wiki( {info, images} ) {
             </div>
             <div className={wiki.summary}>
               <div className={wiki.description}>
-                <h3> Information </h3>
+                <h3>Information</h3>
                 <p>{data["info"]["description"]}</p>
-
+                <hr/>
                 <div className={wiki.average}>
-                  <hr />
-                  <h3>Reviews</h3>
-                  <br/>
+                  <h3>Summary</h3>
                   {avg}
                 </div>
               </div>
             </div>
           </div>
           <span className={wiki.review_box}>
+            <h2>Submit a Review</h2>
             <div className={`${wiki.review} ${wiki.review_form}`}>
               <div className={wiki.review_input}>
                 <form onSubmit={handleSubmit} method="post">
@@ -139,7 +138,7 @@ export default function Wiki( {info, images} ) {
                 </form>
               </div>
               <div className={wiki.review_rating}>
-                <label>Enviorment</label>
+                <label>Environment: </label>
                 <ReactStars
                   edit={true}
                   starCount={5}
@@ -149,7 +148,7 @@ export default function Wiki( {info, images} ) {
                     changeRating(r, 0);
                   }}
                 />
-                <label>Food</label>
+                <label>Food: </label>
                 <ReactStars
                   edit={true}
                   starCount={5}
@@ -159,7 +158,7 @@ export default function Wiki( {info, images} ) {
                     changeRating(r, 1);
                   }}
                 />
-                <label>Walkability</label>
+                <label>Walkability: </label>
                 <ReactStars
                   edit={true}
                   starCount={5}
@@ -169,7 +168,7 @@ export default function Wiki( {info, images} ) {
                     changeRating(r, 2);
                   }}
                 />
-                <label>Safety</label>
+                <label>Safety: </label>
                 <ReactStars
                   edit={true}
                   starCount={5}
