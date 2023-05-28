@@ -9,7 +9,7 @@ import Navbar from "../components/Navbar";
 import GoogleButton from '../components/GoogleButton';
 // remove signIn, signOut depends on where we implement signin and sign out
 import { useSession, signIn, signOut } from 'next-auth/react';
-
+import Footer from "@/components/Footer";
 import styles from "@/styles/Home.module.css";
 import login from '@/styles/Login.module.css';
 
@@ -48,7 +48,8 @@ if (session) { // logged in already
           </div>
         </div>
       </main>
+     <Footer/>
     </>
-  );
+   );
   }
 }

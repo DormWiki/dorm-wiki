@@ -25,16 +25,6 @@
   line-height: 24px;
 }
 
-.main_content {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  height: auto;
-  width: 100%;
-  padding-top: 67px;
-}
-
 .logo {
   display: flex;
   order: 1;
@@ -86,10 +76,12 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   height: 100%;
+  min-height: 100vh;
   width: 100%;
   padding-top: 7vh;
+  padding-bottom: 7vh;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -124,22 +116,19 @@
 }
 
 .navbar_logo_wrapper {
-  margin-left: 0;
-  align-items:center;
-  display: flex;
+  align-items: center;
+  display: fixed;
   position: fixed;
-  z-index: 102;
-  height: 7%;
+  z-index: 110;
+  width: 20vw;
+  height: 10vh;
 }
 
 .navbar_logo_wrapper img {
   display: block;
-  height: 95%;
-  width: 100%;
-}
-
-.navbar_logo_wrapper a {
-  height: 100%;
+  width: 75%;
+  height: 70%;
+  padding: 1vh 1vh 1vh 1vh;
 }
 
 .navbar ul {
@@ -158,6 +147,7 @@
 
 .search_wrapper {
   width: 30%;
+  margin-bottom: 4vh;
 }
 
 .search_wrapper input {
@@ -190,6 +180,7 @@
 .event_link {
   color: black !important;
 }
+
 .event_deck {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -200,6 +191,7 @@
   width: 18vw;
   border-radius: 15px;
   transition: 0.2s;
+  overflow: hidden;
 }
 
 .event_deck:hover {
@@ -222,6 +214,15 @@
   height: auto;
 }
 
+.event_deck .h2_wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  width: 100%;
+  background-color: #ece6f6;
+}
+
 .event_deck p {
   font-size: 0.7em;
   line-height: 15px;
@@ -232,14 +233,13 @@
 }
 
 .event_deck.event_deck h3 {
-  margin-top: auto;
   font-size: smaller;
 }
 
 .event_deck h2, .event_deck h3, .event_deck h4 {
-  margin: 15px;
+  margin: 2vh;
+  text-overflow: ellipsis;
 }
-
 
 .event_button {
   width: 3vw;
@@ -257,21 +257,12 @@
  background-position: center;
 }
 
-
-.navbar img {
-  position: relative;
-  z-index: 2;
-  width: 150px;
-  height: 150px;
-  padding-left: 10px;
-  margin-top: 100px;
-}
-
 .navbar button {
   border: none;
   background-color: var(--uw-gold);
-  margin: 10px;
-  height: 40px;
+  margin-top: 1.5vh;
+  margin-right: 1vw;
+  height: 4vh;
   border-radius: var(--border-radius);
   padding: 8px;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
@@ -464,8 +455,8 @@
   padding-top: 20px;
 }
 
-.full_span {
-  margin-top: 4vh;
+.info {
+  padding: 4vh;
   background-color: #e8e3d3;
   opacity: 80%;
   height: 85vh;
@@ -474,17 +465,30 @@
   display: fixed;
 }
 
+.testimonials {
+  padding: 4vh;
+  opacity: 80%;
+  height: 40vh;
+  width: 100%;
+  text-align: center;
+  display: fixed;
+}
+
+.testimonials p {
+  margin-bottom: 2vh;
+}
+
 .standout {
   line-height: 15vh;
   margin-top: 1vh;
 }
 
-.full_span p {
+.info p {
   margin-left: 10vw;
   margin-right: 10vw;
 }
 
-.full_span img {
+.info img {
   margin-top: -5vh;
   margin-bottom: 2vh;
 }

@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { getWiki } from "./api/wiki";
 import { cleanName } from "@/misc";
+import Footer from "@/components/Footer";
 
 import styles from "@/styles/Home.module.css";
 import wiki from "@/styles/Wiki.module.css";
@@ -46,15 +47,13 @@ export default function Wiki({ info }) {
   let dormCards = genDorms(info, sort);
   return (
     <>
-      <div className={styles.navbar_logo_wrapper}>
-        <img src="/dw-logo-navbar.png"></img>
-      </div>
       <Navbar />
       <section className={styles.content}>
         <div className={wiki.wiki_grid}>
           {dormCards} 
         </div>
       </section>
+      <Footer/>
     </>
   );
 }

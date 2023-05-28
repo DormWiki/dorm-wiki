@@ -17,23 +17,6 @@
   line-height: 10px;
 }
 
-.content {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
-  margin-right: 67px;
-  padding-top: 67px;
-  margin-left: 67;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
-}
-
 .event_box {
   display: flex;
   flex-direction: column;
