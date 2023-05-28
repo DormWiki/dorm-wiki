@@ -9,46 +9,54 @@ import Navbar from "../components/Navbar";
 import GoogleButton from '../components/GoogleButton';
 // remove signIn, signOut depends on where we implement signin and sign out
 import { useSession, signIn, signOut } from 'next-auth/react';
-
+import Footer from "@/components/Footer";
 import styles from "@/styles/Home.module.css";
 import login from '@/styles/Login.module.css';
 
 
+function getUsername(email) {
+  let i = email.indexOf("@");
+  return email.substring(0, i);
+}
+
 export default function Login() {
+  const router = useRouter();
+  const {data: session} = useSession();
 
-const router = useRouter();
-
-const {data: session} = useSession();
-
-if (session) { // logged in already 
-  return (
-    <>
-      <Navbar />
-      <main className={styles.main}>
-        <div className={styles.content}>
-          <div className={login.signin_box}>
-            <h2 className={login.hrtitle}>Welcome! {session.user.email}</h2>
-          </div>
-        </div>
-      </main>
-    </>
-  );
-  // TODO: add sign out button?
-} else { // haven't logged in
-  return (
-    <>
-      <Navbar />
-      <main className={styles.main}>
-        <div className={styles.content}>
-          <div className={login.signin_box}>
-            <h2 className={login.hrtitle}>Welcome!</h2>
-            <div className={login.button_wrapper}>
-              <GoogleButton text="Sign in with Google"/>
+  if (session) { // logged in already 
+    return (
+      <>
+        <Navbar/>
+        <main className={styles.main}>
+          <div className={styles.content}>
+            <div className={login.signin_box}>
+              <h2 className={login.hrtitle}>Welcome back, {getUsername(session.user.email)}!</h2>
+              <div className={login.button_wrapper}>
+                <button className={login.signout_button} 
+                      onClick={() => signOut()}>Sign out
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
-    </>
-  );
-}
+        </main>
+      </>
+    );
+  } else { // haven't logged in
+    return (
+      <>
+        <Navbar />
+        <main className={styles.main}>
+          <div className={styles.content}>
+            <div className={login.signin_box}>
+              <h2 className={login.hrtitle}>Welcome!</h2>
+              <div className={login.button_wrapper}>
+                <GoogleButton text="Sign in with Google"/>
+              </div>
+            </div>
+          </div>
+        </main>
+        <Footer/>
+      </>
+    );
+  }
 }

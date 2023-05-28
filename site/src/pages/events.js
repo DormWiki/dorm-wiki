@@ -8,9 +8,12 @@ import Navbar from "../components/Navbar";
 import { FileUploader } from "react-drag-drop-files";
 import { formatDate } from '@/misc';
 import { getEvent } from './api/event';
+import Footer from "@/components/Footer";
+
 import styles from '@/styles/Home.module.css'
 import events from '@/styles/Events.module.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
@@ -61,7 +64,7 @@ export default function Events({ events_info, images }) {
       </Head>
       <Navbar />
       <main className={events.main}>
-        <div className={events.content}>
+        <div className={styles.content}>
           <h2 className={events.title}>Trending</h2>
             <div className={events.top_wrapper}>
               <div className={events.carousel_wrapper}>
@@ -132,6 +135,7 @@ export default function Events({ events_info, images }) {
           {events_arr}
         </div>
       </main>
+      <Footer/>
     </>
   );
 }

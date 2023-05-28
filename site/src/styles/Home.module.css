@@ -25,16 +25,6 @@
   line-height: 24px;
 }
 
-.main_content {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  height: auto;
-  width: 100%;
-  padding-top: 67px;
-}
-
 .logo {
   display: flex;
   order: 1;
@@ -86,10 +76,12 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   height: 100%;
+  min-height: 100vh;
   width: 100%;
   padding-top: 7vh;
+  padding-bottom: 7vh;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -124,22 +116,19 @@
 }
 
 .navbar_logo_wrapper {
-  margin-left: 0;
-  align-items:center;
-  display: flex;
+  align-items: center;
+  display: fixed;
   position: fixed;
-  z-index: 102;
-  height: 7%;
+  z-index: 110;
+  width: 20vw;
+  height: 10vh;
 }
 
 .navbar_logo_wrapper img {
   display: block;
-  height: 95%;
-  width: 100%;
-}
-
-.navbar_logo_wrapper a {
-  height: 100%;
+  width: 75%;
+  height: 70%;
+  padding: 1vh 1vh 1vh 1vh;
 }
 
 .navbar ul {
@@ -158,6 +147,7 @@
 
 .search_wrapper {
   width: 30%;
+  margin-bottom: 4vh;
 }
 
 .search_wrapper input {
@@ -186,6 +176,11 @@
   height: auto;
 }
 
+
+.event_link {
+  color: black !important;
+}
+
 .event_deck {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -195,15 +190,19 @@
   height: 50vh;
   width: 18vw;
   border-radius: 15px;
+  transition: 0.2s;
+  overflow: hidden;
 }
 
 .event_deck:hover {
-
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.005);
 }
 
 .event_deck_button_container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 70%;
 }
 
@@ -213,6 +212,15 @@
   align-self: flex-start;
   width: 100%;
   height: auto;
+}
+
+.event_deck .h2_wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  width: 100%;
+  background-color: #ece6f6;
 }
 
 .event_deck p {
@@ -225,14 +233,13 @@
 }
 
 .event_deck.event_deck h3 {
-  margin-top: auto;
   font-size: smaller;
 }
 
 .event_deck h2, .event_deck h3, .event_deck h4 {
-  margin: 15px;
+  margin: 2vh;
+  text-overflow: ellipsis;
 }
-
 
 .event_button {
   width: 3vw;
@@ -250,21 +257,12 @@
  background-position: center;
 }
 
-
-.navbar img {
-  position: relative;
-  z-index: 2;
-  width: 150px;
-  height: 150px;
-  padding-left: 10px;
-  margin-top: 100px;
-}
-
 .navbar button {
   border: none;
   background-color: var(--uw-gold);
-  margin: 10px;
-  height: 40px;
+  margin-top: 1.5vh;
+  margin-right: 1vw;
+  height: 4vh;
   border-radius: var(--border-radius);
   padding: 8px;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
@@ -291,7 +289,7 @@
   opacity: 85%;
 }
 
- .navbar ul {
+.navbar ul {
   text-align: center;
   list-style-type: none;
 }
@@ -299,16 +297,22 @@
 .navbar li {
   float: left;
   height: 7vh;
+  line-height: 7vh;
 }
 
  .navbar li a {
   font-size: 20px;
   display: block;
-  padding: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .navbar li a:hover {
   color: var(--uw-gold);
+}
+
+.no_link {
+  height: 6vh;
 }
 
 .description {
@@ -427,26 +431,32 @@
 }
 
 .dropdown {
+  line-height: 24px;
   position: relative;
   display: inline-block;
-  transition: ease-out 0.25s;
+}
+
+.dropdown_text a {
+  padding: 20px;
+  font-size: 16px;
 }
 
 .dropdown:hover .dropdown_text {
-  height: 376px;
+  display: block;
 }
 
 .dropdown_text {
   text-align: left;
   overflow: hidden;
-  height: 0;
-  transition: height 0.3s;
+  height: auto;
+  display: none;
   background-color: var(--uw-purple);
   position: absolute;
+  padding-top: 20px;
 }
 
-.full_span {
-  margin-top: 4vh;
+.info {
+  padding: 4vh;
   background-color: #e8e3d3;
   opacity: 80%;
   height: 85vh;
@@ -455,17 +465,30 @@
   display: fixed;
 }
 
+.testimonials {
+  padding: 4vh;
+  opacity: 80%;
+  height: 40vh;
+  width: 100%;
+  text-align: center;
+  display: fixed;
+}
+
+.testimonials p {
+  margin-bottom: 2vh;
+}
+
 .standout {
   line-height: 15vh;
   margin-top: 1vh;
 }
 
-.full_span p {
+.info p {
   margin-left: 10vw;
   margin-right: 10vw;
 }
 
-.full_span img {
+.info img {
   margin-top: -5vh;
   margin-bottom: 2vh;
 }
@@ -563,6 +586,16 @@
     );
     z-index: 1;
   }
+}
+
+.footer {
+  height: 10vh;
+  width: 100%;
+  font-size: smaller;
+  text-align: center;
+  line-height: 10vh;
+  color: white;
+  background-color: var(--uw-purple);
 }
 
 /* Tablet and Smaller Desktop */

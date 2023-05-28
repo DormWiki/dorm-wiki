@@ -1,0 +1,39 @@
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 7vh 7vh 7vw 7vw;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.full_span {
+  margin-top: 4vh;
+  height: 20vh;
+  width: 100%;
+  text-align: center;
+  display: fixed;
+}
+
+.title {
+  width: 100%;
+  margin-top: 2.5vh;
+  padding-bottom: .5vw;
+  display: inline-block;
+  font-size: 30px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 10px;
+}
+
+.p, .list_wrapper {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}

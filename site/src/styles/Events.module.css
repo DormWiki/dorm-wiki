@@ -13,25 +13,20 @@
   font-size: 30px;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 10px;
 }
 
-.content {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 100%;
+.title_right {
   width: 100%;
-  margin-right: 67px;
-  padding-top: 67px;
-  margin-left: 67;
+  margin-top: 2.5vh;
+  padding-bottom: .5vw;
+  display: inline-block;
+  font-size: 30px;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
+  font-weight: 600;
+  line-height: 10px;
 }
 
 .event_box {
@@ -60,16 +55,6 @@
   border: 2px solid black;
   border-radius: 20px;
   height: auto;
-}
-
-.title_right {
-  padding-bottom: .5vw;
-  display: inline-block;
-  font-size: 30px;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 8px;
 }
 
 .top_wrapper {

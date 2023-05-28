@@ -13,6 +13,23 @@
   border-radius: 4;
 }
 
+.signout_button {
+  padding: .5vw;
+  height: 4vh;
+  text-align: center;
+  border-radius: 6px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-size: medium;
+}
+
+.google_button {
+  padding: .5vw;
+  font-size: 18px;
+  line-height: 24px;
+  border-radius: 6px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
 .button_wrapper, .hrtitle {
   width: 100%;
   text-align: center;

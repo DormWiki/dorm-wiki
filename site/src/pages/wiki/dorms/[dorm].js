@@ -9,13 +9,13 @@ import ReactStars from "react-stars";
 import CustomCarousel from "../../../components/Carousel";
 import Navbar from  "../../../components/Navbar";
 import Sidebar from "../../../components/Sidebar"
-import styles from '@/styles/Home.module.css'
-
-import wiki from '@/styles/Wiki.module.css';
+import Footer from "@/components/Footer";
 import path from "path";
 import ReviewBar from "@/components/ReviewBar";
-
 import { getWiki } from '@/pages/api/wiki';
+
+import styles from '@/styles/Home.module.css'
+import wiki from '@/styles/Wiki.module.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
@@ -24,6 +24,7 @@ export default function Wiki( {info, images} ) {
   const dorm = router.query.dorm;
   let data = info[0];
   let reviews = genReviews(data["review"]);
+  let avg = getAverage(data["review"]);
 
   // all of this because I am too lazy to make my own star ratings or just encapsulate it in its own component
   let types = ["enviornment", "food", "walkability", "safety"];
@@ -59,14 +60,10 @@ export default function Wiki( {info, images} ) {
     });
     const res = await response.status;
     if (res === 200) {
-     event.target.parentNode.parentNode.className =
-       wiki.review_submitted + " " + wiki.success;
+      router.reload(window.location.pathname);
     } else {
      router.push("/500");
     }
-    setTimeout(() => {
-     router.reload(window.location.pathname);
-    }, 750);
     
   };
 
@@ -87,12 +84,18 @@ export default function Wiki( {info, images} ) {
             </div>
             <div className={wiki.summary}>
               <div className={wiki.description}>
-                <h3> Information </h3>
-                <p>{info[0]["info"]["description"]}</p>
+                <h3>Information</h3>
+                <p>{data["info"]["description"]}</p>
+                <hr/>
+                <div className={wiki.average}>
+                  <h3>Summary</h3>
+                  {avg}
+                </div>
               </div>
             </div>
           </div>
           <span className={wiki.review_box}>
+            <h2>Submit a Review</h2>
             <div className={`${wiki.review} ${wiki.review_form}`}>
               <div className={wiki.review_input}>
                 <form onSubmit={handleSubmit} method="post">
@@ -121,7 +124,9 @@ export default function Wiki( {info, images} ) {
                     required
                   />
                   <br />
-                  <p id="max_chars" className={wiki.char_count}>0/300</p>
+                  <p id="max_chars" className={wiki.char_count}>
+                    0/300
+                  </p>
                   <input
                     type="hidden"
                     name="date"
@@ -133,7 +138,7 @@ export default function Wiki( {info, images} ) {
                 </form>
               </div>
               <div className={wiki.review_rating}>
-                <label>Enviorment</label>
+                <label>Environment: </label>
                 <ReactStars
                   edit={true}
                   starCount={5}
@@ -143,7 +148,7 @@ export default function Wiki( {info, images} ) {
                     changeRating(r, 0);
                   }}
                 />
-                <label>Food</label>
+                <label>Food: </label>
                 <ReactStars
                   edit={true}
                   starCount={5}
@@ -153,7 +158,7 @@ export default function Wiki( {info, images} ) {
                     changeRating(r, 1);
                   }}
                 />
-                <label>Walkability</label>
+                <label>Walkability: </label>
                 <ReactStars
                   edit={true}
                   starCount={5}
@@ -163,7 +168,7 @@ export default function Wiki( {info, images} ) {
                     changeRating(r, 2);
                   }}
                 />
-                <label>Safety</label>
+                <label>Safety: </label>
                 <ReactStars
                   edit={true}
                   starCount={5}
@@ -180,8 +185,36 @@ export default function Wiki( {info, images} ) {
           </span>
         </section>
       </main>
+      <Footer/>
     </>
   );
+}
+
+
+function getAverage(reviews) {
+  let avg = {
+    Overall: 0,
+    Enviornment: 0,
+    Food: 0,
+    Walkability: 0,
+    Safety: 0
+  }
+  reviews.forEach((r) => {
+    avg.Overall += averageReview(r["rating"]);
+    avg.Enviornment += r["rating"].enviornment;
+    avg.Food += r["rating"].food;
+    avg.Walkability += r["rating"].walkability;
+    avg.Safety += r["rating"].safety;
+  })
+  if (reviews.length !== 0) {
+    avg.Overall = avg.Overall / reviews.length;
+    avg.Enviornment = avg.Enviornment / reviews.length;
+    avg.Food = avg.Food / reviews.length;
+    avg.Walkability = avg.Walkability / reviews.length;
+    avg.Safety = avg.Safety / reviews.length;
+  }
+  console.log(avg);
+  return <ReviewBar data={avg}/>
 }
 
 
@@ -197,7 +230,9 @@ function genReviews(reviews) {
             {new Date(r["date"]).toLocaleDateString()}
           </h3>
           <h3>{r["title"]}</h3>
-          <p style={{overflow: 'hidden'}}>{r["text"]}</p>
+          <div className={wiki.review_p}>
+            {r["text"]}
+          </div>
         </div>
         <div className={wiki.review_rating}>
           <ReactStars
