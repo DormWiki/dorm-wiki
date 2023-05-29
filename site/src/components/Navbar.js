@@ -4,8 +4,8 @@
  import styles from "@/styles/Home.module.css";
  import { useSession, signIn, signOut } from "next-auth/react";
 
-function checkLogin(data) {
-  const router = useRouter();
+function checkLogin(data, router) {
+
   if (data) {
     return (
       <>
@@ -33,7 +33,9 @@ function checkLogin(data) {
 
  const Navbar = () => {
   const { data: session } = useSession();
-  const picture = checkLogin(session);
+  const router = useRouter();
+  const picture = checkLogin(session, router);
+  
   return (
     <>
       <div className={styles.navbar_logo_wrapper}>
