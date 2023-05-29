@@ -38,7 +38,7 @@ function checkLogin(data, router) {
   return (
     <>
       <div className={styles.navbar_logo_wrapper}>
-        <Link href={"/"}>
+        <Link style={{"height": "100%", "display": "block"}} href={"/"}>
           <img src="/dw-logo-navbar.png"></img>
         </Link>
       </div>

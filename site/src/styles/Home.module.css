@@ -121,14 +121,19 @@
   position: fixed;
   z-index: 110;
   width: 20vw;
-  height: 10vh;
+  height: 7vh;
 }
 
 .navbar_logo_wrapper img {
   display: block;
-  width: 75%;
-  height: 70%;
+  width: auto;
+  height: 100%;
   padding: 1vh 1vh 1vh 1vh;
+}
+
+.navbar_logo_wrapper a {
+  display: block;
+  height: 100%;
 }
 
 .navbar ul {
