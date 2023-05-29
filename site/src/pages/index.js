@@ -154,13 +154,20 @@ export default function Home({ info }) {
 function genCards(events) {
   let arr = [];
   events.forEach((event, i) => {
+    const INITIAL_SIZE = 26; //px
+    const MAX_LENGTH = 22;
+    let size = 2 - (event["name"].length / MAX_LENGTH)*0.7;
     arr.push(
       <>
         <Link className={styles.event_link} href={`/events/${event["_id"]}`}>
           <div key={i} className={styles.event_deck}>
             <img src="/events/events1.jpg"></img>
             <div className={styles.h2_wrapper}>
-              <h2>{event["name"]}</h2>
+              <h2
+                style={{ "font-size": size + "vw" }}
+              >
+                {event["name"]}
+              </h2>
             </div>
             <h4>{event["location"]}</h4>
             <div className={styles.event_deck_button_container}>

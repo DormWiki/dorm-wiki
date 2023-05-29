@@ -18,9 +18,14 @@ const Likebutton = ( {id, onClick} ) => {
           y: canvas.top / window.innerHeight,
         },
       });
-    await fetch(`/events/${id}/like`, {method: 'POST'});
+    let response = await fetch(`/api/event?id=${id}`, {method: 'POST'})
+    .then(res => res.json());
+    console.log(id + ": " +response);
     } else {
-      await fetch(`/events/${id}/like`, {method: 'DELETE'});
+      let response = await fetch(`/api/event?id=${id}`, {
+        method: "DELETE",
+      }).then((res) => res.json());
+      console.log(id + ": " + response);
     }
   };
 
