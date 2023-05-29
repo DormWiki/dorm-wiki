@@ -9,6 +9,9 @@ import ClientPromise from "@/lib/mongodb";
 // - '/event?dorm=': return all the coming events in the given dorm
 // POST:
 // - '/event': post an event
+// - '/event/:id/like': like an event
+// DELETE:
+// - '/event/:id/like': unlike an event
 
 export async function getEvent(dorm) {
 	let client = await ClientPromise;
@@ -36,35 +39,49 @@ export default async function handler(req, res) {
 	if (req.method == 'GET') {
 		let ret = await getEvent(req.query.dorm);
 		res.status(200).json(ret);
-	} else { // POST CALL
-		const count = await collection.countDocuments();
-		const body = req.body;
-		// Create a new event object to be inserted into the Dorm and Event table
-		let newEvent = {
-			_id: (count + 1),
-			name: DOMPurify.sanitize(body.name),
-			startTime: DOMPurify.sanitize(body.startTime),
-			description: DOMPurify.sanitize(body.description),
-			postDate: DOMPurify.sanitize(body.postDate),
-			dorm_id: DOMPurify.sanitize(body.dorm_id),
-			location: DOMPurify.sanitize(body.location),
-			organizer: DOMPurify.sanitize(body.organizer),
-			poster: DOMPurify.sanitize(body.poster)
-		}
-		try{
-			const dorm = await db.collection('Dorm');
-			await dorm.updateOne(
-			{ _id: req.body.dorm_id},
-			{ $push: { event: count} }
-			)
-		}catch(err){
-			console.log(err);
-		}
-		
-		let results = await collection.insertOne(newEvent, function(err, result) {
+	} else if (req.method == 'DELETE'){ // DELETE CALL
+		let results = await collection.update({_id: req.query.id}, {$inc : {likes: -1}},
+			function(err, result) {
 			if (err) throw err;
-			res.json({_id: result.insertedId}).status(200);
+			res.json("Unliked").status(200);
 		});
+	} else { // POST CALL
+		if (req.query != undefined){ // Liking an event
+			let results = await collection.update({_id: req.query.id}, {$inc : {likes: 1}},
+				function(err, result) {
+				if (err) throw err;
+				res.json("Liked").status(200);
+			});
+		} else {
+			const count = await collection.countDocuments();
+			const body = req.body;
+			// Create a new event object to be inserted into the Dorm and Event table
+			let newEvent = {
+				_id: (count + 1),
+				name: DOMPurify.sanitize(body.name),
+				startTime: DOMPurify.sanitize(body.startTime),
+				description: DOMPurify.sanitize(body.description),
+				postDate: DOMPurify.sanitize(body.postDate),
+				dorm_id: DOMPurify.sanitize(body.dorm_id),
+				location: DOMPurify.sanitize(body.location),
+				organizer: DOMPurify.sanitize(body.organizer),
+				poster: DOMPurify.sanitize(body.poster)
+			}
+			try{
+				const dorm = await db.collection('Dorm');
+				await dorm.updateOne(
+				{ _id: req.body.dorm_id},
+				{ $push: { event: count} }
+				)
+			}catch(err){
+				console.log(err);
+			}
+			
+			let results = await collection.insertOne(newEvent, function(err, result) {
+				if (err) throw err;
+				res.json({_id: result.insertedId}).status(200);
+			});
+		}
 	}
 
 
