@@ -73,7 +73,7 @@ export default function Home({ info }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/dw-logo-icon.png" />
       </Head>
-      <Navbar/>
+      <Navbar />
       <main className={styles.main}>
         <div className={styles.content}>
           <div className={styles.big_logo}>
@@ -92,35 +92,39 @@ export default function Home({ info }) {
           </div>
           <div className={styles.info}>
             <div className={styles.standout}>
-              <h2><i>Finding the perfect dorm has never been simpler.</i></h2>
+              <h2>
+                <i>Finding the perfect dorm has never been simpler.</i>
+              </h2>
             </div>
             <p>
-              Choosing a dorm can be overwhelming. We've gathered dorm information and condensed
-              it down to just the essentials help you determine which dorm(s) will suit you best. 
-              Get started by searching for a dorm.
+              Choosing a dorm can be overwhelming. We&apos;ve gathered dorm
+              information and condensed it down to just the essentials help you
+              determine which dorm(s) will suit you best. Get started by
+              searching for a dorm.
             </p>
             <div className={styles.standout}>
               <h2>Submit reviews</h2>
             </div>
             <img
-                style={{ height: "125px", width: "125px"}}
-                src="/write.png"
+              style={{ height: "125px", width: "125px" }}
+              src="/write.png"
             ></img>
             <p>
-              Had a particularly good/bad experience at a dorm? Help others learn more about
-              a dorm by writing a review.
+              Had a particularly good/bad experience at a dorm? Help others
+              learn more about a dorm by writing a review.
             </p>
             <div className={styles.standout}>
               <h2>Find events</h2>
             </div>
             <img
-                style={{ height: "70px", width: "150px"}}
-                src="/banner.png"
+              style={{ height: "70px", width: "150px" }}
+              src="/banner.png"
             ></img>
             <p>
-              There are always plenty of great events going on, but it can be hard to remember which event
-              is happening when and where. We've centralized all the upcoming event information so it
-              is easy to plan ahead.
+              There are always plenty of great events going on, but it can be
+              hard to remember which event is happening when and where.
+              We&apos;ve centralized all the upcoming event information so it is
+              easy to plan ahead.
             </p>
           </div>
           <div className={styles.testimonials}>
@@ -128,21 +132,23 @@ export default function Home({ info }) {
               <h2>What students are saying</h2>
             </div>
             <p>
-              <i>DormWiki is so useful! I loved the dorm I stayed at in my freshman year.</i>
+              <i>
+                DormWiki is so useful! I loved the dorm I stayed at in my
+                freshman year.
+              </i>
             </p>
             <p>
-              <i>I've been able to go to so many cool events recently because I am able to stay 
-                updated through DormWiki!
+              <i>
+                I&apos;ve been able to go to so many cool events recently
+                because I am able to stay updated through DormWiki!
               </i>
             </p>
           </div>
           <h2 className={styles.hrtitle}>Upcoming Events</h2>
-          <div className={styles.upcoming_events}>
-            {genCards(events)}
-          </div>
+          <div className={styles.upcoming_events}>{genCards(events)}</div>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 }
