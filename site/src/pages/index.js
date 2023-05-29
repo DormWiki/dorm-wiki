@@ -97,10 +97,10 @@ export default function Home({ info }) {
             </h2>
           </div>
           <p>
-            Choosing a dorm can be overwhelming. We've gathered dorm information
-            and condensed it down to just the essentials help you determine
-            which dorm(s) will suit you best. Get started by searching for a
-            dorm.
+            Choosing a dorm can be overwhelming. We&apos;ve gathered dorm
+            information and condensed it down to just the essentials help you
+            determine which dorm(s) will suit you best. Get started by searching
+            for a dorm.
           </p>
           <div className={styles.standout}>
             <h2>Submit reviews</h2>
@@ -122,7 +122,7 @@ export default function Home({ info }) {
           ></img>
           <p>
             There are always plenty of great events going on, but it can be hard
-            to remember which event is happening when and where. We've
+            to remember which event is happening when and where. We&apos;ve
             centralized all the upcoming event information so it is easy to plan
             ahead.
           </p>
@@ -139,8 +139,8 @@ export default function Home({ info }) {
           </p>
           <p>
             <i>
-              I've been able to go to so many cool events recently because I am
-              able to stay updated through DormWiki!
+              I&apos;ve been able to go to so many cool events recently because
+              I am able to stay updated through DormWiki!
             </i>
           </p>
         </div>
