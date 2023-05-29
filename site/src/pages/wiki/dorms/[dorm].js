@@ -100,17 +100,17 @@ export default function Wiki( {info, images} ) {
               <div className={wiki.review_input}>
                 <form onSubmit={handleSubmit} method="post">
                   <input
-                    placeholder="Name"
+                    placeholder="Title"
                     type="text"
-                    name="user"
+                    name="title"
                     autoComplete="off"
                     required
                   />
                   <br />
                   <input
-                    placeholder="Title"
+                    placeholder="Name"
                     type="text"
-                    name="title"
+                    name="name"
                     autoComplete="off"
                     required
                   />
