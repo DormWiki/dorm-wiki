@@ -5,11 +5,12 @@
  import { useSession, signIn, signOut } from "next-auth/react";
 
 function checkLogin(data) {
+  let router = useRouter();
   if (data) {
     return (
       <>
         <div className={styles.gmail_logo_wrapper}>
-          <Link style={{'height': '3.5vh'}}href="/login">
+          <Link style={{'height': '3.5vh'}} href="/user">
             <img
               className={styles.gmail_logo}
               src={data.user.image}

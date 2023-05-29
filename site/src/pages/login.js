@@ -21,26 +21,13 @@ function getUsername(email) {
 
 export default function Login() {
   const router = useRouter();
-  const {data: session} = useSession();
-
-  if (session) { // logged in already 
-    return (
-      <>
-        <Navbar/>
-        <main className={styles.main}>
-          <div className={styles.content}>
-            <div className={login.signin_box}>
-              <h2 className={login.hrtitle}>Welcome back, {getUsername(session.user.email)}!</h2>
-              <div className={login.button_wrapper}>
-                <button className={login.signout_button} 
-                      onClick={() => signOut()}>Sign out
-                </button>
-              </div>
-            </div>
-          </div>
-        </main>
-      </>
-    );
+  const {data: session, status} = useSession();
+  if (session === undefined) {
+    return "loading";
+  }
+  else if (status === "authenticated") { // logged in already 
+    console.log("routing");
+    router.push("/user");
   } else { // haven't logged in
     return (
       <>

@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { getWiki } from "./api/wiki";
 import { cleanName } from "@/misc";
 import Footer from "@/components/Footer";
-
+import Layout from "@/components/Layout";
 import styles from "@/styles/Home.module.css";
 import wiki from "@/styles/Wiki.module.css";
 import Navbar from "../components/Navbar";
@@ -49,13 +49,9 @@ export default function Wiki({ info }) {
   let dormCards = genDorms(info, sort);
   return (
     <>
-      <Navbar />
-      <section className={styles.content}>
-        <div className={wiki.wiki_grid}>
-          {dormCards} 
-        </div>
-      </section>
-      <Footer/>
+      <Layout>
+        <div className={wiki.wiki_grid}>{dormCards}</div>
+      </Layout>
     </>
   );
 }

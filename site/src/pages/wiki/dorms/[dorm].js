@@ -213,7 +213,6 @@ function getAverage(reviews) {
     avg.Walkability = avg.Walkability / reviews.length;
     avg.Safety = avg.Safety / reviews.length;
   }
-  console.log(avg);
   return <ReviewBar data={avg}/>
 }
 

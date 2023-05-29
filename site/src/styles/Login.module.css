@@ -5,13 +5,10 @@
 
 .signin_box {
   border-color: black;
-  margin-top: 25vh;
-  width: 100%;
-  padding: 10px;
-  align-items: center;
-  display: fixed;
-  border-radius: 4;
+  margin-top: 10vh;
+  width: 40%;
 }
+
 
 .signout_button {
   padding: .5vw;
@@ -35,6 +32,11 @@
   text-align: center;
   margin-top: 1vh;
   margin-bottom: 1vh;
+}
+
+.events {
+  margin-top: 10vh;
+  width: 60%;
 }
 
 .hrtitle {
