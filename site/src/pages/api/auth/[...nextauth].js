@@ -13,5 +13,15 @@ export const authOptions = {
   // store and manage user session in your app
   strategy: 'jwt',
  },
+ callbacks: {
+  async signIn({account, profile}) {
+    if (account.provider === 'google' &&
+        profile.email.endsWith('@uw.edu')) {
+      return Promise.resolve(true)
+    } else {
+       return Promise.resolve(false)
+    }
+  }
+}
 };
 export default NextAuth(authOptions);
