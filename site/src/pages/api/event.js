@@ -40,15 +40,14 @@ export default async function handler(req, res) {
 		let ret = await getEvent(req.query.dorm);
 		res.status(200).json(ret);
 	} else if (req.method == 'DELETE'){ // DELETE CALL
-		let results = await collection.update({_id: req.query.id}, {$inc : {likes: -1}},
+		let results = await collection.updateOne({_id: req.query.id}, {$inc : {likes: -1}},
 			function(err, result) {
 			if (err) throw err;
 			res.json("Unliked").status(200);
 		});
 	} else { // POST CALL
-		if (req.query.id != undefined){ // Liking an event
-			console.log("IF");
-			let results = await collection.update({_id: req.query.id}, {$inc : {likes: 1}},
+		if (req.query != undefined){ // Liking an event
+			let results = await collection.updateOne({_id: req.query.id}, {$inc : {likes: 1}},
 				function(err, result) {
 				if (err) throw err;
 				res.json("Liked").status(200);

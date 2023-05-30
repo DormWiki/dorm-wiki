@@ -27,38 +27,39 @@ export default function User() {
     return;
   } else if (status === "unauthenticated" || session === null) {
     router.push("/login");
-  }
-  return (
-    <>
-      <Head>
-        <title>Dorm Wiki</title>
-        <meta name="description" content="Your go-to place for UW dorm info" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/dw-logo-icon.svg"/>
-      </Head>
-      <Layout>
-            <h2 className={login.hrtitle}>
-              Welcome back, {getUsername(session.user.email)}!
-            </h2>
-            <div className={login.button_wrapper}>
-              <button
-                className={login.signout_button}
-                onClick={() => {
-                  signOut();
-                  setTimeout(() => {
-                    router.push("/login");
-                  }, 500);
-                }}
-              >
-                Sign out
-              </button>
+  } else {
+    return (
+      <>
+        <Head>
+          <title>Dorm Wiki</title>
+          <meta name="description" content="Your go-to place for UW dorm info" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/dw-logo-icon.svg"/>
+        </Head>
+        <Layout>
+              <h2 className={login.hrtitle}>
+                Welcome back, {session.user.name}!
+              </h2>
+              <div className={login.button_wrapper}>
+                <button
+                  className={login.signout_button}
+                  onClick={() => {
+                    signOut();
+                    setTimeout(() => {
+                      router.push("/login");
+                    }, 500);
+                  }}
+                >
+                  Sign out
+                </button>
+              </div>
+            <div className={login.events}>
+              <h2 className={login.hrtitle}>
+                Saved Events
+              </h2>
             </div>
-          <div className={login.events}>
-            <h2 className={login.hrtitle}>
-              Saved Events
-            </h2>
-          </div>
-      </Layout>
-    </>
-  );
+        </Layout>
+      </>
+    );
+  }
 }
