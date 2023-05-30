@@ -54,7 +54,7 @@ export default async function handler(req, res) {
 				res.json("Liked").status(200);
 			});
 		} else {
-			const count = await collection.countDocuments();
+			const count = await collection.find().sort({_id:-1}).limit(1)._id;
 			const body = req.body;
 			// Create a new event object to be inserted into the Dorm and Event table
 			let newEvent = {
@@ -65,26 +65,27 @@ export default async function handler(req, res) {
 				postDate: DOMPurify.sanitize(body.postDate),
 				dorm_id: DOMPurify.sanitize(body.dorm_id),
 				location: DOMPurify.sanitize(body.location),
-				organizer: DOMPurify.sanitize(body.organizer),
-				poster: DOMPurify.sanitize(body.poster)
+				organizer: DOMPurify.sanitize(body.organizer)
 			}
-			try{
+			console.log(newEvent);
+			try {
 				const dorm = await db.collection('Dorm');
 				await dorm.updateOne(
 				{ _id: req.body.dorm_id},
 				{ $push: { event: count} }
 				)
-			}catch(err){
+			} catch (err) {
 				console.log(err);
 			}
 			
 			let results = await collection.insertOne(newEvent, function(err, result) {
-				if (err) throw err;
-				res.json({_id: result.insertedId}).status(200);
+				if (err) {
+					res.status(500).send();
+					console.error(err);
+				} else {
+					res.json({_id: result.insertedId}).status(200);
+				}
 			});
 		}
 	}
-
-
-	
 }

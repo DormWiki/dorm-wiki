@@ -468,7 +468,7 @@
   padding: 4vh;
   background-color: #e8e3d3;
   opacity: 80%;
-  height: 85vh;
+  height: auto;
   width: 100%;
   text-align: center;
   display: fixed;
