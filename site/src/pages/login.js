@@ -10,6 +10,8 @@ import GoogleButton from '../components/GoogleButton';
 // remove signIn, signOut depends on where we implement signin and sign out
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Footer from "@/components/Footer";
+import Layout from '@/components/Layout';
+
 import styles from "@/styles/Home.module.css";
 import login from '@/styles/Login.module.css';
 import Layout from '@/components/Layout';
@@ -43,10 +45,10 @@ export default function Login() {
         </Head>
         <Layout>
           <div className={login.signin_box}>
-            <h2 className={login.hrtitle}>Welcome!</h2>
-            <div className={login.button_wrapper}>
-              <GoogleButton text="Sign in with Google" />
-            </div>
+              <h2 className={login.hrtitle}>Welcome!</h2>
+              <div className={login.button_wrapper}>
+                <GoogleButton text="Sign in with Google"/>
+              </div>
           </div>
         </Layout>
       </>
