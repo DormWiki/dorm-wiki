@@ -595,11 +595,13 @@
 }
 
 .footer {
-  height: 10vh;
+  height: 7vh;
+  position: absolute;
+  z-index: 101;
   width: 100%;
   font-size: smaller;
   text-align: center;
-  line-height: 10vh;
+  line-height: 7vh;
   color: white;
   background-color: var(--uw-purple);
 }

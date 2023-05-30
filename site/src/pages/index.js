@@ -154,7 +154,6 @@ export default function Home({ info }) {
 function genCards(events) {
   let arr = [];
   events.forEach((event, i) => {
-    const INITIAL_SIZE = 26; //px
     const MAX_LENGTH = 22;
     let size = 2 - (event["name"].length / MAX_LENGTH)*0.7;
     arr.push(

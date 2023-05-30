@@ -83,7 +83,7 @@ export default function Events({ events_info, images }) {
                 <div>
                   <label className={events.field}>
                     Event title:
-                    <input type="text" name="name" required />
+                    <input type="text" maxLength="25" name="name" required />
                   </label>
                 </div>
                 <div>
