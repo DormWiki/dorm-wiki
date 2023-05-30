@@ -170,10 +170,12 @@ export default function Events({ events_info, images }) {
                 />
                 <div>
                   <label className={events.field}>
-                    Dorm: 
-                    <select name="dorm_id" required>
-                    {dormOptions}
-                    </select>
+                    Dorm:
+                    <div>
+                      <select name="dorm_id" required>
+                        {dormOptions}
+                      </select>
+                    </div>
                   </label>
                 </div>
                 <div>
