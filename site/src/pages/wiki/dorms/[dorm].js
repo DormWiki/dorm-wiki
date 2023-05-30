@@ -37,7 +37,7 @@ export default function Wiki( {info, images} ) {
     let count = event.target.value.length;
     let max = document.getElementById("max_chars");
     max.innerText = `${count}/300`;
-  }
+  } //
 
   const handleSubmit = async (event) => {
     event.preventDefault();
