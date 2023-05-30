@@ -1,17 +1,20 @@
 @media (prefers-color-scheme: light) {
   .content {
     color: black;
+    background-color: var(--background-color-light);
   }
 }
 @media (prefers-color-scheme: dark) {
   .content {
     color: white;
+    background-color: var(--background-color-dark);
   }
 }
 
 .navbar, .navbar a:visited {
   color: white;
 }
+
 .main {
   display: flex;
   flex-direction: row;

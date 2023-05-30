@@ -9,7 +9,10 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-
+  
+  --background-color-light: rgba(239, 244, 247, 0.897);
+  --background-color-dark: rgba(16, 11, 8, 0.897);
+  
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
     #16abff33 0deg,

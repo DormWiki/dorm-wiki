@@ -47,6 +47,7 @@ export default async function handler(req, res) {
 		});
 	} else { // POST CALL
 		if (req.query != undefined){ // Liking an event
+			console.log(req.query);
 			let results = await collection.updateOne({_id: req.query.id}, {$inc : {likes: 1}},
 				function(err, result) {
 				if (err) throw err;
