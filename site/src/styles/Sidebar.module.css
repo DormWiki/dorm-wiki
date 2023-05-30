@@ -4,11 +4,12 @@
   position: fixed;
   z-index: 100;
   margin-top: 7vh;
+  margin-bottom: 7vh;
   flex-direction: column;
   height: 100vh;
   width: 10vw;
   overflow-y: scroll;
-  background-color: gray;
+  background-color: #acacac;
   box-shadow: 2px 0px 8px 1px rgba(0, 0, 0, 0.2);
   padding-top: 10px;
 }
@@ -27,6 +28,7 @@
   font-size: 18px;
   display: block;
   padding: 0px 10px;
+  margin-bottom: 10px;
 }
 
 .sidebar a:visited {

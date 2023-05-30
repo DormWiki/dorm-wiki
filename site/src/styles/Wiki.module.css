@@ -188,10 +188,11 @@
 }
 
 
-.wiki_square a {
+.wiki_square a, .wiki_square a:visited {
   width: 100%;
   display: block;
   margin-bottom: 5px;
+  color: black;
 }
 
 .wiki_square img {

@@ -9,7 +9,7 @@
   }
 }
 
-.navbar, .main a:visited {
+.navbar, .navbar a:visited {
   color: white;
 }
 .main {
@@ -121,14 +121,19 @@
   position: fixed;
   z-index: 110;
   width: 20vw;
-  height: 10vh;
+  height: 7vh;
 }
 
 .navbar_logo_wrapper img {
   display: block;
-  width: 75%;
-  height: 70%;
+  width: auto;
+  height: 100%;
   padding: 1vh 1vh 1vh 1vh;
+}
+
+.navbar_logo_wrapper a {
+  display: block;
+  height: 100%;
 }
 
 .navbar ul {
@@ -370,6 +375,7 @@
   width: auto !important;
   margin: 0px;
   padding: 0px;
+  cursor: pointer;
 }
 
 .card {
@@ -589,11 +595,13 @@
 }
 
 .footer {
-  height: 10vh;
+  height: 7vh;
+  position: absolute;
+  z-index: 101;
   width: 100%;
   font-size: smaller;
   text-align: center;
-  line-height: 10vh;
+  line-height: 7vh;
   color: white;
   background-color: var(--uw-purple);
 }
