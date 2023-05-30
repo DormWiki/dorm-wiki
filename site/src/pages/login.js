@@ -12,6 +12,7 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import Footer from "@/components/Footer";
 import styles from "@/styles/Home.module.css";
 import login from '@/styles/Login.module.css';
+import Layout from '@/components/Layout';
 
 
 function getUsername(email) {
@@ -22,7 +23,7 @@ function getUsername(email) {
 export default function Login() {
   const router = useRouter();
   const {data: session, status} = useSession();
-  if (session === undefined) {
+  if (session === undefined ) {
     return "loading";
   }
   else if (status === "authenticated") { // logged in already 
@@ -32,21 +33,22 @@ export default function Login() {
     return (
       <>
         <Head>
-        <title>Dorm Wiki</title>
-        <meta name="description" content="Your go-to place for UW dorm info" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/dw-logo-icon.svg"/>
+          <title>Dorm Wiki</title>
+          <meta
+            name="description"
+            content="Your go-to place for UW dorm info"
+          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/dw-logo-icon.svg" />
         </Head>
-        <main className={styles.main}>
-          <div className={styles.content}>
-            <div className={login.signin_box}>
-              <h2 className={login.hrtitle}>Welcome!</h2>
-              <div className={login.button_wrapper}>
-                <GoogleButton text="Sign in with Google"/>
-              </div>
+        <Layout>
+          <div className={login.signin_box}>
+            <h2 className={login.hrtitle}>Welcome!</h2>
+            <div className={login.button_wrapper}>
+              <GoogleButton text="Sign in with Google" />
             </div>
           </div>
-        </main>
+        </Layout>
       </>
     );
   }
