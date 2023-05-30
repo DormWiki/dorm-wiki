@@ -9,8 +9,8 @@ const ReviewBar = ({data}) => {
 function genBars(data) {
     let ret = []
     Object.entries(data).map((rating, i) => {
-        let width = `${50 + (rating[1]/5 * 50)}%`;
-        let colors = ["#ff4545", "#ffa534", "#ffe234", "#b7dd29", "#57e32c"];
+        let colors = ["#F94144", "#F3722C", "#F8961E", "#F9C74F", "#90BE6D", "#4D908E"];
+        let width = `${50 + (rating[1] / colors.length * 50)}%`;
         let c = colors[Math.floor(rating[1])-1];
         ret.push(
           <>

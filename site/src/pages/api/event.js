@@ -39,18 +39,26 @@ export default async function handler(req, res) {
 	if (req.method == 'GET') {
 		let ret = await getEvent(req.query.dorm);
 		res.status(200).json(ret);
-	} else if (req.method == 'DELETE'){ // DELETE CALL
-		let results = await collection.updateOne({_id: req.query.id}, {$inc : {likes: -1}},
+	} else if (req.method == 'DELETE'){ // DELETE CALL --> deleting a like
+		let results = await collection.updateOne({_id: Number.parseInt(req.query.id)}, {$inc : {likes: -1}},
 			function(err, result) {
-			if (err) throw err;
-			res.json("Unliked").status(200);
+			if (err) {
+				res.status(500).send();
+				console.error(err);
+			} else {
+				res.status(200).json("Unliked");
+			}
 		});
 	} else { // POST CALL
 		if (req.query != undefined){ // Liking an event
-			let results = await collection.updateOne({_id: req.query.id}, {$inc : {likes: 1}},
+			let results = await collection.updateOne({_id: Number.parseInt(req.query.id)}, {$inc : {likes: 1}},
 				function(err, result) {
-				if (err) throw err;
-				res.json("Liked").status(200);
+				if (err) {
+					res.status(500).send();
+					console.error(err);
+				} else {
+					res.status(200).json("Liked");
+				}
 			});
 		} else {
 			const count = await collection.countDocuments();
@@ -64,26 +72,27 @@ export default async function handler(req, res) {
 				postDate: DOMPurify.sanitize(body.postDate),
 				dorm_id: DOMPurify.sanitize(body.dorm_id),
 				location: DOMPurify.sanitize(body.location),
-				organizer: DOMPurify.sanitize(body.organizer),
-				poster: DOMPurify.sanitize(body.poster)
+				organizer: DOMPurify.sanitize(body.organizer)
 			}
-			try{
+			console.log(newEvent);
+			try {
 				const dorm = await db.collection('Dorm');
 				await dorm.updateOne(
 				{ _id: req.body.dorm_id},
 				{ $push: { event: count} }
 				)
-			}catch(err){
+			} catch (err) {
 				console.log(err);
 			}
 			
 			let results = await collection.insertOne(newEvent, function(err, result) {
-				if (err) throw err;
-				res.json({_id: result.insertedId}).status(200);
+				if (err) {
+					res.status(500).send();
+					console.error(err);
+				} else {
+					res.json({_id: result.insertedId}).status(200);
+				}
 			});
 		}
 	}
-
-
-	
 }
