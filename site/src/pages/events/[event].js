@@ -21,7 +21,7 @@ export  default function Event({ info, id }) {
       <Head>
         <title>{evt["name"]}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/dw-logo-icon.png" />
+        <link rel="icon" href="/dw-logo-icon.svg" />
       </Head>
       <main className={event.main}>
         <Navbar />

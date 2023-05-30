@@ -73,7 +73,7 @@ export default function Home({ info }) {
         <title>Dorm Wiki</title>
         <meta name="description" content="Your go-to place for UW dorm info" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/dw-logo-icon.png" />
+        <link rel="icon" href="/dw-logo-icon.svg"/>
       </Head>
       <Layout>
         <div className={styles.big_logo}>

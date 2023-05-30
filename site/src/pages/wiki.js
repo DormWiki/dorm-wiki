@@ -49,6 +49,12 @@ export default function Wiki({ info }) {
   let dormCards = genDorms(info, sort);
   return (
     <>
+      <Head>
+        <title>Dorm Wiki</title>
+        <meta name="description" content="Your go-to place for UW dorm info" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/dw-logo-icon.svg"/>
+      </Head>
       <Layout>
         <div className={wiki.wiki_grid}>{dormCards}</div>
       </Layout>

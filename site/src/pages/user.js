@@ -30,6 +30,12 @@ export default function User() {
   }
   return (
     <>
+      <Head>
+        <title>Dorm Wiki</title>
+        <meta name="description" content="Your go-to place for UW dorm info" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/dw-logo-icon.svg"/>
+      </Head>
       <Layout>
             <h2 className={login.hrtitle}>
               Welcome back, {getUsername(session.user.email)}!

@@ -31,7 +31,12 @@ export default function Login() {
   } else { // haven't logged in
     return (
       <>
-        <Navbar />
+        <Head>
+        <title>Dorm Wiki</title>
+        <meta name="description" content="Your go-to place for UW dorm info" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/dw-logo-icon.svg"/>
+        </Head>
         <main className={styles.main}>
           <div className={styles.content}>
             <div className={login.signin_box}>
@@ -42,7 +47,6 @@ export default function Login() {
             </div>
           </div>
         </main>
-        <Footer/>
       </>
     );
   }

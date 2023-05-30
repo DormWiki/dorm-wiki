@@ -72,7 +72,7 @@ export default function Wiki( {info, images} ) {
       <Head>
         <title>{cleanName(dorm)}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/dw-logo-icon.png" />
+        <link rel="icon" href="/dw-logo-icon.svg" />
       </Head>
       <main className={styles.main}>
         <Navbar />
