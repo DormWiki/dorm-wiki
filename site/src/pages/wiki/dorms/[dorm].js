@@ -194,21 +194,21 @@ export default function Wiki( {info, images} ) {
 function getAverage(reviews) {
   let avg = {
     Overall: 0,
-    Enviornment: 0,
+    Environment: 0,
     Food: 0,
     Walkability: 0,
     Safety: 0
   }
   reviews.forEach((r) => {
     avg.Overall += averageReview(r["rating"]);
-    avg.Enviornment += r["rating"].enviornment;
+    avg.Environment += r["rating"].enviornment;
     avg.Food += r["rating"].food;
     avg.Walkability += r["rating"].walkability;
     avg.Safety += r["rating"].safety;
   })
   if (reviews.length !== 0) {
     avg.Overall = avg.Overall / reviews.length;
-    avg.Enviornment = avg.Enviornment / reviews.length;
+    avg.Environment = avg.Environment / reviews.length;
     avg.Food = avg.Food / reviews.length;
     avg.Walkability = avg.Walkability / reviews.length;
     avg.Safety = avg.Safety / reviews.length;

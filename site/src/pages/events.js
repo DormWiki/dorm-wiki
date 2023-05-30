@@ -10,11 +10,36 @@ import { formatDate } from "@/misc";
 import { getEvent } from "./api/event";
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
+import { cleanName } from "@/misc";
+
 import styles from "@/styles/Home.module.css";
 import events from "@/styles/Events.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
+
+export const BLDGS = [
+  "Alder Hall",
+  "Elm Hall",
+  "Hansee Hall",
+  "Lander Hall",
+  "Madrona Hall",
+  "Maple Hall",
+  "McCarty Hall",
+  "McMahon Hall",
+  "Oak Hall",
+  "Poplar Hall",
+  "Terry Hall",
+  "Willow Hall",
+  "Mercer Court",
+  "Stevens Court",
+  "Cedar Apartments",
+  "Commodore Duchess",
+  "Nordheim Court",
+  "Radford Court",
+  "Blakely Village",
+  "Laural Village",
+];
 
 function getUpcomingEvents(events_info) {
   var events_arr = [];
@@ -32,11 +57,11 @@ function getUpcomingEvents(events_info) {
             </h2>
             <h3 className={events.subtitle}>
               <i>
-                {formatDate(event["startTime"])}, {event["dorm_id"]} (
+                {formatDate(event["startTime"])}, {cleanName(event["dorm_id"])} (
                 {event["location"]})
               </i>
             </h3>
-            <p className={events.p}>description missing.</p>
+            <p className={events.p}>{event["description"]}</p>
             <i>
               - <b>{event["organizer"]}</b> @{" "}
               {new Date(event["postDate"]).toLocaleDateString()}.
@@ -50,6 +75,16 @@ function getUpcomingEvents(events_info) {
   return events_arr;
 }
 
+function getDorms() {
+  let dorms = [];
+  BLDGS.forEach((name) => {
+    dorms.push(
+      <option value={name}>{name}</option>
+    );
+  });
+  return dorms;
+}
+
 export default function Events({ events_info, images }) {
   const router = useRouter();
   var events_arr = getUpcomingEvents(events_info);
@@ -57,6 +92,39 @@ export default function Events({ events_info, images }) {
   const [file, setFile] = useState(null);
   const handleChange = (file) => {
     setFile(file);
+  };
+
+  const dormOptions = getDorms();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const data = {
+      name: event.target.name.value,
+      organizer: event.target.organizer.value,
+      location: event.target.location.value,
+      postDate: event.target.postDate.value,
+      dorm_id: event.target.dorm_id.value.split(" ").join("-").toLowerCase(),
+      startTime: event.target.startTime.value,
+      description: event.target.text.value,
+    };
+  
+    console.log(data);
+
+    const response = await fetch("/api/event", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+  
+    const result = await response.status;
+    if (result == 200) {
+      router.reload(window.location.pathname);
+    } else {
+      router.push("/500");
+    }
   };
 
   return (
@@ -76,10 +144,7 @@ export default function Events({ events_info, images }) {
           <div className={events.submit_event_wrapper}>
             <h2 className={events.title_right}>Submit an Event</h2>
             <div className={events.form_fields_wrapper}>
-              <form
-                method="post"
-                action="https://dorm-wiki.vercel.app/api/event"
-              >
+              <form onSubmit={handleSubmit} method="post">
                 <div>
                   <label className={events.field}>
                     Event title:
@@ -105,8 +170,10 @@ export default function Events({ events_info, images }) {
                 />
                 <div>
                   <label className={events.field}>
-                    Dorm:
-                    <input type="text" name="dorm_id" required />
+                    Dorm: 
+                    <select name="dorm_id" required>
+                    {dormOptions}
+                    </select>
                   </label>
                 </div>
                 <div>
