@@ -1,10 +1,13 @@
 import styles from '@/styles/Likebutton.module.css';
 import React, { useState } from "react";
 import confetti from "canvas-confetti";
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
-const Likebutton = ( {id, onClick} ) => {
-  const [isSelected, setSelected] = useState(false);
-
+const Likebutton = ( {selected, id, onClick} ) => {
+  const [isSelected, setSelected] = useState(selected);
+  const { status } = useSession();
+  let router = useRouter();
   const toggleSelect = async (event) => {
     setSelected(!isSelected);
     if (!isSelected) {
@@ -20,21 +23,22 @@ const Likebutton = ( {id, onClick} ) => {
       });
     let response = await fetch(`/api/event?id=${id}`, {method: 'POST'})
     .then(res => res.json());
-    console.log(id + ": " +response);
     } else {
       let response = await fetch(`/api/event?id=${id}`, {
         method: "DELETE",
       }).then((res) => res.json());
-      console.log(id + ": " + response);
     }
   };
-
   return (
     <>
       <button
         onClick={(e)=> {
-          onClick(e);
-          toggleSelect(e);
+          if (status === "authenticated") {
+            onClick(e);
+            toggleSelect(e);
+          } else {
+            router.push("/login");
+          }
         }}
         className={
           isSelected

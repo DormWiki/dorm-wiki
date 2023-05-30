@@ -64,7 +64,6 @@ export default function Wiki( {info, images} ) {
     } else {
      router.push("/500");
     }
-    
   };
 
   return (
