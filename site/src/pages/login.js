@@ -25,6 +25,7 @@ function getUsername(email) {
 export default function Login() {
   const router = useRouter();
   const {data: session, status} = useSession();
+  let req = router.query.required;
   if (session === undefined ) {
     return "loading";
   }
@@ -45,7 +46,8 @@ export default function Login() {
         </Head>
         <Layout>
           <div className={login.signin_box}>
-              <h2 className={login.hrtitle}>Welcome!</h2>
+              <h2 className={login.hrtitle}>{req ? "You must be signed in to perform this action" : "Welcome!"}</h2>
+              <h3 className={login.hrtitle}>We only allow @uw.edu email accounts</h3>
               <div className={login.button_wrapper}>
                 <GoogleButton text="Sign in with Google"/>
               </div>

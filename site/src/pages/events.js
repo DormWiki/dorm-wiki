@@ -98,7 +98,11 @@ export default function Events({ events_info, images }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    const session = await getSession();
+    if (session === null) {
+      router.push("/login?required=true", "/login");
+      return;
+    }
     const data = {
       name: event.target.name.value,
       organizer: event.target.organizer.value,
@@ -109,7 +113,6 @@ export default function Events({ events_info, images }) {
       description: event.target.text.value,
     };
   
-    console.log(data);
 
     const response = await fetch("/api/event", {
       method: "POST",

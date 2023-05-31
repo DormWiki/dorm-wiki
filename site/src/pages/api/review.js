@@ -6,6 +6,7 @@ import ClientPromise from "@/lib/mongodb";
 // POST:
 // '/review': post single review to the given dorm
 export default async function handler(req, res) {
+  
   let client = await ClientPromise;
   let db = client.db("DormWiki");
   let collection = await db.collection("Dorm");

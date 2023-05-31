@@ -150,12 +150,11 @@
   flex-direction: row;
   height: 7vh;
   width: 100%;
-
 }
 
 .search_wrapper {
   width: 30%;
-  margin-bottom: 4vh;
+  margin-bottom: 7vh;
 }
 
 .search_wrapper input {
@@ -175,7 +174,8 @@
   order: 3;
   align-self: flex-end;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  column-gap: 5vw;
   align-items: center;
   width: 100%;
   padding: 50px;
@@ -464,42 +464,58 @@
   padding-top: 20px;
 }
 
+.standout {
+  line-height: 15vh;
+  margin-top: 1vh;
+}
+
 .info {
   padding: 4vh;
   background-color: #e8e3d3;
-  opacity: 80%;
+  opacity: 90%;
   height: auto;
   width: 100%;
   text-align: center;
   display: fixed;
 }
 
-.testimonials {
-  padding: 4vh;
-  opacity: 80%;
-  height: 40vh;
-  width: 100%;
-  text-align: center;
-  display: fixed;
-}
-
-.testimonials p {
-  margin-bottom: 2vh;
-}
-
-.standout {
-  line-height: 15vh;
-  margin-top: 1vh;
-}
-
-.info p {
-  margin-left: 10vw;
-  margin-right: 10vw;
-}
-
 .info img {
   margin-top: -5vh;
   margin-bottom: 2vh;
+}
+
+.info p {
+  margin-left: 20vw;
+  margin-right: 20vw;
+  margin-top: 1vh;
+  margin-bottom: 3vh;
+}
+
+.testimonials {
+  padding: 4vw;
+  height: auto;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 5vh;
+}
+
+.quote_box {
+  color: grey;
+  display: inline-block; 
+  width: 20vw;
+  height: auto;
+  border: none; 
+  border-radius: 6px;
+  padding: 1.5vw;
+  background-color: white;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.quote_box p {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
 /* Enable hover only on non-touch devices */

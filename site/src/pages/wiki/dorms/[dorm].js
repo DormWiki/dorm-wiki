@@ -13,11 +13,11 @@ import Footer from "@/components/Footer";
 import path from "path";
 import ReviewBar from "@/components/ReviewBar";
 import { getWiki } from '@/pages/api/wiki';
-
+import { getSession } from "next-auth/react";
 import styles from '@/styles/Home.module.css'
 import wiki from '@/styles/Wiki.module.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import { redirect } from "next/navigation";
 
 export default function Wiki( {info, images} ) {
   const router = useRouter();
@@ -37,10 +37,15 @@ export default function Wiki( {info, images} ) {
     let count = event.target.value.length;
     let max = document.getElementById("max_chars");
     max.innerText = `${count}/300`;
-  }
+  } //
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const session = await getSession();
+    if (session === null) {
+      router.push("/login?required=true", "/login");
+      return;
+    }
     const data = {
       title: event.target.title.value,
       user: event.target.user.value,
@@ -49,7 +54,7 @@ export default function Wiki( {info, images} ) {
       text: event.target.text.value,
       ID: event.target.ID.value,
     };
-    
+
     const response = await fetch("/api/review", {
      method: "POST",
      body: JSON.stringify(data),
@@ -64,7 +69,6 @@ export default function Wiki( {info, images} ) {
     } else {
      router.push("/500");
     }
-    
   };
 
   return (
