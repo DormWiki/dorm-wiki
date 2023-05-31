@@ -6,6 +6,8 @@ Success: new event is successfully posted and can be found on events
 Fail: if any error occurs
 */
 
+// const { fromDate } = require("next-auth/src/core/lib/utils");
+
 describe('Event Test', () => {
 	it('Test posting new event', () => {
 		// visiting the page
@@ -17,8 +19,8 @@ describe('Event Test', () => {
 			organizer: 'Jaylyn',
 			location: 'roof',
 			dorm: 'Elm Hall',
-			startTime: '2023-05-30T23:52',
-			text: '*&sd^vdf(bg(sav&f',
+			startTime: '2099-12-31T23:59',
+			text: 'testingggg',
 		}
 
 		// fill out the form with following
@@ -32,10 +34,10 @@ describe('Event Test', () => {
 		// click the submit button and submit
 		cy.get("input[id='submit']").click()
 
-		// Expected: the new Event should show up:
-		// 1. in the event page
+		// Expected: the new Event should show up in the event page
 		cy.contains(event.text);
 		cy.contains(event.organizer);
-		cy.contains(location);
+		cy.contains(event.location);
+		// cy.contains(fromDate(event.startTime));
 	})
 })
