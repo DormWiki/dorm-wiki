@@ -1,8 +1,14 @@
 import ClientPromise from "@/lib/mongodb";
 import { authOptions } from "./auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
+import { useRouter } from "next/router";
 
 export default async function handler(req, res) {
+  const session = await getServerSession(req, res, authOptions);
+  if (!session) {
+    res.status(401).json({ message: "User is not logged in" });
+    return;
+  }
   let results = await getLikes(req, res);
   if (results === undefined) {
     res.status(401).json({ message: "Not logged in." })
