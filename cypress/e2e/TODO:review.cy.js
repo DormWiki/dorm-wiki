@@ -7,7 +7,7 @@ describe('Review Test', () => {
 	  cy.get("input[name='name']").type('Jaylyn');
 	  cy.get("textarea[name='text']").type('Elmmmm');
 	//   cy.get("ReactStars[oncange=2]").click()
-	// how to do the star?
+	// how to select the rating?
 
 
 	})

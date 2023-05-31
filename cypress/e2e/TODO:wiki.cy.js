@@ -1,4 +1,5 @@
 /* UNDER DEVELOPMENT*/
+// What are some good testcases for wiki?
 
 describe('Wiki Test', () => {
   it('Test /wiki, get a list of dorms', () => {
