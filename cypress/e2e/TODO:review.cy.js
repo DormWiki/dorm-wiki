@@ -1,4 +1,9 @@
-/* UNDER DEVELOPMENT*/
+/*
+Review Test
+Modify the event number on line 15 "/event/___" to like a different event
+Success: if the number of likes incremented for the corresponding event
+Fail: if any error occurs
+*/
 
 describe('Review Test', () => {
 	it('Test /review, post a review', () => {
