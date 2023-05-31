@@ -14,7 +14,7 @@ import Layout from '@/components/Layout';
 
 import styles from "@/styles/Home.module.css";
 import login from '@/styles/Login.module.css';
-import Layout from '@/components/Layout';
+// import Layout from '@/components/Layout';
 
 
 function getUsername(email) {

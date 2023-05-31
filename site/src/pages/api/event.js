@@ -72,7 +72,7 @@ export default async function handler(req, res) {
 				postDate: DOMPurify.sanitize(body.postDate),
 				dorm_id: DOMPurify.sanitize(body.dorm_id),
 				location: DOMPurify.sanitize(body.location),
-				organizer: DOMPurify.sanitize(body.organizer)
+				organizer: DOMPurify.sanitize(body.organizer),
 			}
 			console.log(newEvent);
 			try {
