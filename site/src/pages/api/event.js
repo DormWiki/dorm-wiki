@@ -1,5 +1,7 @@
 import DOMPurify from 'isomorphic-dompurify';
 import ClientPromise from "@/lib/mongodb";
+import { authOptions } from "./auth/[...nextauth]";
+import { getServerSession } from "next-auth/next";
 
 // const URL = "https://localhost:5050";
 
@@ -12,43 +14,66 @@ import ClientPromise from "@/lib/mongodb";
 // - '/event/:id/like': like an event
 // DELETE:
 // - '/event/:id/like': unlike an event
-
-export async function getEvent(dorm) {
+export async function getEvent(dorm, current = false) {
 	let client = await ClientPromise;
   let db = client.db("DormWiki");
   let collection = await db.collection("Event");
 	if (dorm === undefined) {
     // no parameter
-    let results = await collection
-      .find()
-      .sort({ startTime: -1 })
-			.toArray();
+		let results;
+		if (current) {
+      results = await collection
+        .find(
+          { startTime: { $gt: new Date().toISOString() } }
+        )
+        .sort({ startTime: -1 })
+        .toArray();
+    } else {
+			results = await collection
+				.find()
+				.sort({ startTime: -1 })
+				.toArray();
+		}
 		return results;
   } else {
-		let results = await collection
-      .find({ dorm_id: dorm })
-      .sort({ startTime: -1 })
-      .toArray();
+			let results = await collection
+        .find({ dorm_id: dorm })
+        .sort({ startTime: -1 })
+        .toArray();
     return results;
 	}
 }
+
 export default async function handler(req, res) {
 	let client = await ClientPromise;
 	let db = client.db("DormWiki");
 	let collection = await db.collection("Event");
+	const session = await getServerSession(req, res, authOptions);
+	if (!session) {
+		res.status(401).json({message: "User is not logged in"});
+		return;
+	}
 	if (req.method == 'GET') {
 		let ret = await getEvent(req.query.dorm);
 		res.status(200).json(ret);
 	} else if (req.method == 'DELETE'){ // DELETE CALL --> deleting a like
-		let results = await collection.updateOne({_id: Number.parseInt(req.query.id)}, {$inc : {likes: -1}},
-			function(err, result) {
-			if (err) {
-				res.status(500).send();
-				console.error(err);
-			} else {
-				res.status(200).json("Unliked");
+		let results = await collection.updateOne(
+			{ _id: Number.parseInt(req.query.id) },
+			{ $inc: { likes: -1 } },
+			function (err, result) {
+				if (err) {
+					res.status(500).send();
+					console.error(err);
+				} else {
+					res.status(200).json("Unliked");
+				}
 			}
-		});
+		);
+		let user = await db.collection('User');
+		await user.updateOne(
+			{ _id: session.user.email },
+			{ $pull: { likes : { $eq : parseInt(req.query.id) } } }
+		)
 	} else { // POST CALL
 		if (req.query != undefined){ // Liking an event
 			let results = await collection.updateOne({_id: Number.parseInt(req.query.id)}, {$inc : {likes: 1}},
@@ -60,6 +85,11 @@ export default async function handler(req, res) {
 					res.status(200).json("Liked");
 				}
 			});
+			let user = await db.collection("User");
+			await user.updateOne(
+				{ _id: session.user.email },
+				{ $push: { likes:  parseInt(req.query.id) } }
+			);
 		} else {
 			const count = await collection.countDocuments();
 			const body = req.body;

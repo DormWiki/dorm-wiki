@@ -1,26 +1,16 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import Link from "next/link";
-import React, { useState } from "react";
-import Events from "./events";
-import getInfo from "./events.js";
-import { Component } from "react";
+import React from "react";
 import { useRouter } from "next/router";
-import CustomCarousel from "../components/Carousel";
-import Navbar from "@/components/Navbar";
 import ReactSearchBox from "react-search-box";
 import { formatDate } from "@/misc";
-import confetti from "canvas-confetti";
 import Likebutton from "@/components/Likebutton";
-import Footer from "@/components/Footer";
-
 import Layout from "@/components/Layout";
-
 import styles from "@/styles/Home.module.css";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-
 import { getEvent } from './api/event'
+import { getLikes } from "./api/user";
+import { getSession } from "next-auth/react";
+
 
 export const BLDGS = [
   "Alder Hall",
@@ -53,12 +43,11 @@ function getSearchOptions() {
   return options;
 }
 
-export default function Home({ info }) {
+export default function Home({ info, data }) {
   const router = useRouter();
 
   const events = info.slice(0, 4);
   const options = getSearchOptions();
-
   const handleSubmit = (value) => {
     if (value != undefined) {
       const bld = "" + value.item.key.toLowerCase();
@@ -161,13 +150,13 @@ export default function Home({ info }) {
           </div>
         </div>
         <h2 className={styles.hrtitle}>Upcoming Events</h2>
-        <div className={styles.upcoming_events}>{genCards(events)}</div>
+        <div className={styles.upcoming_events}>{genCards(events, data["likes"])}</div>
       </Layout>
     </>
   );
 }
 
-function genCards(events) {
+function genCards(events, likes) {
   let arr = [];
   events.forEach((event, i) => {
     const MAX_LENGTH = 22;
@@ -178,11 +167,7 @@ function genCards(events) {
           <div key={i} className={styles.event_deck}>
             <img src="/events/events1.jpg"></img>
             <div className={styles.h2_wrapper}>
-              <h2
-                style={{ "font-size": size + "vw" }}
-              >
-                {event["name"]}
-              </h2>
+              <h2 style={{ fontSize: size + "vw" }}>{event["name"]}</h2>
             </div>
             <h4>{event["location"]}</h4>
             <div className={styles.event_deck_button_container}>
@@ -192,7 +177,11 @@ function genCards(events) {
                   e.preventDefault();
                 }}
               >
-                <Likebutton onClick={change_event} id={event["_id"]} />
+                <Likebutton
+                  selected={likes.indexOf(event["_id"]) !== -1}
+                  onClick={change_event}
+                  id={event["_id"]}
+                />
               </div>
               <div>{event["likes"] === undefined ? 0 : event["likes"]}</div>
             </div>
@@ -217,11 +206,19 @@ function change_event(event) {
     : parseInt(likes) - 1;
 }
 
-export async function getStaticProps() {
-  const info = await getEvent();
+export async function getServerSideProps(context) {
+  const info = await getEvent(undefined, true);
+  const likes = await getLikes(context.req, context.res);
+  let data;
+  if (likes === undefined) {
+    data = JSON.parse('{"likes": []}');
+  } else {
+    data = likes[0];
+  }
   return {
     props: {
       info,
+      data,
     },
   };
 }

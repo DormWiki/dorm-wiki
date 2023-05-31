@@ -174,7 +174,8 @@
   order: 3;
   align-self: flex-end;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  column-gap: 5vw;
   align-items: center;
   width: 100%;
   padding: 50px;
