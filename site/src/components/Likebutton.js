@@ -37,7 +37,7 @@ const Likebutton = ( {selected, id, onClick} ) => {
             onClick(e);
             toggleSelect(e);
           } else {
-            router.push("/login");
+            router.push("/login?required=true", "/login");
           }
         }}
         className={
