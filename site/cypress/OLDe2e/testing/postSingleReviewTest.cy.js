@@ -6,7 +6,7 @@ describe('POST /postReview', () => {
       method: 'POST',
       url: 'http://localhost:5050/postReview',
       body: {
-        user: 'Yijia Zhao',
+        user: 'Jaylyn',
         title: 'bad dorm',
         text: 'I dont like this dorm!',
         date: '2021-06-12',

@@ -21,8 +21,9 @@ Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave
 
 ## Building and testing the system
 ### To run locally:
-1. Install the dependencies using `npm run v`
-2. Run both servers (front & back) concurrently: `npm run all`
+1. Contact team member to add `.env.local ` in `/site` to enble google authentication
+2. Install the dependencies using `npm run v`
+3. Run both servers (front & back) concurrently: `npm run all`
 	- Or to check the log in a cleaner way, you can run these commands in different terminal windows:
 		- Start the web server: `npm run dev` 
 		- Start the database server: `npm run data` 
@@ -32,7 +33,11 @@ Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave
 2. Add local IP to MongoDB in order to run the system
 	- Go to MongoDB and sign in by given account and password(on slack)
 	- Navigate to "Network Access" and current IP address
-4. Run Cypress e2e tests: `npm run cypress:open`
+4. Run Cypress e2e tests
+	- under the main repo, run `npm run cypress:open`
+	- Select E2E testing 
+	- Select a browser (Recommend Chrome) and click Start
+	- On the left side, select "Specs" and all the tests will be shown
 
 ## Reporting a bug
 Use this [Bug Report template](https://github.com/DormWiki/dorm-wiki/blob/main/bug_template.md) to inform us about the bug.
@@ -49,15 +54,17 @@ Use this [Bug Report template](https://github.com/DormWiki/dorm-wiki/blob/main/b
 If you want to contribute to our project, below are some details you may find useful.
 
 ## Layout
-- `site`: next.js root folder:
+- `cypress`: all the testing code
+- `site`: next.js root folder
 	- `public`: contains all public resources (mostly images)
 	- `src`: front-end code
 		- `components`: react components
 		- `pages`: all of the next.js code for the web pages
+			- `api`: all of the api calls
 		- `styles`: all of the css for the pages
 
 ## To Add New Tests
-1. Go to `site/cypress/e2e/testing`.
+1. Go to `cypress/e2e/testing`.
 2. Create a test named by the component you want to test using camelCase notation and ending with Test.cy.js (e.g. `postSingleEventTest.cy.js`).
 3. Once you create the new test, refresh the Cypress test window. Click on the test you wrote to run it.
 
