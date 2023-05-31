@@ -11,6 +11,7 @@ import { getEvent } from "./api/event";
 import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
 import { cleanName } from "@/misc";
+import { getSession } from "next-auth/react";
 
 import styles from "@/styles/Home.module.css";
 import events from "@/styles/Events.module.css";
