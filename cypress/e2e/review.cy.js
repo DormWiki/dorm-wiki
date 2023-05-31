@@ -1,3 +1,5 @@
+/* UNDER DEVELOPMENT*/
+
 describe('Review Test', () => {
 	it('Test /review, post a review', () => {
 	  cy.visit('http://localhost:3000/wiki/dorms/elm-hall')

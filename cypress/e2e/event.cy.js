@@ -1,9 +1,9 @@
 /*
 Post event: Manual Testing
 Modify the event fields from line 16-21 to change to a new event
-200: new event is successfully posted and can be found on events 
+Success: new event is successfully posted and can be found on events 
 		page and form page
-400: if any error occurs
+Fail: if any error occurs
 */
 
 describe('Event Test', () => {

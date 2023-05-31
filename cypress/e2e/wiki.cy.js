@@ -1,3 +1,5 @@
+/* UNDER DEVELOPMENT*/
+
 describe('Wiki Test', () => {
   it('Test /wiki, get a list of dorms', () => {
     cy.visit('http://localhost:3000/wiki')
