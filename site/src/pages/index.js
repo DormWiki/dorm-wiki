@@ -46,7 +46,7 @@ function getSearchOptions() {
 export default function Home({ info, data }) {
   const router = useRouter();
 
-  const events = info.slice(0, 4);
+  const events = info.slice(0, 4).reverse();
   const options = getSearchOptions();
   const handleSubmit = (value) => {
     if (value != undefined) {
