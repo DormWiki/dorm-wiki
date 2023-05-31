@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       date: DOMPurify.sanitize(body.date),
       rating: body.rating,
       poster: body.poster
-    };
+    }
     const result = await collection.updateOne(
       { _id: req.body.ID },
       { $push: { review: newReview } }

@@ -20,6 +20,7 @@ export async function getWiki(dorm) {
 		return results;
   }
 }
+
 // handling all the wiki calls
 // GET:
 // - '/wiki': return the list of dorms
