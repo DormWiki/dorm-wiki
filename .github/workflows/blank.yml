@@ -30,6 +30,10 @@ jobs:
         run: |
           touch ./site/.env.local
           echo "ATLAS_URI=${{secrets.ATLAS_URI}}" > ./site/.env.local
+          touch cypress/.env
+          echo "GOOGLE_REFRESH_TOKEN=${{secrets.GOOGLE_REFRESH_TOKEN}}$" > cypress/.env
+          echo "REACT_APP_GOOGLE_CLIENTID=${{secrets.REACT_APP_GOOGLE_CLIENTID}}$" > cypress/.env
+          echo "REACT_APP_GOOGLE_CLIENT_SECRET=${{secrets.REACT_APP_GOOGLE_CLIENT_SECRET}}$" > cypress/.env
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
