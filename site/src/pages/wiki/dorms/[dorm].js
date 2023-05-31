@@ -48,8 +48,8 @@ export default function Wiki( {info, images} ) {
     }
     const data = {
       title: event.target.title.value,
-      user: event.target.user.value,
-      date: event.target.name.value,
+      user: session.user.name,
+      date: event.target.date.value,
       rating: ratings,
       text: event.target.text.value,
       ID: event.target.ID.value,
@@ -111,13 +111,6 @@ export default function Wiki( {info, images} ) {
                     required
                   />
                   <br />
-                  <input
-                    placeholder="Name"
-                    type="text"
-                    name="name"
-                    autoComplete="off"
-                    required
-                  />
                   <br />
                   <textarea
                     placeholder="Review"

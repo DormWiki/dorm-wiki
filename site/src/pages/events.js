@@ -12,7 +12,8 @@ import Footer from "@/components/Footer";
 import Layout from "@/components/Layout";
 import { cleanName } from "@/misc";
 import { getSession } from "next-auth/react";
-
+import Likebutton from "@/components/Likebutton";
+import { getLikes } from "./api/user";
 import styles from "@/styles/Home.module.css";
 import events from "@/styles/Events.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -42,54 +43,10 @@ export const BLDGS = [
   "Laural Village",
 ];
 
-function getUpcomingEvents(events_info) {
-  var events_arr = [];
-  events_info.forEach((event, i) => {
-    events_arr.push(
-      <span key={i} className={events.event_box}>
-        <div className={events.event}>
-          <div className={events.event_info}>
-            <h2>
-              <u>
-                <Link href={`/events/${encodeURIComponent(event["_id"])}`}>
-                  {event["name"]}
-                </Link>
-              </u>
-            </h2>
-            <h3 className={events.subtitle}>
-              <i>
-                {formatDate(event["startTime"])}, {cleanName(event["dorm_id"])} (
-                {event["location"]})
-              </i>
-            </h3>
-            <p className={events.p}>{event["description"]}</p>
-            <i>
-              - <b>{event["organizer"]}</b> @{" "}
-              {new Date(event["postDate"]).toLocaleDateString()}.
-            </i>
-          </div>
-        </div>
-      </span>
-    );
-  });
-
-  return events_arr;
-}
-
-function getDorms() {
-  let dorms = [];
-  BLDGS.forEach((name) => {
-    dorms.push(
-      <option value={name}>{name}</option>
-    );
-  });
-  return dorms;
-}
-
-export default function Events({ events_info, images }) {
+export default function Events({ events_info, images, data }) {
   const router = useRouter();
-  var events_arr = getUpcomingEvents(events_info);
-
+  let likes = data["likes"];
+  var events_arr = getUpcomingEvents(events_info, likes);
   const [file, setFile] = useState(null);
   const handleChange = (file) => {
     setFile(file);
@@ -106,23 +63,22 @@ export default function Events({ events_info, images }) {
     }
     const data = {
       name: event.target.name.value,
-      organizer: event.target.organizer.value,
+      organizer: session.user.name,
       location: event.target.location.value,
       postDate: event.target.postDate.value,
       dorm_id: event.target.dorm_id.value.split(" ").join("-").toLowerCase(),
       startTime: event.target.startTime.value,
       description: event.target.text.value,
     };
-  
 
     const response = await fetch("/api/event", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     });
-  
+
     const result = await response.status;
     if (result == 200) {
       router.reload(window.location.pathname);
@@ -153,12 +109,6 @@ export default function Events({ events_info, images }) {
                   <label className={events.field}>
                     Event title:
                     <input type="text" maxLength="25" name="name" required />
-                  </label>
-                </div>
-                <div>
-                  <label className={events.field}>
-                    Organizer:
-                    <input type="text" name="organizer" required />
                   </label>
                 </div>
                 <div>
@@ -223,10 +173,83 @@ export default function Events({ events_info, images }) {
   );
 }
 
-export async function getServerSideProps() {
-  const events_info = await getEvent();
-  const fs = require("fs");
+// this is horribly scuffed
+// if we add another class to Likebutton component this
+// won't work
+// can be solved by using array.some but im too lazy
+function change_event(event) {
+  let clicked = event.target.classList.length === 2;
+  let likes = event.target.parentElement.nextElementSibling.innerText;
+  event.target.parentElement.nextElementSibling.innerText = clicked
+    ? parseInt(likes) + 1
+    : parseInt(likes) - 1;
+}
 
+export function getUpcomingEvents(events_info, likes) {
+  var events_arr = [];
+  events_info.forEach((event, i) => {
+    events_arr.push(
+      <span key={i} className={events.event_box}>
+        <div className={events.event}>
+          <div className={events.event_info}>
+            <h2>
+              <u>
+                <Link href={`/events/${encodeURIComponent(event["_id"])}`}>
+                  {event["name"]}
+                </Link>
+              </u>
+            </h2>
+            <h3 className={events.subtitle}>
+              <i>
+                {formatDate(event["startTime"])}, {cleanName(event["dorm_id"])}{" "}
+                ({event["location"]})
+              </i>
+            </h3>
+            <p className={events.p}>{event["description"]}</p>
+            <i>
+              - <b>{event["organizer"]}</b> @{" "}
+              {new Date(event["postDate"]).toLocaleDateString()}.
+            </i>
+          </div>
+          <div>
+            <div
+              className={styles.no_link}
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <Likebutton
+                selected={likes.indexOf(event["_id"]) !== -1}
+                onClick={change_event}
+                id={event["_id"]}
+              />
+            </div>
+            <div className={events.like_count}>{event["likes"] === undefined ? 0 : event["likes"]}</div>
+          </div>
+        </div>
+      </span>
+    );
+  });
+
+  return events_arr;
+}
+
+function getDorms() {
+  let dorms = [];
+  BLDGS.forEach((name) => {
+    dorms.push(<option value={name}>{name}</option>);
+  });
+  return dorms;
+}
+
+export async function getServerSideProps(context) {
+  const events_info = await getEvent();
+  const likes = await getLikes(context.req, context.res);
+  let data = JSON.parse('{"likes": []}');
+  if (likes !== undefined) {
+    data = likes[0];
+  }
+  const fs = require("fs");
   const dir = path.resolve("./public", "events");
 
   const filenames = fs.readdirSync(dir);
@@ -236,6 +259,7 @@ export async function getServerSideProps() {
     props: {
       events_info,
       images,
+      data,
     },
   };
 }
