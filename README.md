@@ -55,7 +55,6 @@ If you want to contribute to our project, below are some details you may find us
 		- `components`: react components
 		- `pages`: all of the next.js code for the web pages
 		- `styles`: all of the css for the pages
-	- `api`: back-end code
 
 ## To Add New Tests
 1. Go to `site/cypress/e2e/testing`.

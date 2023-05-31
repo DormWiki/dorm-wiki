@@ -127,22 +127,38 @@ export default function Home({ info }) {
             ahead.
           </p>
         </div>
-        <div className={styles.testimonials}>
-          <div className={styles.standout}>
+        <div className={styles.standout}>
             <h2>What students are saying</h2>
+        </div>
+        <div className={styles.testimonials}>
+          <div className={styles.quote_box}>
+            <p>
+              <i>
+                &quot;DormWiki is my go-to for dorm info! So convenient and reliable. My friends
+                and I use it all the time. &quot; 
+              </i>
+            </p>
+            <br/> - Alex B.
           </div>
-          <p>
-            <i>
-              DormWiki is so useful! I loved the dorm I stayed at in my freshman
-              year.
-            </i>
-          </p>
-          <p>
-            <i>
-              I&apos;ve been able to go to so many cool events recently because
-              I am able to stay updated through DormWiki!
-            </i>
-          </p>
+          <div className={styles.quote_box}>
+            <p>
+              <i>
+                &quot;My college experience has been great so far. I&apos;ve been able to go
+                to so many cool events recently because DormWiki helps me stay updated!&quot; 
+              </i>
+            </p>
+            <br/>  - Sarah H.
+          </div>
+          <div className={styles.quote_box}>
+            <p>
+              <i>
+                &quot;Thanks to DormWiki, I feel much more connected to my dorm community.
+                Highly recommend!&quot; 
+              </i>
+            </p>
+            <br/> 
+            - Emma R.
+          </div>
         </div>
         <h2 className={styles.hrtitle}>Upcoming Events</h2>
         <div className={styles.upcoming_events}>{genCards(events)}</div>
