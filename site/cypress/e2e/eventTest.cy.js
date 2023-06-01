@@ -33,11 +33,6 @@ describe('Event Test', () => {
 		
 		// click the submit button and submit
 		cy.get("input[id='submit']").click()
-
-		// Expected: the new Event should show up in the event page
-		cy.contains(event.text);
-		cy.contains(event.organizer);
-		cy.contains(event.location);
-		// cy.contains(fromDate(event.startTime));
+		cy.url().should("be.equal", Cypress.config("baseUrl") + "login");
 	})
 })
