@@ -3,7 +3,7 @@ import ClientPromise from "@/lib/mongodb";
 import { authOptions } from "./auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
 
-// const URL = "https://localhost:5050";
+// const URL = "https://localhost:3000";
 
 // Handling event calls
 // GET: 

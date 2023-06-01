@@ -28,5 +28,4 @@ export async function getWiki(dorm) {
 export default async function handler(req, res) {
 	let ret = await getWiki(req.query.dorm);
 	res.json(ret).status(200);
-
 }
