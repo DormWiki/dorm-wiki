@@ -1,20 +1,23 @@
 /*
 Like Test
-Modify the event number on line 15 "/event/___" to like a different event
-Success: if the number of likes incremented for the corresponding event
+Success: if we click the like button and get redirected to log in page
 Fail: if any error occurs
 */
 
 describe('Like Test', () => {
 	it('Like an event on Home page', () => {
 		// visiting the main page
-		cy.visit('http://localhost:3000')
+		cy.visit(Cypress.config('baseUrl') + 'events')
 
 		// navigate to event "Niki Meet & Greet"
-        cy.get('a[href = "/events/20"]').within(() => {
-            // test like button
-            cy.get('button[class = "Likebutton_event_button__Yeeej Likebutton_like__V563P"]').as('btn').click();
-        })
-		
+        cy.get('div[class^="Events_event__"]').first().within(() => {
+            // click on like button twice to like and unlike the event
+            cy.get('button[class*="Likebutton"]').click();
+            // see the number of likes displayed on the website
+            // if success, the number should increment then decrement
+        });
+		// verify that we land on the log in page due to user not logged in
+        cy.url()
+            .should('be.equal', Cypress.config('baseUrl') + 'login')
 	})
 })
