@@ -12,7 +12,9 @@ import styles from "@/styles/Home.module.css";
 import wiki from "@/styles/Wiki.module.css";
 import Navbar from "../components/Navbar";
 
-
+/**
+ * For categorizing the dorms. 
+ */
 const SORTS = {
   residence: [
     "alder-hall",
@@ -43,6 +45,7 @@ const SORTS = {
     "stevens-court",
   ],
 };
+
 export default function Wiki({ info }) {
   const router = useRouter();
   const sort = router.query.dorm;
@@ -62,6 +65,12 @@ export default function Wiki({ info }) {
   );
 }
 
+/**
+ * Generates the dorm information to be displayed.
+ * @param {*} info the dorm information
+ * @param {*} sort the category of dorms
+ * @returns dorm information as an array
+ */
 function genDorms(info, sort) {
   let arr = [];
     info.forEach( (dorm, i) => {
@@ -85,6 +94,10 @@ function genDorms(info, sort) {
   return arr;
 }
 
+/**
+ * Retrieves information from the server.
+ * @returns props/data from the server
+ */
 export async function getServerSideProps() {
   const info = await getWiki();
   return {

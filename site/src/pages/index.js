@@ -11,8 +11,10 @@ import { getEvent } from './api/event'
 import { getLikes } from "./api/user";
 import { getSession } from "next-auth/react";
 
-
-export const BLDGS = [
+/**
+ * Names of the dorm buildings.
+ */
+export const buildings = [
   "Alder Hall",
   "Elm Hall",
   "Hansee Hall",
@@ -35,9 +37,13 @@ export const BLDGS = [
   "Laural Village",
 ];
 
+/**
+ * Makes the dorms as options to be selected in the search bar.
+ * @returns dorms as options for the search bar
+ */
 function getSearchOptions() {
   var options = [];
-  BLDGS.forEach((name) => {
+  buildings.forEach((name) => {
     options.push({ key: name, value: name });
   });
   return options;
@@ -156,6 +162,12 @@ export default function Home({ info, data }) {
   );
 }
 
+/**
+ * Gets and formats the top four upcoming events.
+ * @param {*} events the events to be highlighted
+ * @param {*} likes the likes the events have
+ * @returns 
+ */
 function genCards(events, likes) {
   let arr = [];
   events.forEach((event, i) => {
@@ -194,10 +206,10 @@ function genCards(events, likes) {
   return arr;
 }
 
-// this is horribly scuffed
-// if we add another class to Likebutton component this
-// won't work
-// can be solved by using array.some but im too lazy
+/**
+ * Changes an event's number of likes. 
+ * @param {*} event the event to change
+ */
 function change_event(event) {
   let clicked = event.target.classList.length === 2;
   let likes = event.target.parentElement.nextElementSibling.innerText;
@@ -206,6 +218,11 @@ function change_event(event) {
     : parseInt(likes) - 1;
 }
 
+/**
+ * Retrieves information from the server.
+ * @param {*} context the request and response
+ * @returns props/data from the server
+ */
 export async function getServerSideProps(context) {
   const info = await getEvent(undefined, true);
   const likes = await getLikes(context.req, context.res);

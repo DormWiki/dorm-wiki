@@ -18,9 +18,15 @@ import styles from "@/styles/Home.module.css";
 import events from "@/styles/Events.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+/**
+ * Accepted file types.
+ */
 const fileTypes = ["JPG", "PNG", "GIF"];
 
-export const BLDGS = [
+/**
+ * Names of the dorm buildings.
+ */
+export const buildings = [
   "Alder Hall",
   "Elm Hall",
   "Hansee Hall",
@@ -173,10 +179,10 @@ export default function Events({ events_info, images, data }) {
   );
 }
 
-// this is horribly scuffed
-// if we add another class to Likebutton component this
-// won't work
-// can be solved by using array.some but im too lazy
+/**
+ * Changes an event's number of likes. 
+ * @param {*} event the event to change
+ */
 function change_event(event) {
   let clicked = event.target.classList.length === 2;
   let likes = event.target.parentElement.nextElementSibling.innerText;
@@ -185,6 +191,12 @@ function change_event(event) {
     : parseInt(likes) - 1;
 }
 
+/**
+ * Gets all the events that are upcoming.
+ * @param {*} events_info the event (includes title, start time, etc.)
+ * @param {*} likes the number of likes for the event
+ * @returns 
+ */
 export function getUpcomingEvents(events_info, likes) {
   var events_arr = [];
   events_info.forEach((event, i) => {
@@ -234,14 +246,23 @@ export function getUpcomingEvents(events_info, likes) {
   return events_arr;
 }
 
+/**
+ * Returns all the dorms to be used in the dropdown.
+ * @returns dorms as options
+ */
 function getDorms() {
   let dorms = [];
-  BLDGS.forEach((name) => {
+  buildings.forEach((name) => {
     dorms.push(<option value={name}>{name}</option>);
   });
   return dorms;
 }
 
+/**
+ * Retrieves information from the server.
+ * @param {*} context the request and response
+ * @returns props/data from the server
+ */
 export async function getServerSideProps(context) {
   const events_info = await getEvent();
   const likes = await getLikes(context.req, context.res);
