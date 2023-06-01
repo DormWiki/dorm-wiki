@@ -19,7 +19,7 @@ describe('Review Test', () => {
 		cy.get("textarea[name='text']").type(review.text);
 		
 		// navigate to review box rating stars area
-		cy.get('.Wiki_review_rating__i2Rq7').first().within(() => {
+		cy.get('div[class^=Wiki_review_rating__]').first().within(() => {
 			// choose 2 stars for all ratings
 			cy.get('span[data-index = "2"]').click({ multiple: true })
 		})
