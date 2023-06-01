@@ -24,7 +24,7 @@ describe('Event Test', () => {
 		}
 
 		// fill out the form with following
-		cy.get("input[name='name'], {force: true}" ).type(event.name);
+		cy.get("input[name='name']" ).type(event.name);
 		cy.get("input[name='location']").type(event.location);
 		cy.get("select[name='dorm_id']").select(event.dorm);
 		cy.get("input[name='startTime']").type(event.startTime);
