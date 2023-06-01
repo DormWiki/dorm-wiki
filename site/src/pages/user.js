@@ -17,6 +17,12 @@ import { getEvent } from "./api/event";
 import { getLikes } from "./api/user";
 import { formatDate, cleanName } from "@/misc";
 
+/**
+ * Gets the events the user has previously liked.
+ * @param {*} events_info the event (includes title, start time, etc.)
+ * @param {*} likes the number of likes the event has
+ * @returns 
+ */
 function getEvents(events_info, likes) {
   let events_arr = [];
   console.log(likes);
@@ -103,6 +109,11 @@ export default function User({ events_info, data }) {
   }
 }
 
+/**
+ * Retrieves information from the server.
+ * @param {*} context the request and response
+ * @returns props/data from the server
+ */
 export async function getServerSideProps(context) {
   const events_info = await getEvent();
   const likes = await getLikes(context.req, context.res);

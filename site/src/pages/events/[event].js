@@ -67,6 +67,11 @@ export  default function Event({ info, id }) {
 );
 }
 
+/**
+ * Retrieves information from the server.
+ * @param {*} context the request and response
+ * @returns props/data from the server
+ */
 export async function getServerSideProps(context) {
   let id = context.params.event;
   const info = await getEvent();
@@ -78,8 +83,12 @@ export async function getServerSideProps(context) {
   };
 }
 
-// Given a date, reformats it to be more readable
-// E.g. 2023-06-13T00:24 --> 6/13/2023, 12:24 AM
+/**
+ * Given a date, reformats it to be more readable.
+ * E.g. 2023-06-13T00:24 --> 6/13/2023, 12:24 AM
+ * @param {*} string the date to format
+ * @returns a nicely formatted date
+ */
 function formatDate(string) {
   let format = new Date(string).toLocaleString();
 

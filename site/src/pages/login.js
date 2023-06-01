@@ -7,16 +7,19 @@ import Link from "next/link";
 import { redirect } from 'next/navigation';
 import Navbar from "../components/Navbar";
 import GoogleButton from '../components/GoogleButton';
-// remove signIn, signOut depends on where we implement signin and sign out
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Footer from "@/components/Footer";
 import Layout from '@/components/Layout';
 
 import styles from "@/styles/Home.module.css";
 import login from '@/styles/Login.module.css';
-// import Layout from '@/components/Layout';
 
 
+/**
+ * Reformats the current logged in user's username
+ * @param {*} email the logged in user's email address
+ * @returns 
+ */
 function getUsername(email) {
   let i = email.indexOf("@");
   return email.substring(0, i);
