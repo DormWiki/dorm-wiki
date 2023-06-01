@@ -6,7 +6,7 @@ Fail: if any unexpected error occurs
 
 describe('Review Test', () => {
 	it('Test /review, post a review', () => {
-		cy.visit(Cypress.config('baseUrl') + 'wiki/dorms/elm-hall')
+		cy.visit('http://localhost:3000/wiki/dorms/elm-hall')
 
 		// replace all the data in review to test add new review
 		const review = {
@@ -28,12 +28,7 @@ describe('Review Test', () => {
 		cy.get("input[id='submit']").click()
 
 		// verify that the returned status code is 401 due to user not logged in
-		cy.request({
-			method: 'POST',  
-			url: '/api/review', 
-			failOnStatusCode: false
-		}).then((response) => {
-			expect(response.status).to.eq(401)
-		})
+		cy.url()
+            .should('be.equal', 'http://localhost:3000/login')
 	})
 })

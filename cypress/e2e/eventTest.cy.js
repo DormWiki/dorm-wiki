@@ -24,8 +24,7 @@ describe('Event Test', () => {
 		}
 
 		// fill out the form with following
-		cy.get("input[name='name']").type(event.name);
-		cy.get("input[name='organizer']").type(event.organizer);
+		cy.get("input[name='name'], {force: true}" ).type(event.name);
 		cy.get("input[name='location']").type(event.location);
 		cy.get("select[name='dorm_id']").select(event.dorm);
 		cy.get("input[name='startTime']").type(event.startTime);
@@ -33,6 +32,7 @@ describe('Event Test', () => {
 		
 		// click the submit button and submit
 		cy.get("input[id='submit']").click()
-		cy.url().should("be.equal", Cypress.config("baseUrl") + "login");
+
+		cy.url().should('be.equal', 'http://localhost:3000/login')
 	})
 })
