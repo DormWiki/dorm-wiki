@@ -4,11 +4,11 @@ DormWiki is a website designed to inform prospective/incoming students about var
 ## Layout
 - site: Contains all of the code for the front end and API
   - `src/pages/api` — contains the code for all API calls
-- server: Contains all of the code for the back end (http requests, etc.)
+  - `src/pages/` - contains the code for the pages
 - database: MongoDB
 
 ## Using our website
-Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave (very scuffed) for some browsers (best to use Chrome)
+Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave (very scuffed) for some browsers (best to use Chrome with light mode)
 
 ### Pages:
 - Home: search/navigate to dorm pages, lists top upcoming events
@@ -20,56 +20,45 @@ Website is currently deployed at https://dorm-wiki.vercel.app/. It may misbehave
 - Login: sign in through Google to to post an event or a review; if signed in, user can view profile page
 
 ## Building and testing the system
+### Building
+Building the project is fairly simple and can be achieved via `npm run build`.
 ### To run locally:
-1. Contact team member to add `.env.local ` in `/site` to enble google authentication
-2. Install the dependencies using `npm run v`
-3. Run both servers (front & back) concurrently: `npm run all`
-	- Or to check the log in a cleaner way, you can run these commands in different terminal windows:
-		- Start the web server: `npm run dev` 
-		- Start the database server: `npm run data` 
+1. Contact team member for API keys, then add them to the environment variables of the project.
+2. Install the dependencies using `cd site && npm install`
+3. The server can be run in development mode via `npm run dev`.
+	1. To build and run the production version, use `npm run build` to build and `npm start` to start the server.
 
 ### To run Cypress Test:
-1. Follow the instruction to install cypress: https://docs.cypress.io/guides/getting-started/installing-cypress
-2. Add local IP to MongoDB in order to run the system
-	- Go to MongoDB and sign in by given account and password(on slack)
-	- Navigate to "Network Access" and current IP address
-4. Run Cypress e2e tests
-	- under the main repo, run `npm run cypress:open`
-	- Select E2E testing 
-	- Select a browser (Recommend Chrome) and click Start
-	- On the left side, select "Specs" and all the tests will be shown
+1. Follow the [instructions](https://docs.cypress.io/guides/getting-started/installing-cypress) to install cypress.
+2. Contact a team member to gain access to make requests to database.
+3. To run Cypress e2e tests:
+	1. in root, run `npm run cypress:open`
+	2. Select E2E testing 
+	3. Select a browser (Recommend Chrome) and click Start
+	4. On the left side, select "Specs" and all the tests will be shown
+4. If you prefer, you can use the [Cypress CLI](https://docs.cypress.io/guides/guides/command-line).
 
 ## Reporting a bug
 Use this [Bug Report template](https://github.com/DormWiki/dorm-wiki/blob/main/bug_template.md) to inform us about the bug.
 
 ### Known Bugs
-- Build failure: currently building the project may not successfully execute. 
-	- This is because of some issues regarding the database; this should not matter as the website can run through development mode instead.
-- Not all dorm pages can be served (McMahon, Oak, Poplar, Nordheim, Radford, Blakeley)
-- Deprecated component (`useLayoutEffect` does nothing on the server)
-- Rating stars are 5px cut short
-- Scaling issues with dropdown menu on some mac displays
+- No known bugs at the moment :)
 
 ## Contributing
-If you want to contribute to our project, below are some details you may find useful.
+If you want to contribute to our project, below are some details you may find useful. Contact a team member for API keys.
 
-## Layout
+### Layout
 - `cypress`: all the testing code
 - `site`: next.js root folder
 	- `public`: contains all public resources (mostly images)
 	- `src`: front-end code
 		- `components`: react components
 		- `pages`: all of the next.js code for the web pages
-			- `api`: all of the api calls
+			- `api`: the backend API calls
 		- `styles`: all of the css for the pages
 
-## To Add New Tests
+### To Add New Tests
 1. Go to `cypress/e2e/testing`.
-2. Create a test named by the component you want to test using camelCase notation and ending with Test.cy.js (e.g. `postSingleEventTest.cy.js`).
-3. Once you create the new test, refresh the Cypress test window. Click on the test you wrote to run it.
-
-## Operational use cases
-1. Displaying a dorm page (Maple Hall)
-	- From the home page, navigate to "Wiki", then click "Maple Hall". We will fetch the dorm information and reviews from the database and display everything on the page.
-2. Post a review
-	In a dorm page (Maple Hall), underneath the dorm picture, users can leave a review for a dorm by filling in their name, review, and rating for the dorm. On submission, will send all the information to our database and store it there. If they refresh the page, we will fetch all the dorm info from database again so the new review will be posted on the dorm page. 
+2. Testing documentation can be found [here](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test).
+3. Create a test named by the component you want to test using camelCase notation and ending with Test.cy.js (e.g. `postSingleEventTest.cy.js`).
+4. Once you create the new test, refresh the Cypress test window. Click on the test you wrote to run it.
