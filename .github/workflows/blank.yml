@@ -36,5 +36,4 @@ jobs:
           working-directory: ./site
           build: npm run build
           start: npm start
-          command: cd ../
           
