@@ -38,7 +38,7 @@ Building the project is fairly simple and can be achieved via `npm run build`.
 	4. On the left side, select "Specs" and all the tests will be shown
 4. If you prefer, you can use the [Cypress CLI](https://docs.cypress.io/guides/guides/command-line).
 
-### 
+### Cypress testing limitation:
 The website requires Google login before making posts or liking events. Prior to e2e test, testing individual API/endpoint results in the correct data being passed in and stored in the database. However, after implementing the login functionality, we encountered a lot of difficulty automating Google login in our tests to test data flow and storage. We decided to test the posting review and event, like/unliking an event functionalies by asserting that after we press the submit button or the like button, we're redirected to the login page. To see component tests (without the login limitation) for all API calls, please refer to our alpha release Cypress tests.
 - We tried to follow this Cypress documentation to programtically authenticate with Google without success: https://docs.cypress.io/guides/end-to-end-testing/google-authentication
 - We found the following discussions about the issue and tried the strategies mentioned to debug: 
